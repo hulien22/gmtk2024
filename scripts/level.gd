@@ -23,7 +23,24 @@ func CurrentState() -> LevelState:
 
 func TryMove(dir: Enums.Direction) -> bool:
 	var cur_state: LevelState = CurrentState()
-	print(1)
+	
+	var player_body_obj: PlayerBodyObj = WillPlayerRejoin(dir)
+	if player_body_obj != null:
+		var new_state: LevelState = cur_state.custom_duplicate()
+		# delete body
+		for obj in new_state.collision_objects:
+			if obj.type == player_body_obj.type && obj.posn == player_body_obj.posn:
+				new_state.collision_objects.erase(obj)
+				break
+		# update player
+		new_state.player.posn = player_body_obj.posn
+		new_state.player.size = player_body_obj.size
+		new_state.player.direction = player_body_obj.direction
+		
+		state_stack.push_back(new_state)
+		PlayAnim()
+		return true
+	
 	if !CanPlayerMove(dir):
 		if dir != cur_state.player.direction:
 			# Can't move, but can change directions
@@ -33,7 +50,6 @@ func TryMove(dir: Enums.Direction) -> bool:
 			PlayAnim()
 			return true
 		return false
-	print(1)
 	
 	var new_state: LevelState = cur_state.custom_duplicate()
 	var moved_objs: Array[TileObj] = GetMovedObjs(new_state, dir)
@@ -75,6 +91,16 @@ func TrySummon() -> bool:
 	PlayAnim()
 	state_stack.push_back(new_state)
 	return true
+
+func WillPlayerRejoin(dir: Enums.Direction) -> PlayerBodyObj:
+	var state: LevelState = CurrentState()
+	if (state.player.size == TileObj.TileSize.BIG):
+		return null
+	var target_posn:Vector2i = state.player.posn + Enums.GetDirection(dir) * state.player.size
+	for obj in state.collision_objects:
+		if obj.type == TileObj.TileType.PLAYER_BODY && obj.size == state.player.size * 2 && obj.CollidesWith(target_posn, state.player.size):
+			return obj
+	return null
 
 func CanPlayerMove(dir: Enums.Direction) -> bool:
 	var state: LevelState = CurrentState()
