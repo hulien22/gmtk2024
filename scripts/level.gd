@@ -37,8 +37,7 @@ func TryMove(dir: Enums.Direction) -> bool:
 		new_state.player.size = player_body_obj.size
 		new_state.player.direction = player_body_obj.direction
 		
-		state_stack.push_back(new_state)
-		PlayAnim()
+		UpdateState(new_state)
 		return true
 	
 	if !CanPlayerMove(dir):
@@ -46,8 +45,8 @@ func TryMove(dir: Enums.Direction) -> bool:
 			# Can't move, but can change directions
 			var new_state: LevelState = cur_state.custom_duplicate()
 			new_state.player.direction = dir
-			state_stack.push_back(new_state)
-			PlayAnim()
+			
+			UpdateState(new_state)
 			return true
 		return false
 	
@@ -62,19 +61,11 @@ func TryMove(dir: Enums.Direction) -> bool:
 	if moved_obj != null:
 		moved_obj.posn = moved_obj.posn + movement_vec
 	for obj in crushed_objs:
-		assert(obj.type == TileObj.TileType.BOX)
-		# Add crushed object tile (to show debris)
-		var new_obj:TileObj = CrushedBoxObj.new()
-		new_obj.posn = obj.posn
-		new_obj.size = obj.size
-		new_obj.AssertOnGrid()
-		new_state.bg_objects.push_back(new_obj)
-		new_state.collision_objects.erase(obj)
+		CrushBox(obj, new_state)
 	
 	# TODO check if we are on any buttons and activate if not activated before
 	
-	PlayAnim()
-	state_stack.push_back(new_state)
+	UpdateState(new_state)
 	return true
 
 func TrySummon() -> bool:
@@ -86,6 +77,7 @@ func TrySummon() -> bool:
 	var new_posn = GetSummonPosn()
 	print(new_posn)
 	if new_posn == Vector2i(-1,-1):
+		# TODO emit signal to display "NO ROOM" message
 		return false
 	
 	# summon new guy!
@@ -98,9 +90,98 @@ func TrySummon() -> bool:
 	new_state.player.size = new_state.player.size / 2
 	new_state.player.posn = new_posn
 	
+	UpdateState(new_state)
+	return true
+
+func TryToggleSwitch() -> bool:
+	var state: LevelState = CurrentState()
+	var new_state: LevelState = state.custom_duplicate()
+	# see if we are on a switch of our size
+	var updated:bool = false
+	for obj in new_state.bg_objects:
+		if obj.type == TileObj.TileType.SWITCH && obj.size == new_state.player.size && \
+		   obj.CollidesWith(new_state.player.posn, new_state.player.size):
+			obj.activated = !obj.activated
+			updated = true
+			break
+	
+	if !updated:
+		return false
+	
+	UpdateState(new_state)
+	return true
+
+func UpdateState(new_state: LevelState):
+	# also need to update colors
+	ComputeLevelColorState(new_state)
+	while HandleLevelColorState(new_state):
+		ComputeLevelColorState(new_state) # crushed a box, recompute as may no longer be on a button
+	
 	PlayAnim()
 	state_stack.push_back(new_state)
-	return true
+
+func ComputeLevelColorState(new_state: LevelState):
+	new_state.level_color_states = [0, 0, 0, 0, 0, 0];
+	for obj in new_state.bg_objects:
+		if obj.type == TileObj.TileType.SWITCH:
+			if obj.activated:
+				new_state.level_color_states[obj.color] = !new_state.level_color_states[obj.color]
+		elif obj.type == TileObj.TileType.BUTTON:
+			# check if we have an object on us
+			for top_obj in new_state.collision_objects:
+				if top_obj.CollidesWith(obj.posn, obj.size):
+					new_state.level_color_states[obj.color] = !new_state.level_color_states[obj.color]
+					break
+
+# Returns whether or not we deleted stuff - requires a recompute of colors
+func HandleLevelColorState(new_state: LevelState) -> bool:
+	#TODO combine with global state
+	var combined_color_states = new_state.level_color_states
+	var crushed_box:bool = false
+	
+	# Color walls swap between collision_objects and bg_objects depending on if they are activated or not
+	var deactivated_walls: Array[TileObj] = []
+	var activated_walls: Array[TileObj] = []
+	for obj in new_state.collision_objects:
+		if obj.type == TileObj.TileType.COLOR_WALL:
+			if obj.is_reversed:
+				obj.activated = !combined_color_states[obj.color]
+			else:
+				obj.activated = combined_color_states[obj.color]
+			
+			if !obj.activated:
+				# need to move to bg_objects
+				deactivated_walls.push_back(obj)
+	
+	for obj in new_state.bg_objects:
+		if obj.type == TileObj.TileType.COLOR_WALL:
+			if obj.is_reversed:
+				obj.activated = !combined_color_states[obj.color]
+			else:
+				obj.activated = combined_color_states[obj.color]
+			
+			if obj.activated:
+				# need to move to collision_objects
+				activated_walls.push_back(obj)
+				# check if anything collides with us, need to crush it
+				for col_obj in new_state.collision_objects:
+					if col_obj.CollidesWith(obj.posn, obj.size):
+						if col_obj.type == TileObj.TileType.PLAYER || col_obj.type == TileObj.TileType.PLAYER_BODY:
+							# DEATH
+							print("YOU DIED")
+						elif col_obj.type == TileObj.TileType.BOX:
+							# crush the box 
+							CrushBox(col_obj, new_state)
+							crushed_box = true
+	
+	for wall in deactivated_walls:
+		new_state.bg_objects.push_back(wall)
+		new_state.collision_objects.erase(wall)
+	for wall in activated_walls:
+		new_state.collision_objects.push_back(wall)
+		new_state.bg_objects.erase(wall)
+	
+	return crushed_box
 
 func WillPlayerRejoin(dir: Enums.Direction) -> PlayerBodyObj:
 	var state: LevelState = CurrentState()
@@ -247,6 +328,16 @@ func GetSummonPosn() -> Vector2i:
 	# return nope
 	return Vector2i(-1,-1)
 
+func CrushBox(obj: TileObj, new_state: LevelState):
+	assert(obj.type == TileObj.TileType.BOX)
+	# Add crushed object tile (to show debris)
+	var new_obj:TileObj = CrushedBoxObj.new()
+	new_obj.posn = obj.posn
+	new_obj.size = obj.size
+	new_obj.AssertOnGrid()
+	new_state.bg_objects.push_back(new_obj)
+	new_state.collision_objects.erase(obj)
+
 func PlayAnim():
 	pass
 
@@ -327,12 +418,15 @@ func LoadLevelFromText(map: Array[String]):
 					var new_obj:TileObj = ColoredWallObj.new()
 					new_obj.posn = Vector2i(j,i)
 					new_obj.color = GetColorFromChar(text[1])
+					new_obj.AssertOnGrid()
 					if text[2] == "R":
 						new_obj.is_reversed = true
+						new_obj.activated = true
+						starting_state.collision_objects.push_back(new_obj)
 					else:
 						assert(text[2] == " ")
-					new_obj.AssertOnGrid()
-					starting_state.collision_objects.push_back(new_obj)
+						new_obj.activated = false
+						starting_state.bg_objects.push_back(new_obj)
 				"S":
 					var new_obj:TileObj = SwitchObj.new()
 					new_obj.posn = Vector2i(j,i)
@@ -373,7 +467,9 @@ func LoadLevelFromText(map: Array[String]):
 func DEBUG_TileToString(tile: TileObj) -> String:
 	match tile.type:
 		TileObj.TileType.SWITCH:
-			return "S" + str(tile.color) + " "
+			if tile.activated:
+				return "S" + str(tile.color) + " "
+			return "s" + str(tile.color) + " "
 		TileObj.TileType.BUTTON:
 			return "B" + str(tile.color) + " "
 		TileObj.TileType.FLAG:
@@ -385,6 +481,8 @@ func DEBUG_TileToString(tile: TileObj) -> String:
 		TileObj.TileType.BOX:
 			return "XX "
 		TileObj.TileType.COLOR_WALL:
+			if !tile.activated:
+				return "-" + str(tile.color) + "-"
 			return "C" + str(tile.color) + " "
 		TileObj.TileType.CRUSHED_BOX:
 			return "x  "
