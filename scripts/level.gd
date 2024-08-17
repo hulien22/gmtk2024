@@ -53,9 +53,7 @@ func TryMove(dir: Enums.Direction) -> bool:
 	
 	var new_state: LevelState = cur_state.custom_duplicate()
 	var moved_obj: TileObj = GetMovedObj(new_state, dir)
-	#var crushed_objs: Array[TileObj] = GetCrushedObjs(new_state, moved_obj, dir)
-	
-	# check if we are on any buttons and activate if not activated before
+	var crushed_objs: Array[TileObj] = GetCrushedObjs(new_state, dir, moved_obj)
 	
 	# update player and moved_objs positions
 	var movement_vec: Vector2i = Enums.GetDirection(dir) * new_state.player.size
@@ -63,6 +61,17 @@ func TryMove(dir: Enums.Direction) -> bool:
 	new_state.player.direction = dir
 	if moved_obj != null:
 		moved_obj.posn = moved_obj.posn + movement_vec
+	for obj in crushed_objs:
+		assert(obj.type == TileObj.TileType.BOX)
+		# Add crushed object tile (to show debris)
+		var new_obj:TileObj = CrushedBoxObj.new()
+		new_obj.posn = obj.posn
+		new_obj.size = obj.size
+		new_obj.AssertOnGrid()
+		new_state.bg_objects.push_back(new_obj)
+		new_state.collision_objects.erase(obj)
+	
+	# TODO check if we are on any buttons and activate if not activated before
 	
 	PlayAnim()
 	state_stack.push_back(new_state)
@@ -157,6 +166,19 @@ func GetMovedObj(state: LevelState, dir: Enums.Direction) -> TileObj:
 		if obj.CollidesWith(target_posn, state.player.size) && obj.size == state.player.size:
 			return obj
 	return null
+
+func GetCrushedObjs(state: LevelState, dir: Enums.Direction, moved_obj: TileObj) -> Array[TileObj]:
+	var target_posn:Vector2i = state.player.posn + Enums.GetDirection(dir) * state.player.size
+	var crushed_objs: Array[TileObj] = []
+	for obj in state.collision_objects:
+		if obj.CollidesWith(target_posn, state.player.size) && obj.size < state.player.size:
+			crushed_objs.push_back(obj)
+	if (moved_obj != null):
+		target_posn = moved_obj.posn + Enums.GetDirection(dir) * state.player.size
+		for obj in state.collision_objects:
+			if obj.CollidesWith(target_posn, state.player.size) && obj.size < state.player.size:
+				crushed_objs.push_back(obj)
+	return crushed_objs
 
 func IsPosnInBounds(posn: Vector2i) -> bool:
 	return posn.x >= 0 && posn.x < width && posn.y >= 0 && posn.y < height
@@ -364,6 +386,8 @@ func DEBUG_TileToString(tile: TileObj) -> String:
 			return "XX "
 		TileObj.TileType.COLOR_WALL:
 			return "C" + str(tile.color) + " "
+		TileObj.TileType.CRUSHED_BOX:
+			return "x  "
 	return "?? "
 
 func DEBUG_WhatIsAtPoint(state: LevelState, posn: Vector2i) -> String:

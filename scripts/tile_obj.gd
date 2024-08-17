@@ -9,6 +9,7 @@ enum TileType {
 	PLAYER_BODY,
 	BOX,
 	COLOR_WALL,
+	CRUSHED_BOX
 }
 
 enum TileSize {
