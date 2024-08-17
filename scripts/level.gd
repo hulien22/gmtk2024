@@ -52,7 +52,8 @@ func TryMove(dir: Enums.Direction) -> bool:
 		return false
 	
 	var new_state: LevelState = cur_state.custom_duplicate()
-	var moved_objs: Array[TileObj] = GetMovedObjs(new_state, dir)
+	var moved_obj: TileObj = GetMovedObj(new_state, dir)
+	#var crushed_objs: Array[TileObj] = GetCrushedObjs(new_state, moved_obj, dir)
 	
 	# check if we are on any buttons and activate if not activated before
 	
@@ -60,8 +61,8 @@ func TryMove(dir: Enums.Direction) -> bool:
 	var movement_vec: Vector2i = Enums.GetDirection(dir) * new_state.player.size
 	new_state.player.posn = new_state.player.posn + movement_vec
 	new_state.player.direction = dir
-	for mo in moved_objs:
-		mo.posn = mo.posn + movement_vec
+	if moved_obj != null:
+		moved_obj.posn = moved_obj.posn + movement_vec
 	
 	PlayAnim()
 	state_stack.push_back(new_state)
@@ -105,47 +106,57 @@ func WillPlayerRejoin(dir: Enums.Direction) -> PlayerBodyObj:
 func CanPlayerMove(dir: Enums.Direction) -> bool:
 	var state: LevelState = CurrentState()
 	var target_posn:Vector2i = state.player.posn + Enums.GetDirection(dir) * state.player.size
-	return IsPosnMoveable(state, target_posn, state.player.size, dir, true)
+	return CanObjMoveTo(state, target_posn, state.player.size, dir, TileObj.TileType.PLAYER)
 
-func IsPosnMoveable(state: LevelState, target_posn:Vector2i, size: TileObj.TileSize, dir: Enums.Direction, allow_recurse:bool) -> bool:
+func CanObjMoveTo(state: LevelState, target_posn:Vector2i, size: TileObj.TileSize, dir: Enums.Direction, type: TileObj.TileType) -> bool:
 	if (!IsPosnInBounds(target_posn)):
 		print("not IsPosnInBounds")
 		return false
-	if (WallExistsAtPosn(target_posn, state.player.size)):
+	if (WallExistsAtPosn(target_posn, size)):
 		print("WallExistsAtPosn")
 		return false
 	
 	# now check for other objects
 	for obj in state.collision_objects:
-		if obj.CollidesWith(target_posn, state.player.size):
-			if !obj.is_pushable || obj.size > state.player.size || !allow_recurse:
-				 # can't move things that aren't pushable, bigger things than us, or if we're already trying to push smth
-				print("!!", obj)
-				return false
-			else:
+		if obj.CollidesWith(target_posn, size):
+			if (type == TileObj.TileType.PLAYER):
+				if !obj.is_pushable || obj.size > size:
+					 # can't move things that aren't pushable, bigger things than us
+					print("!!", obj)
+					return false
+				if obj.size < size:
+					# we can move into this spot and will crush it
+					# need to check for other objects that might not be pushable
+					continue
+				assert(obj.size == size)
+				# Pushing something of our size
 				# check that there's nothing else in the next space up
 				var target_posn2:Vector2i = target_posn + Enums.GetDirection(dir) * size
-				
-				# TODO can just return this if we don't allow pushing multiple smaller things
-				if !IsPosnMoveable(state, target_posn2, size, dir, false):
-					print("recurse failure")
+				return CanObjMoveTo(state, target_posn2, size, dir, obj.type)
+			elif (type == TileObj.TileType.BOX):
+				if !obj.is_pushable || obj.size >= size:
+					# can't push box into non-pushable things, or into bigger/same sized objects
 					return false
-	## Can't push a box onto a switch?
-	#if !allow_recurse:
+				# We can push the box into smaller things (crushes them)
+				return true
+			# TODO handler other types if needed here
+	
+	### Can't push a box onto a switch?
+	#if (type == TileObj.TileType.BOX):
 		#for obj in state.bg_objects:
-			#if obj.type == TileObj.TileType.SWITCH && obj.CollidesWith(target_posn, state.player.size):
+			#if obj.type == TileObj.TileType.SWITCH && obj.CollidesWith(target_posn, size):
 				#return false
+
 	print("ret true")
 	return true
 
 # Assumes that CanPlayerMove == true
-func GetMovedObjs(state: LevelState, dir: Enums.Direction) -> Array[TileObj]:
+func GetMovedObj(state: LevelState, dir: Enums.Direction) -> TileObj:
 	var target_posn:Vector2i = state.player.posn + Enums.GetDirection(dir) * state.player.size
-	var moved_objs: Array[TileObj] = []
 	for obj in state.collision_objects:
-		if obj.CollidesWith(target_posn, state.player.size):
-			moved_objs.push_back(obj)
-	return moved_objs
+		if obj.CollidesWith(target_posn, state.player.size) && obj.size == state.player.size:
+			return obj
+	return null
 
 func IsPosnInBounds(posn: Vector2i) -> bool:
 	return posn.x >= 0 && posn.x < width && posn.y >= 0 && posn.y < height
@@ -159,8 +170,7 @@ func WallExistsAtPosn(posn: Vector2i, size: TileObj.TileSize) -> bool:
 		_:
 			return walls_s[posn.y][posn.x]
 
-# TODO Use this for IsPosnMoveable
-func IsPosnAvailable(target_posn: Vector2i, size: TileObj.TileSize, type: TileObj.TileType) -> bool:
+func IsSummonPosnAvailable(target_posn: Vector2i, size: TileObj.TileSize) -> bool:
 	var state: LevelState = CurrentState()
 	if (!IsPosnInBounds(target_posn)):
 		return false
@@ -195,7 +205,7 @@ func GetSummonPosn() -> Vector2i:
 		Enums.Direction.LEFT:
 			target_posn = state.player.posn + Enums.GetDirection(Enums.Direction.LEFT) * new_size + Enums.GetDirection(Enums.Direction.DOWN) * new_size
 	
-	if IsPosnAvailable(target_posn, new_size, TileObj.TileType.PLAYER):
+	if IsSummonPosnAvailable(target_posn, new_size):
 		return target_posn
 	
 	# try posn 2
@@ -209,7 +219,7 @@ func GetSummonPosn() -> Vector2i:
 		Enums.Direction.LEFT:
 			target_posn = state.player.posn + Enums.GetDirection(Enums.Direction.LEFT) * new_size
 	
-	if IsPosnAvailable(target_posn, new_size, TileObj.TileType.PLAYER):
+	if IsSummonPosnAvailable(target_posn, new_size):
 		return target_posn
 	
 	# return nope
@@ -290,7 +300,7 @@ func LoadLevelFromText(map: Array[String]):
 					new_obj.size = GetSizeFromChar(text[1])
 					assert(text[2] == " ")
 					new_obj.AssertOnGrid()
-					starting_state.bg_objects.push_back(new_obj)
+					starting_state.collision_objects.push_back(new_obj)
 				"C":
 					var new_obj:TileObj = ColoredWallObj.new()
 					new_obj.posn = Vector2i(j,i)
