@@ -14,3 +14,10 @@ var bg_objects: Array[TileObj] = [] # Vector2i -> TileObj
 func test():
 	inst_to_dict(self)
 	var_to_bytes(self)
+
+func custom_duplicate() -> LevelState:
+	var new_state = LevelState.new()
+	new_state.player = player.duplicate(true)
+	new_state.collision_objects = collision_objects.duplicate(true)
+	new_state.bg_objects = bg_objects.duplicate(true)
+	return new_state

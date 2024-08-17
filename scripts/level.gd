@@ -21,18 +21,21 @@ var walls_s: Array[Array] # 2d array of bool to represent walls / empty spaces
 func CurrentState() -> LevelState:
 	return state_stack.back()
 
-func TryMove(dir: Enums.Direction):
+func TryMove(dir: Enums.Direction) -> bool:
 	var cur_state: LevelState = CurrentState()
+	print(1)
 	if !CanPlayerMove(dir):
 		if dir != cur_state.player.direction:
 			# Can't move, but can change directions
-			var new_state: LevelState = cur_state.duplicate(true)
+			var new_state: LevelState = cur_state.custom_duplicate()
 			new_state.player.direction = dir
 			state_stack.push_back(new_state)
 			PlayAnim()
-		return
+			return true
+		return false
+	print(1)
 	
-	var new_state: LevelState = cur_state.duplicate(true)
+	var new_state: LevelState = cur_state.custom_duplicate()
 	var moved_objs: Array[TileObj] = GetMovedObjs(new_state, dir)
 	
 	# check if we are on any buttons and activate if not activated before
@@ -45,6 +48,7 @@ func TryMove(dir: Enums.Direction):
 	
 	PlayAnim()
 	state_stack.push_back(new_state)
+	return true
 	
 
 func CanPlayerMove(dir: Enums.Direction) -> bool:
@@ -54,8 +58,10 @@ func CanPlayerMove(dir: Enums.Direction) -> bool:
 
 func IsPosnMoveable(state: LevelState, target_posn:Vector2i, size: TileObj.TileSize, dir: Enums.Direction, allow_recurse:bool) -> bool:
 	if (!IsPosnInBounds(target_posn)):
+		print("not IsPosnInBounds")
 		return false
-	if (!WallExistsAtPosn(target_posn, state.player.size)):
+	if (WallExistsAtPosn(target_posn, state.player.size)):
+		print("WallExistsAtPosn")
 		return false
 	
 	# now check for other objects
@@ -63,6 +69,7 @@ func IsPosnMoveable(state: LevelState, target_posn:Vector2i, size: TileObj.TileS
 		if obj.CollidesWith(target_posn, state.player.size):
 			if !obj.is_pushable || obj.size > state.player.size || !allow_recurse:
 				 # can't move things that aren't pushable, bigger things than us, or if we're already trying to push smth
+				print("!!", obj)
 				return false
 			else:
 				# check that there's nothing else in the next space up
@@ -70,13 +77,14 @@ func IsPosnMoveable(state: LevelState, target_posn:Vector2i, size: TileObj.TileS
 				
 				# TODO can just return this if we don't allow pushing multiple smaller things
 				if !IsPosnMoveable(state, target_posn2, size, dir, false):
+					print("recurse failure")
 					return false
-	# Can't push a box onto a switch?
-	if !allow_recurse:
-		for obj in state.bg_objects:
-			if obj.type == TileObj.TileType.SWITCH && obj.CollidesWith(target_posn, state.player.size):
-				return false
-			
+	## Can't push a box onto a switch?
+	#if !allow_recurse:
+		#for obj in state.bg_objects:
+			#if obj.type == TileObj.TileType.SWITCH && obj.CollidesWith(target_posn, state.player.size):
+				#return false
+	print("ret true")
 	return true
 
 # Assumes that CanPlayerMove == true
@@ -261,3 +269,4 @@ func DEBUG_PrintState(state: LevelState):
 			var posn: Vector2i = Vector2i(j, i)
 			out += DEBUG_WhatIsAtPoint(state, posn)
 		print(out)
+	print()
