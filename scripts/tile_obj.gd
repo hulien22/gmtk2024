@@ -17,13 +17,13 @@ enum TileSize {
 	SMALL = 1
 }
 
-var posn: Vector2i = Vector2i.ZERO;
-var type: TileType;
-var size: TileSize = TileSize.SMALL
-var color: Enums.Colors = Enums.Colors.NONE
-var is_pushable:bool = false
-var activated:bool = false;
-var direction: Enums.Direction = Enums.Direction.RIGHT
+@export var posn: Vector2i = Vector2i.ZERO;
+@export var type: TileType;
+@export var size: TileSize = TileSize.SMALL
+@export var color: Enums.Colors = Enums.Colors.NONE
+@export var is_pushable:bool = false
+@export var activated:bool = false;
+@export var direction: Enums.Direction = Enums.Direction.RIGHT
 
 func AssertOnGrid():
 	assert(posn.x % size == 0 && posn.y % size == 0, " ERROR NOT ON GRID: " + str(posn) + " " + str(size))
