@@ -18,6 +18,8 @@ var walls_b: Array[Array]
 var walls_m: Array[Array]
 var walls_s: Array[Array] # 2d array of bool to represent walls / empty spaces
 
+signal player_moved(size, new_pos)
+
 func CurrentState() -> LevelState:
 	return state_stack.back()
 
@@ -45,7 +47,6 @@ func TryMove(dir: Enums.Direction) -> bool:
 			# Can't move, but can change directions
 			var new_state: LevelState = cur_state.custom_duplicate()
 			new_state.player.direction = dir
-			
 			UpdateState(new_state)
 			return true
 		return false
@@ -117,7 +118,7 @@ func UpdateState(new_state: LevelState):
 	while HandleLevelColorState(new_state):
 		ComputeLevelColorState(new_state) # crushed a box, recompute as may no longer be on a button
 	
-	PlayAnim()
+	PlayAnim(new_state.player.size, new_state.player.posn)
 	state_stack.push_back(new_state)
 
 func ComputeLevelColorState(new_state: LevelState):
@@ -343,8 +344,8 @@ func CrushBox(obj: TileObj, new_state: LevelState):
 	new_state.bg_objects.push_back(new_obj)
 	new_state.collision_objects.erase(obj)
 
-func PlayAnim():
-	pass
+func PlayAnim(size, new_pos):
+	player_moved.emit(size, new_pos)
 
 static func GetSizeFromChar(c: String) -> TileObj.TileSize:
 	match c:

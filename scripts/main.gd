@@ -36,6 +36,7 @@ func _ready() -> void:
 	level = Level.new()
 	level.LoadLevelFromText(levelstr)
 	level.DEBUG_PrintState(level.CurrentState())
+	$RenderedLevel.init(level)
 
 func _input(event):
 	var update:bool = false
