@@ -43,6 +43,7 @@ func TryMove(dir: Enums.Direction) -> bool:
 	# update player and moved_objs positions
 	var movement_vec: Vector2i = Enums.GetDirection(dir) * new_state.player.size
 	new_state.player.posn = new_state.player.posn + movement_vec
+	new_state.player.direction = dir
 	for mo in moved_objs:
 		mo.posn = mo.posn + movement_vec
 	
