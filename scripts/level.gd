@@ -161,33 +161,44 @@ func LoadLevelFromText(map: Array[String]):
 					assert(text == "PB ")
 					starting_state.player = PlayerObj.new()
 					starting_state.player.posn = Vector2i(i,j)
+					starting_state.player.AssertOnGrid()
 				"F":
 					var new_obj:TileObj = FlagObj.new()
+					new_obj.posn = Vector2i(i,j)
 					new_obj.size = GetSizeFromChar(text[1])
 					assert(text[2] == " ")
+					new_obj.AssertOnGrid()
 					starting_state.bg_objects.push_back(new_obj)
 				"X":
 					var new_obj:TileObj = BoxObj.new()
+					new_obj.posn = Vector2i(i,j)
 					new_obj.size = GetSizeFromChar(text[1])
 					assert(text[2] == " ")
+					new_obj.AssertOnGrid()
 					starting_state.bg_objects.push_back(new_obj)
 				"C":
 					var new_obj:TileObj = ColoredWallObj.new()
+					new_obj.posn = Vector2i(i,j)
 					new_obj.color = GetColorFromChar(text[1])
 					if text[2] == "R":
 						new_obj.is_reversed = true
 					else:
 						assert(text[2] == " ")
+					new_obj.AssertOnGrid()
 					starting_state.collision_objects.push_back(new_obj)
 				"S":
 					var new_obj:TileObj = SwitchObj.new()
+					new_obj.posn = Vector2i(i,j)
 					new_obj.color = GetColorFromChar(text[1])
 					new_obj.size = GetSizeFromChar(text[2])
+					new_obj.AssertOnGrid()
 					starting_state.bg_objects.push_back(new_obj)
 				"B":
 					var new_obj:TileObj = ButtonObj.new()
+					new_obj.posn = Vector2i(i,j)
 					new_obj.color = GetColorFromChar(text[1])
 					new_obj.size = GetSizeFromChar(text[2])
+					new_obj.AssertOnGrid()
 					starting_state.bg_objects.push_back(new_obj)
 			walls_s[i].push_back(false)
 	
