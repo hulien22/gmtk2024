@@ -127,11 +127,14 @@ func ComputeLevelColorState(new_state: LevelState):
 			if obj.activated:
 				new_state.level_color_states[obj.color] = !new_state.level_color_states[obj.color]
 		elif obj.type == TileObj.TileType.BUTTON:
-			# check if we have an object on us
+			# check if we have an object on us - obj also needs to be our size or larger
 			for top_obj in new_state.collision_objects:
-				if top_obj.CollidesWith(obj.posn, obj.size):
+				if top_obj.size >= obj.size && top_obj.CollidesWith(obj.posn, obj.size):
 					new_state.level_color_states[obj.color] = !new_state.level_color_states[obj.color]
 					break
+			if new_state.player.size >= obj.size && new_state.player.CollidesWith(obj.posn, obj.size):
+				new_state.level_color_states[obj.color] = !new_state.level_color_states[obj.color]
+
 
 # Returns whether or not we deleted stuff - requires a recompute of colors
 func HandleLevelColorState(new_state: LevelState) -> bool:
@@ -166,13 +169,15 @@ func HandleLevelColorState(new_state: LevelState) -> bool:
 				# check if anything collides with us, need to crush it
 				for col_obj in new_state.collision_objects:
 					if col_obj.CollidesWith(obj.posn, obj.size):
-						if col_obj.type == TileObj.TileType.PLAYER || col_obj.type == TileObj.TileType.PLAYER_BODY:
+						if col_obj.type == TileObj.TileType.PLAYER_BODY:
 							# DEATH
 							print("YOU DIED")
 						elif col_obj.type == TileObj.TileType.BOX:
 							# crush the box 
 							CrushBox(col_obj, new_state)
 							crushed_box = true
+				if new_state.player.CollidesWith(obj.posn, obj.size):
+					print("YOU DIED")
 	
 	for wall in deactivated_walls:
 		new_state.bg_objects.push_back(wall)
