@@ -47,6 +47,8 @@ func _input(event):
 		update = level.TryMove(Enums.Direction.RIGHT)
 	elif event.is_action_pressed("ui_left"):
 		update = level.TryMove(Enums.Direction.LEFT)
+	elif event.is_action_pressed("ui_accept"):
+		update = level.TrySummon()
 	
 	if update: 
 		level.DEBUG_PrintState(level.CurrentState())

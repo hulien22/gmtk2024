@@ -49,7 +49,31 @@ func TryMove(dir: Enums.Direction) -> bool:
 	PlayAnim()
 	state_stack.push_back(new_state)
 	return true
+
+func TrySummon() -> bool:
+	var state: LevelState = CurrentState()
+	if state.player.size == TileObj.TileSize.SMALL:
+		# already too small
+		return false
 	
+	var new_posn = GetSummonPosn()
+	print(new_posn)
+	if new_posn == Vector2i(-1,-1):
+		return false
+	
+	# summon new guy!
+	var new_state: LevelState = state.custom_duplicate()
+	# turn current body into corpse
+	var body_obj:TileObj = PlayerBodyObj.new()
+	body_obj.CopyFromPlayer(state.player)
+	new_state.collision_objects.push_back(body_obj)
+	# replace player now
+	new_state.player.size = new_state.player.size / 2
+	new_state.player.posn = new_posn
+	
+	PlayAnim()
+	state_stack.push_back(new_state)
+	return true
 
 func CanPlayerMove(dir: Enums.Direction) -> bool:
 	var state: LevelState = CurrentState()
@@ -104,9 +128,65 @@ func WallExistsAtPosn(posn: Vector2i, size: TileObj.TileSize) -> bool:
 		TileObj.TileSize.BIG:
 			return walls_b[posn.y / 4][posn.x / 4]
 		TileObj.TileSize.MEDIUM:
-			return walls_b[posn.y / 2][posn.x / 2]
+			return walls_m[posn.y / 2][posn.x / 2]
 		_:
-			return walls_b[posn.y][posn.x]
+			return walls_s[posn.y][posn.x]
+
+# TODO Use this for IsPosnMoveable
+func IsPosnAvailable(target_posn: Vector2i, size: TileObj.TileSize, type: TileObj.TileType) -> bool:
+	var state: LevelState = CurrentState()
+	if (!IsPosnInBounds(target_posn)):
+		return false
+	if (WallExistsAtPosn(target_posn, size)):
+		return false
+	
+	for obj in state.collision_objects:
+		if obj.CollidesWith(target_posn, size):
+			return false
+	# for boxes, also check if there are switches here, can't push onto those
+	
+	return true
+
+func GetSummonPosn() -> Vector2i:
+	# first check 1 then check 2
+	#    12
+	#   2PP1
+	#   1PP2
+	#    21
+	var state: LevelState = CurrentState()
+	var size:int = state.player.size
+	var new_size:int = size / 2
+	var dir:Enums.Direction = state.player.direction
+	var target_posn:Vector2i = state.player.posn
+	match dir:
+		Enums.Direction.UP:
+			target_posn = state.player.posn + Enums.GetDirection(Enums.Direction.UP) * new_size
+		Enums.Direction.RIGHT:
+			target_posn = state.player.posn + Enums.GetDirection(Enums.Direction.RIGHT) * size
+		Enums.Direction.DOWN:
+			target_posn = state.player.posn + Enums.GetDirection(Enums.Direction.DOWN) * size + Enums.GetDirection(Enums.Direction.RIGHT) * new_size
+		Enums.Direction.LEFT:
+			target_posn = state.player.posn + Enums.GetDirection(Enums.Direction.LEFT) * new_size + Enums.GetDirection(Enums.Direction.DOWN) * new_size
+	
+	if IsPosnAvailable(target_posn, new_size, TileObj.TileType.PLAYER):
+		return target_posn
+	
+	# try posn 2
+	match dir:
+		Enums.Direction.UP:
+			target_posn = state.player.posn + Enums.GetDirection(Enums.Direction.UP) * new_size + Enums.GetDirection(Enums.Direction.RIGHT) * new_size
+		Enums.Direction.RIGHT:
+			target_posn = state.player.posn + Enums.GetDirection(Enums.Direction.RIGHT) * size + Enums.GetDirection(Enums.Direction.DOWN) * new_size
+		Enums.Direction.DOWN:
+			target_posn = state.player.posn + Enums.GetDirection(Enums.Direction.DOWN) * size
+		Enums.Direction.LEFT:
+			target_posn = state.player.posn + Enums.GetDirection(Enums.Direction.LEFT) * new_size
+	
+	if IsPosnAvailable(target_posn, new_size, TileObj.TileType.PLAYER):
+		return target_posn
+	
+	# return nope
+	return Vector2i(-1,-1)
 
 func PlayAnim():
 	pass
