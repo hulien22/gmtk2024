@@ -160,25 +160,25 @@ func LoadLevelFromText(map: Array[String]):
 				"P":
 					assert(text == "PB ")
 					starting_state.player = PlayerObj.new()
-					starting_state.player.posn = Vector2i(i,j)
+					starting_state.player.posn = Vector2i(j,i)
 					starting_state.player.AssertOnGrid()
 				"F":
 					var new_obj:TileObj = FlagObj.new()
-					new_obj.posn = Vector2i(i,j)
+					new_obj.posn = Vector2i(j,i)
 					new_obj.size = GetSizeFromChar(text[1])
 					assert(text[2] == " ")
 					new_obj.AssertOnGrid()
 					starting_state.bg_objects.push_back(new_obj)
 				"X":
 					var new_obj:TileObj = BoxObj.new()
-					new_obj.posn = Vector2i(i,j)
+					new_obj.posn = Vector2i(j,i)
 					new_obj.size = GetSizeFromChar(text[1])
 					assert(text[2] == " ")
 					new_obj.AssertOnGrid()
 					starting_state.bg_objects.push_back(new_obj)
 				"C":
 					var new_obj:TileObj = ColoredWallObj.new()
-					new_obj.posn = Vector2i(i,j)
+					new_obj.posn = Vector2i(j,i)
 					new_obj.color = GetColorFromChar(text[1])
 					if text[2] == "R":
 						new_obj.is_reversed = true
@@ -188,14 +188,14 @@ func LoadLevelFromText(map: Array[String]):
 					starting_state.collision_objects.push_back(new_obj)
 				"S":
 					var new_obj:TileObj = SwitchObj.new()
-					new_obj.posn = Vector2i(i,j)
+					new_obj.posn = Vector2i(j,i)
 					new_obj.color = GetColorFromChar(text[1])
 					new_obj.size = GetSizeFromChar(text[2])
 					new_obj.AssertOnGrid()
 					starting_state.bg_objects.push_back(new_obj)
 				"B":
 					var new_obj:TileObj = ButtonObj.new()
-					new_obj.posn = Vector2i(i,j)
+					new_obj.posn = Vector2i(j,i)
 					new_obj.color = GetColorFromChar(text[1])
 					new_obj.size = GetSizeFromChar(text[2])
 					new_obj.AssertOnGrid()
@@ -242,7 +242,7 @@ func DEBUG_TileToString(tile: TileObj) -> String:
 	return "?? "
 
 func DEBUG_WhatIsAtPoint(state: LevelState, posn: Vector2i) -> String:
-	if walls_s[posn.x][posn.y]:
+	if walls_s[posn.y][posn.x]:
 		return "WW "
 	if state.player.CollidesWith(posn,1):
 		return DEBUG_TileToString(state.player)
@@ -258,6 +258,6 @@ func DEBUG_PrintState(state: LevelState):
 	for i in height:
 		var out: String = ""
 		for j in width:
-			var posn: Vector2i = Vector2i(i, j)
+			var posn: Vector2i = Vector2i(j, i)
 			out += DEBUG_WhatIsAtPoint(state, posn)
 		print(out)
