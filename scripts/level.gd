@@ -200,6 +200,7 @@ func Undo() -> bool:
 	state_stack.pop_back()
 	dead = false
 	# don't update any colors, previous state should already have sorted that out
+	rendered_level.init(self)
 	return true
 
 func Reset() -> bool:
@@ -207,6 +208,7 @@ func Reset() -> bool:
 	state_stack.push_back(starting_state)
 	dead = false
 	# don't update completed, that stays
+	rendered_level.init(self)
 	return true
 
 func UpdateState(new_state: LevelState):
@@ -241,6 +243,8 @@ func ComputeLevelColorState(new_state: LevelState):
 				button_is_activated = true
 			if button_is_activated:
 				new_state.level_color_states[obj.color] = !new_state.level_color_states[obj.color]
+				obj.activated = true
+			obj.activated = false
 			
 			var anim_event: AnimationEvent = AnimationEvent.new()
 			if button_is_activated:

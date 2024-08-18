@@ -25,6 +25,8 @@ func init(data: Level):
 	#$GridOffset/PM.init(data, TileObj.TileSize.MEDIUM)
 	#$GridOffset/PS.init(data, TileObj.TileSize.SMALL)
 	
+	for obj in objects:
+		obj.queue_free()
 	objects.clear()
 	
 	if true:
@@ -64,6 +66,8 @@ func ProcessAnimationEvents(events: Array[AnimationEvent]):
 			node.SpawnFromEvent(event)
 			objects.push_back(node)
 			$GridOffset/Player.add_child(node)
+		
+		# TODO handle deletion events
 		
 		# find corresponding object
 		var found_obj = false
