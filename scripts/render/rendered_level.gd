@@ -61,6 +61,11 @@ func init(data: Level):
 			node.init(obj)
 			objects.push_back(node)
 			$GridOffset/Scissors.add_child(node)
+		elif obj is PlayerBodyObj:
+			var node = player_scene.instantiate() as RenderedPlayer
+			node.init(obj)
+			objects.push_back(node)
+			$GridOffset/Player.add_child(node)
 
 
 func ProcessAnimationEvents(events: Array[AnimationEvent]):
@@ -77,6 +82,8 @@ func ProcessAnimationEvents(events: Array[AnimationEvent]):
 		# find corresponding object
 		var found_obj = false
 		for obj in objects:
+			if obj == null:
+				continue
 			if obj.type == event.obj_type && obj.posn == event.posn:
 				found_obj = true
 				obj.ProcessAnimationEvent(event)
@@ -84,4 +91,11 @@ func ProcessAnimationEvents(events: Array[AnimationEvent]):
 		if !found_obj:
 			print("COULD NOT FIND OBJECT FOR EVENT ", var_to_str(event))
 	pass
-	
+
+func CleanupDeletedEntries():
+	var to_delete:Array[RenderedObj] = []
+	for obj in objects:
+		if obj == null:
+			to_delete.push_back(obj)
+	for obj in to_delete:
+		objects.erase(obj)
