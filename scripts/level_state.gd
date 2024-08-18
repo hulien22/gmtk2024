@@ -20,7 +20,9 @@ func test():
 func custom_duplicate() -> LevelState:
 	var new_state = LevelState.new()
 	new_state.player = player.duplicate(true)
-	new_state.collision_objects = collision_objects.duplicate(true)
-	new_state.bg_objects = bg_objects.duplicate(true)
+	for o in collision_objects:
+		new_state.collision_objects.push_back(o.duplicate(true))
+	for o in bg_objects:
+		new_state.bg_objects.push_back(bg_objects.duplicate(true))
 	new_state.level_color_states = level_color_states.duplicate(true)
 	return new_state

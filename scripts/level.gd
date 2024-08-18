@@ -112,6 +112,13 @@ func TryToggleSwitch() -> bool:
 	UpdateState(new_state)
 	return true
 
+func Undo() -> bool:
+	if state_stack.size() <= 1:
+		return false
+	state_stack.pop_back()
+	# don't update any colors, previous state should already have sorted that out
+	return true
+
 func UpdateState(new_state: LevelState):
 	# also need to update colors
 	ComputeLevelColorState(new_state)

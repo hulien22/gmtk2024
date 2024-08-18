@@ -52,6 +52,8 @@ func _input(event):
 		update = level.TrySummon()
 	elif event.is_action_pressed("ToggleSwitch"):
 		update = level.TryToggleSwitch()
+	elif event.is_action_pressed("Undo"):
+		update = level.Undo()
 	
 	if update: 
 		level.DEBUG_PrintState(level.CurrentState())
