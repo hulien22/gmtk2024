@@ -128,6 +128,13 @@ func Undo() -> bool:
 	# don't update any colors, previous state should already have sorted that out
 	return true
 
+func Reset() -> bool:
+	state_stack.clear()
+	state_stack.push_back(starting_state)
+	dead = false
+	# don't update completed, that stays
+	return true
+
 func UpdateState(new_state: LevelState):
 	# also need to update colors
 	ComputeLevelColorState(new_state)
