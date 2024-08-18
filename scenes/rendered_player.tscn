@@ -1,9 +1,37 @@
-[gd_scene load_steps=3 format=3 uid="uid://dhnmos0i67m3y"]
+[gd_scene load_steps=3 format=3 uid="uid://brekff7vy8ggo"]
 
 [ext_resource type="Texture2D" uid="uid://b5lmy46q2hsor" path="res://art/big_player.jpg" id="1_a0ls2"]
-[ext_resource type="Script" path="res://scripts/render/rendered_player.gd" id="2_7t5ls"]
+
+[sub_resource type="GDScript" id="GDScript_nrqj6"]
+script/source = "extends Sprite2D
+
+var cur_pos: Vector2i
+var size: TileObj.TileSize
+
+func init(level: Level, init_size: TileObj.TileSize):
+	size = init_size
+	set_pos(level.CurrentState().player.posn)
+	level.player_moved.connect(on_moved)
+	if size != TileObj.TileSize.BIG:
+		visible = false
+	
+func set_pos(pos):
+	cur_pos = pos
+	position = cur_pos
+	
+func on_moved(moved_size: TileObj.TileSize, new_pos: Vector2i):
+	if moved_size != size:
+		return
+	set_pos(new_pos)
+
+func on_swallow():
+	pass
+
+func on_spit():
+	pass
+"
 
 [node name="PB" type="Sprite2D"]
 texture = ExtResource("1_a0ls2")
 centered = false
-script = ExtResource("2_7t5ls")
+script = SubResource("GDScript_nrqj6")
