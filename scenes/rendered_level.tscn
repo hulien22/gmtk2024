@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bajdasdx1lxlc" path="res://scenes/rendered_button.tscn" id="2_qskbo"]
 [ext_resource type="Script" path="res://scripts/render/background_layer.gd" id="3_avu2h"]
 [ext_resource type="Texture2D" uid="uid://bpksmmbf3k8pl" path="res://art/Tile_Map.png" id="3_dter0"]
-[ext_resource type="PackedScene" uid="uid://dxawg5c35kabj" path="res://scenes/rendered_player.tscn" id="4_fiw6g"]
+[ext_resource type="PackedScene" path="res://scenes/rendered_player.tscn" id="4_fiw6g"]
 [ext_resource type="Texture2D" uid="uid://cppm4l23knvw4" path="res://art/BIG_blue_Placeholder.png" id="5_txbhw"]
 [ext_resource type="Texture2D" uid="uid://dbs4tv6kf4ghc" path="res://art/MEDIUM_Orange_Placeholder.png" id="6_glsrf"]
 [ext_resource type="Texture2D" uid="uid://k048mq4hwthl" path="res://art/SMALL_Yellow_Placeholder.png" id="7_bn66q"]
@@ -453,6 +453,7 @@ navigation_enabled = false
 script = ExtResource("3_avu2h")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
+visible = false
 
 [node name="GridOffset" type="Node2D" parent="."]
 

@@ -1,5 +1,7 @@
 class_name Level
 
+var rendered_level: RenderedLevel
+
 var starting_state: LevelState
 var state_stack: Array[LevelState] = []
 
@@ -7,6 +9,9 @@ var level_num: int = 1
 var level_name: String = "Unnamed Level"
 var width:int
 var height:int
+
+var animation_events: Array[AnimationEvent]
+
 # don't show flag when the stage has been completed once
 var completed:bool = false
 var dead:bool = false
@@ -25,14 +30,22 @@ func CurrentState() -> LevelState:
 	return state_stack.back()
 
 func TryMove(dir: Enums.Direction) -> bool:
-	var cur_state: LevelState = CurrentState()
-	
 	if dead:
 		return false
+
+	var cur_state: LevelState = CurrentState()
 	
 	var player_body_obj: PlayerBodyObj = WillPlayerRejoin(dir)
 	if player_body_obj != null:
 		var new_state: LevelState = cur_state.custom_duplicate()
+		
+		var smallplayer_anim: AnimationEvent = AnimationEvent.new()
+		smallplayer_anim.anim_type = AnimationEvent.AnimationType.RETURNED
+		smallplayer_anim.obj_type = TileObj.TileType.PLAYER
+		smallplayer_anim.posn = new_state.player.posn
+		smallplayer_anim.new_posn = player_body_obj.posn
+		animation_events.push_back(smallplayer_anim)
+		
 		# delete body
 		for obj in new_state.collision_objects:
 			if obj.type == player_body_obj.type && obj.posn == player_body_obj.posn:
@@ -43,6 +56,13 @@ func TryMove(dir: Enums.Direction) -> bool:
 		new_state.player.size = player_body_obj.size
 		new_state.player.direction = player_body_obj.direction
 		
+		var bigplayer_anim: AnimationEvent = AnimationEvent.new()
+		bigplayer_anim.anim_type = AnimationEvent.AnimationType.REVIVE
+		bigplayer_anim.obj_type = TileObj.TileType.PLAYER
+		bigplayer_anim.posn = new_state.player.posn
+		bigplayer_anim.direction = new_state.player.direction
+		animation_events.push_back(bigplayer_anim)
+		
 		UpdateState(new_state)
 		return true
 	
@@ -51,6 +71,15 @@ func TryMove(dir: Enums.Direction) -> bool:
 			# Can't move, but can change directions
 			var new_state: LevelState = cur_state.custom_duplicate()
 			new_state.player.direction = dir
+			
+			var anim_event: AnimationEvent = AnimationEvent.new()
+			anim_event.anim_type = AnimationEvent.AnimationType.MOVED
+			anim_event.obj_type = TileObj.TileType.PLAYER
+			anim_event.posn = new_state.player.posn
+			anim_event.new_posn = new_state.player.posn
+			anim_event.direction = new_state.player.direction
+			animation_events.push_back(anim_event)
+			
 			UpdateState(new_state)
 			return true
 		return false
@@ -61,9 +90,25 @@ func TryMove(dir: Enums.Direction) -> bool:
 	
 	# update player and moved_objs positions
 	var movement_vec: Vector2i = Enums.GetDirection(dir) * new_state.player.size
+	
+	var player_anim: AnimationEvent = AnimationEvent.new()
+	player_anim.anim_type = AnimationEvent.AnimationType.MOVED
+	player_anim.obj_type = TileObj.TileType.PLAYER
+	player_anim.posn = new_state.player.posn
+	player_anim.new_posn = new_state.player.posn + movement_vec
+	player_anim.direction = dir
+	animation_events.push_back(player_anim)
 	new_state.player.posn = new_state.player.posn + movement_vec
 	new_state.player.direction = dir
+
 	if moved_obj != null:
+		var anim_event: AnimationEvent = AnimationEvent.new()
+		anim_event.anim_type = AnimationEvent.AnimationType.MOVED
+		anim_event.obj_type = moved_obj.type
+		anim_event.posn = moved_obj.posn
+		anim_event.new_posn = moved_obj.posn + movement_vec
+		animation_events.push_back(anim_event)
+		
 		moved_obj.posn = moved_obj.posn + movement_vec
 	for obj in crushed_objs:
 		CrushBox(obj, new_state)
@@ -76,6 +121,7 @@ func TryMove(dir: Enums.Direction) -> bool:
 func TrySummon() -> bool:
 	if dead:
 		return false
+
 	var state: LevelState = CurrentState()
 	if state.player.size == TileObj.TileSize.SMALL:
 		# already too small
@@ -89,6 +135,7 @@ func TrySummon() -> bool:
 	
 	# summon new guy!
 	var new_state: LevelState = state.custom_duplicate()
+	
 	# turn current body into corpse
 	var body_obj:TileObj = PlayerBodyObj.new()
 	body_obj.CopyFromPlayer(state.player)
@@ -97,12 +144,29 @@ func TrySummon() -> bool:
 	new_state.player.size = new_state.player.size / 2
 	new_state.player.posn = new_posn
 	
+	var smallplayer_anim: AnimationEvent = AnimationEvent.new()
+	smallplayer_anim.anim_type = AnimationEvent.AnimationType.SPAWNED
+	smallplayer_anim.obj_type = TileObj.TileType.PLAYER
+	smallplayer_anim.posn = body_obj.posn
+	smallplayer_anim.new_posn = new_state.player.posn
+	smallplayer_anim.direction = new_state.player.direction
+	smallplayer_anim.size = new_state.player.size
+	animation_events.push_back(smallplayer_anim)
+	
+	var bigplayer_anim: AnimationEvent = AnimationEvent.new()
+	bigplayer_anim.anim_type = AnimationEvent.AnimationType.DEACTIVATED
+	bigplayer_anim.obj_type = TileObj.TileType.PLAYER
+	bigplayer_anim.posn = body_obj.posn
+	bigplayer_anim.new_posn = body_obj.posn
+	animation_events.push_back(bigplayer_anim)
+	
 	UpdateState(new_state)
 	return true
 
 func TryToggleSwitch() -> bool:
 	if dead:
 		return false
+
 	var state: LevelState = CurrentState()
 	var new_state: LevelState = state.custom_duplicate()
 	# see if we are on a switch of our size
@@ -112,6 +176,16 @@ func TryToggleSwitch() -> bool:
 		   obj.CollidesWith(new_state.player.posn, new_state.player.size):
 			obj.activated = !obj.activated
 			updated = true
+			
+			var anim_event: AnimationEvent = AnimationEvent.new()
+			if obj.activated:
+				anim_event.anim_type = AnimationEvent.AnimationType.ACTIVATED
+			else:
+				anim_event.anim_type = AnimationEvent.AnimationType.DEACTIVATED
+			anim_event.obj_type = obj.type
+			anim_event.posn = obj.posn
+			animation_events.push_back(anim_event)
+			
 			break
 	
 	if !updated:
@@ -139,9 +213,15 @@ func UpdateState(new_state: LevelState):
 	# also need to update colors
 	ComputeLevelColorState(new_state)
 	while HandleLevelColorState(new_state):
-		ComputeLevelColorState(new_state) # crushed a box, recompute as may no longer be on a button
+		 # crushed a box, recompute as may no longer be on a button
+		# TODO stagger PlayAnims ?? kinda weird with the crushed boxes and buttons..
+		# one thought, have a secondary animation_events, crushed boxes in HandleLevelColorState go there
+		# then we play anim here, and swap in secondary animation_events
+		PlayAnim()
+		ComputeLevelColorState(new_state)
 	
-	PlayAnim(new_state.player.size, new_state.player.posn)
+	#PlayAnim(new_state.player.size, new_state.player.posn)
+	PlayAnim()
 	state_stack.push_back(new_state)
 
 func ComputeLevelColorState(new_state: LevelState):
@@ -152,12 +232,24 @@ func ComputeLevelColorState(new_state: LevelState):
 				new_state.level_color_states[obj.color] = !new_state.level_color_states[obj.color]
 		elif obj.type == TileObj.TileType.BUTTON:
 			# check if we have an object on us - obj also needs to be our size or larger
+			var button_is_activated = false
 			for top_obj in new_state.collision_objects:
 				if top_obj.size >= obj.size && top_obj.CollidesWith(obj.posn, obj.size):
-					new_state.level_color_states[obj.color] = !new_state.level_color_states[obj.color]
+					button_is_activated = true
 					break
-			if new_state.player.size >= obj.size && new_state.player.CollidesWith(obj.posn, obj.size):
+			if !button_is_activated && new_state.player.size >= obj.size && new_state.player.CollidesWith(obj.posn, obj.size):
+				button_is_activated = true
+			if button_is_activated:
 				new_state.level_color_states[obj.color] = !new_state.level_color_states[obj.color]
+			
+			var anim_event: AnimationEvent = AnimationEvent.new()
+			if button_is_activated:
+				anim_event.anim_type = AnimationEvent.AnimationType.ACTIVATED
+			else:
+				anim_event.anim_type = AnimationEvent.AnimationType.DEACTIVATED
+			anim_event.obj_type = obj.type
+			anim_event.posn = obj.posn
+			animation_events.push_back(anim_event)
 
 
 # Returns whether or not we deleted stuff - requires a recompute of colors
@@ -208,9 +300,21 @@ func HandleLevelColorState(new_state: LevelState) -> bool:
 	for wall in deactivated_walls:
 		new_state.bg_objects.push_back(wall)
 		new_state.collision_objects.erase(wall)
+		
+		var anim_event: AnimationEvent = AnimationEvent.new()
+		anim_event.anim_type = AnimationEvent.AnimationType.DEACTIVATED
+		anim_event.obj_type = wall.type
+		anim_event.posn = wall.posn
+		animation_events.push_back(anim_event)
 	for wall in activated_walls:
 		new_state.collision_objects.push_back(wall)
 		new_state.bg_objects.erase(wall)
+		
+		var anim_event: AnimationEvent = AnimationEvent.new()
+		anim_event.anim_type = AnimationEvent.AnimationType.ACTIVATED
+		anim_event.obj_type = wall.type
+		anim_event.posn = wall.posn
+		animation_events.push_back(anim_event)
 	
 	return crushed_box
 
@@ -361,6 +465,13 @@ func GetSummonPosn() -> Vector2i:
 
 func CrushBox(obj: TileObj, new_state: LevelState):
 	assert(obj.type == TileObj.TileType.BOX)
+	
+	var anim_event: AnimationEvent = AnimationEvent.new()
+	anim_event.anim_type = AnimationEvent.AnimationType.CRUSHED
+	anim_event.obj_type = obj.type
+	anim_event.posn = obj.posn
+	animation_events.push_back(anim_event)
+	
 	# Add crushed object tile (to show debris)
 	var new_obj:TileObj = CrushedBoxObj.new()
 	new_obj.posn = obj.posn
@@ -369,8 +480,10 @@ func CrushBox(obj: TileObj, new_state: LevelState):
 	new_state.bg_objects.push_back(new_obj)
 	new_state.collision_objects.erase(obj)
 
-func PlayAnim(size, new_pos):
-	player_moved.emit(size, new_pos)
+func PlayAnim():
+	#player_moved.emit(size, new_pos)
+	rendered_level.ProcessAnimationEvents(animation_events)
+	animation_events.clear()
 
 static func GetSizeFromChar(c: String) -> TileObj.TileSize:
 	match c:
