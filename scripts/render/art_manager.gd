@@ -13,8 +13,8 @@ func get_button(is_up: bool, color: Enums.Colors):
 	else:
 		return buttons_down[int(color)]
 
-func get_color_wall(is_up: bool, color: Enums.Colors):
-	if is_up:
+func get_color_wall(active: bool, color: Enums.Colors):
+	if active:
 		return scissors[int(color)]
 	else:
 		return cut_lines[int(color)]

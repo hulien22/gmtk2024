@@ -1,5 +1,5 @@
 extends RenderedObj
-class_name RenderedSwitch
+class_name RenderedScissors
 
 var activated:bool
 
@@ -14,7 +14,7 @@ func init(obj: TileObj):
 			%SpriteHolder.scale = Vector2(0.01, 0.01)
 		TileObj.TileSize.SMALL:
 			%SpriteHolder.scale = Vector2(0.005, 0.005)
-	%Sprite.texture = ArtManager.get_switch(activated, color)
+	%Sprite.texture = ArtManager.get_color_wall(activated, color)
 
 func ProcessAnimationEvent(event: AnimationEvent):
 	match event.anim_type:
@@ -24,4 +24,4 @@ func ProcessAnimationEvent(event: AnimationEvent):
 			activated = false
 		_:
 			super.ProcessAnimationEvent(event)
-	%Sprite.texture = ArtManager.get_switch(activated, color)
+	%Sprite.texture = ArtManager.get_color_wall(activated, color)

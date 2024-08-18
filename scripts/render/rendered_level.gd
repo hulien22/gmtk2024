@@ -8,6 +8,7 @@ class_name RenderedLevel
 @export var button_scn: PackedScene
 @export var box_scn: PackedScene
 @export var switch_scn: PackedScene
+@export var scissor_scn: PackedScene
 
 @export var temp_scn: PackedScene
 
@@ -39,22 +40,28 @@ func init(data: Level):
 			objects.push_back(node)
 			$GridOffset/Buttons.add_child(node)
 		elif obj is SwitchObj:
-			var node = button_scn.instantiate() as RenderedSwitch
+			var node = switch_scn.instantiate() as RenderedSwitch
 			node.init(obj)
 			objects.push_back(node)
 			$GridOffset/Switches.add_child(node)
-			pass
+		elif obj is ColoredWallObj:
+			var node = scissor_scn.instantiate() as RenderedScissors
+			node.init(obj)
+			objects.push_back(node)
+			$GridOffset/Scissors.add_child(node)
+
 	for obj in data.CurrentState().collision_objects:
 		if obj is BoxObj:
 			var node = box_scn.instantiate() as RenderedBox
 			node.init(obj)
 			objects.push_back(node)
 			$GridOffset/Boxes.add_child(node)
-		elif obj is SwitchObj:
-			#var node = button_scn.instantiate()
-			#node.init(obj)
-			#$GridOffset.add_child(node)
-			pass
+		elif obj is ColoredWallObj:
+			var node = scissor_scn.instantiate() as RenderedScissors
+			node.init(obj)
+			objects.push_back(node)
+			$GridOffset/Scissors.add_child(node)
+
 
 func ProcessAnimationEvents(events: Array[AnimationEvent]):
 	for event in events:

@@ -10,4 +10,4 @@ script = ExtResource("1_rehln")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
-zoom = Vector2(0.1, 0.1)
+zoom = Vector2(0.17, 0.17)
