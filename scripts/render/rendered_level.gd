@@ -47,6 +47,13 @@ func init(data: Level):
 func ProcessAnimationEvents(events: Array[AnimationEvent]):
 	for event in events:
 		# find corresponding object
-		print("EVENT: ", var_to_str(event))
+		var found_obj = false
+		for obj in objects:
+			if obj.type == event.obj_type && obj.posn == event.posn:
+				found_obj = true
+				obj.ProcessAnimationEvent(event)
+				break
+		if !found_obj:
+			print("COULD NOT FIND OBJECT FOR EVENT ", var_to_str(event))
 	pass
 	

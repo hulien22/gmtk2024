@@ -16,6 +16,9 @@ func init(obj: TileObj):
 	size = obj.size
 	direction = obj.direction
 
+func ProcessAnimationEvent(event: AnimationEvent):
+	print("ERROR COULD NOT PROCESS ANIMATION EVENT: ", var_to_str(event))
+
 #var frame: int :
 	#set(value):
 		#(%AnimatedSprite2D as AnimatedSprite2D).set_frame(value)
