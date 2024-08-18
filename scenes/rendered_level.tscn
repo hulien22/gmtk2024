@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://dhxqm08k81422"]
+[gd_scene load_steps=13 format=3 uid="uid://dhxqm08k81422"]
 
 [ext_resource type="Script" path="res://scripts/render/rendered_level.gd" id="1_ms517"]
 [ext_resource type="PackedScene" uid="uid://blijeb150f3pk" path="res://scenes/render/rendered_button.tscn" id="2_bex8r"]
-[ext_resource type="PackedScene" uid="uid://devynwi66p18n" path="res://scenes/rendered_obj.tscn" id="3_6lpuy"]
+[ext_resource type="PackedScene" uid="uid://c3je8dsmej1qp" path="res://scenes/render/rendered_player.tscn" id="2_ll8mi"]
+[ext_resource type="PackedScene" uid="uid://devynwi66p18n" path="res://scenes/render/rendered_obj.tscn" id="3_6lpuy"]
 [ext_resource type="Script" path="res://scripts/render/background_layer.gd" id="3_avu2h"]
 [ext_resource type="Texture2D" uid="uid://bpksmmbf3k8pl" path="res://art/Tile_Map.png" id="3_dter0"]
 [ext_resource type="PackedScene" uid="uid://dhnmos0i67m3y" path="res://scenes/rendered_player.tscn" id="4_fiw6g"]
@@ -445,6 +446,7 @@ sources/2 = SubResource("TileSetAtlasSource_soaic")
 script = ExtResource("1_ms517")
 border_size = 1
 tile_size = 200
+player_scene = ExtResource("2_ll8mi")
 button_scn = ExtResource("2_bex8r")
 temp_scn = ExtResource("3_6lpuy")
 
@@ -459,9 +461,11 @@ visible = false
 
 [node name="GridOffset" type="Node2D" parent="."]
 
+[node name="Buttons" type="Node2D" parent="GridOffset"]
+
 [node name="Boxes" type="Node2D" parent="GridOffset"]
 
-[node name="Buttons" type="Node2D" parent="GridOffset"]
+[node name="Player" type="Node2D" parent="GridOffset"]
 
 [node name="PB" parent="GridOffset" instance=ExtResource("4_fiw6g")]
 visible = false

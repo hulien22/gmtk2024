@@ -4,6 +4,7 @@ class_name RenderedLevel
 @export var border_size: int = 10
 @export var tile_size: int = 3
 
+@export var player_scene: PackedScene
 @export var button_scn: PackedScene
 @export var switch_scn: PackedScene
 
@@ -24,6 +25,13 @@ func init(data: Level):
 	#$GridOffset/PS.init(data, TileObj.TileSize.SMALL)
 	
 	objects.clear()
+	
+	if true:
+		var node = player_scene.instantiate() as RenderedPlayer
+		node.init(data.CurrentState().player)
+		objects.push_back(node)
+		$GridOffset/Player.add_child(node)
+	
 	for obj in data.CurrentState().bg_objects:
 		if obj is ButtonObj:
 			var node = button_scn.instantiate() as RenderedButton
