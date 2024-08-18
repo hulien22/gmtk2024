@@ -17,6 +17,24 @@ func init(obj: TileObj):
 		TileObj.TileSize.SMALL:
 			%Sprite.texture = small_texture
 
+func SpawnFromEvent(event: AnimationEvent):
+	assert(event.anim_type == AnimationEvent.AnimationType.SPAWNED)
+	type = event.obj_type
+	posn = event.new_posn
+	size = event.size
+	direction = event.direction
+	
+	%SpriteHolder.position = posn
+	%SpriteHolder.scale = Vector2(0.04, 0.04)
+	match size:
+		TileObj.TileSize.BIG:
+			%Sprite.texture = big_texture
+		TileObj.TileSize.MEDIUM:
+			%Sprite.texture = medium_texture
+		TileObj.TileSize.SMALL:
+			%Sprite.texture = small_texture
+
+
 func ProcessAnimationEvent(event: AnimationEvent):
 	match event.anim_type:
 		AnimationEvent.AnimationType.MOVED:

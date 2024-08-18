@@ -60,7 +60,10 @@ func ProcessAnimationEvents(events: Array[AnimationEvent]):
 	for event in events:
 		# Check for special events
 		if event.anim_type == AnimationEvent.AnimationType.SPAWNED:
-			pass
+			var node = player_scene.instantiate() as RenderedPlayer
+			node.SpawnFromEvent(event)
+			objects.push_back(node)
+			$GridOffset/Player.add_child(node)
 		
 		# find corresponding object
 		var found_obj = false
