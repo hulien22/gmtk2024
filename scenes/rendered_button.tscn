@@ -1,7 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://bajdasdx1lxlc"]
+[gd_scene load_steps=2 format=3 uid="uid://cqljq0yldooqn"]
 
-[ext_resource type="Script" path="res://scripts/render/rendered_button.gd" id="1_whq6t"]
+[sub_resource type="GDScript" id="GDScript_uvbk8"]
+script/source = "extends Sprite2D
+
+var color: Enums.Colors
+
+func init(obj: ButtonObj):
+	color = obj.color
+	position = obj.posn
+	match obj.size:
+		TileObj.TileSize.BIG:
+			scale = Vector2(0.02, 0.02)
+		TileObj.TileSize.MEDIUM:
+			scale = Vector2(0.01, 0.01)
+		TileObj.TileSize.SMALL:
+			scale = Vector2(0.005, 0.005)
+	texture = ArtManager.get_button(!obj.activated, color)
+	
+func on_toggle(is_pressed: bool):
+	texture = ArtManager.get_button(!is_pressed, color)
+"
 
 [node name="RenderedButton" type="Sprite2D"]
 centered = false
-script = ExtResource("1_whq6t")
+script = SubResource("GDScript_uvbk8")

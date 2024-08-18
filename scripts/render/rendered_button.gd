@@ -1,18 +1,27 @@
-extends Sprite2D
+extends RenderedObj
+class_name RenderedButton
 
-var color: Enums.Colors
+var activated:bool
 
-func init(obj: ButtonObj):
-	color = obj.color
-	position = obj.posn
+func init(obj: TileObj):
+	super.init(obj)
+	activated = obj.activated
+	%SpriteHolder.position = obj.posn
 	match obj.size:
 		TileObj.TileSize.BIG:
-			scale = Vector2(0.02, 0.02)
+			%SpriteHolder.scale = Vector2(0.02, 0.02)
 		TileObj.TileSize.MEDIUM:
-			scale = Vector2(0.01, 0.01)
+			%SpriteHolder.scale = Vector2(0.01, 0.01)
 		TileObj.TileSize.SMALL:
-			scale = Vector2(0.005, 0.005)
-	texture = ArtManager.get_button(!obj.activated, color)
-	
-func on_toggle(is_pressed: bool):
-	texture = ArtManager.get_button(!is_pressed, color)
+			%SpriteHolder.scale = Vector2(0.005, 0.005)
+	%Sprite.texture = ArtManager.get_button(!activated, color)
+
+func ProcessAnimationEvent(event: AnimationEvent):
+	match event.anim_type:
+		AnimationEvent.AnimationType.ACTIVATED:
+			activated = true
+		AnimationEvent.AnimationType.DEACTIVATED:
+			activated = false
+		_:
+			super.ProcessAnimationEvent(event)
+	%Sprite.texture = ArtManager.get_button(!activated, color)

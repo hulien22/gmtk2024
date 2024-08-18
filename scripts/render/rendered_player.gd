@@ -1,26 +1,46 @@
-extends Sprite2D
+extends RenderedObj
+class_name RenderedPlayer
 
-var cur_pos: Vector2i
-var size: TileObj.TileSize
+@export var big_texture: Texture
+@export var medium_texture: Texture
+@export var small_texture: Texture
 
-func init(level: Level, init_size: TileObj.TileSize):
-	size = init_size
-	set_pos(level.CurrentState().player.posn)
-	level.player_moved.connect(on_moved)
-	if size != TileObj.TileSize.BIG:
-		visible = false
+func init(obj: TileObj):
+	super.init(obj)
+	%SpriteHolder.position = obj.posn
+	%SpriteHolder.scale = Vector2(0.04, 0.04)
+	match obj.size:
+		TileObj.TileSize.BIG:
+			%Sprite.texture = big_texture
+		TileObj.TileSize.MEDIUM:
+			%Sprite.texture = medium_texture
+		TileObj.TileSize.SMALL:
+			%Sprite.texture = small_texture
+
+func SpawnFromEvent(event: AnimationEvent):
+	assert(event.anim_type == AnimationEvent.AnimationType.SPAWNED)
+	type = event.obj_type
+	posn = event.new_posn
+	size = event.size
+	direction = event.direction
 	
-func set_pos(pos):
-	cur_pos = pos
-	position = cur_pos
+	%SpriteHolder.position = posn
+	%SpriteHolder.scale = Vector2(0.04, 0.04)
+	match size:
+		TileObj.TileSize.BIG:
+			%Sprite.texture = big_texture
+		TileObj.TileSize.MEDIUM:
+			%Sprite.texture = medium_texture
+		TileObj.TileSize.SMALL:
+			%Sprite.texture = small_texture
+
+
+func ProcessAnimationEvent(event: AnimationEvent):
+	match event.anim_type:
+		AnimationEvent.AnimationType.MOVED:
+			posn = event.new_posn
+			%SpriteHolder.position = event.new_posn
+			# TODO Direction
+		_:
+			super.ProcessAnimationEvent(event)
 	
-func on_moved(moved_size: TileObj.TileSize, new_pos: Vector2i):
-	if moved_size != size:
-		return
-	set_pos(new_pos)
-
-func on_swallow():
-	pass
-
-func on_spit():
-	pass

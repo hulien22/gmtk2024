@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://cchalf14w1x1i"]
+
+[ext_resource type="PackedScene" uid="uid://devynwi66p18n" path="res://scenes/render/rendered_obj.tscn" id="1_0m7pg"]
+[ext_resource type="Script" path="res://scripts/render/rendered_scissors.gd" id="2_t42fb"]
+
+[node name="RenderedScissors" instance=ExtResource("1_0m7pg")]
+script = ExtResource("2_t42fb")

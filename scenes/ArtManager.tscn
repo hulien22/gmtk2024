@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://b03xa0i64squl"]
+[gd_scene load_steps=62 format=3 uid="uid://b03xa0i64squl"]
 
 [ext_resource type="Script" path="res://scripts/render/art_manager.gd" id="1_qhmg0"]
 [ext_resource type="Texture2D" uid="uid://b14moahu3nqy5" path="res://art/BUTTON_UP_Brown.png" id="2_nljg2"]
@@ -41,6 +41,26 @@
 [ext_resource type="Texture2D" uid="uid://bkln3uber2yuv" path="res://art/SCISSORS_Pink.png" id="39_inwm7"]
 [ext_resource type="Texture2D" uid="uid://dxn1d61ggqv0o" path="res://art/SCISSORS_Purple.png" id="40_vo2h3"]
 [ext_resource type="Texture2D" uid="uid://3qag2o43o04y" path="res://art/SCISSORS_Red.png" id="41_j26dk"]
+[ext_resource type="Texture2D" uid="uid://cxll2s3epo2d5" path="res://art/LEVER_LEFT_Brown.png" id="42_hj270"]
+[ext_resource type="Texture2D" uid="uid://dvg525g754sgk" path="res://art/LEVER_LEFT_DarkBlue.png" id="43_ryesk"]
+[ext_resource type="Texture2D" uid="uid://b76p56jymi1vl" path="res://art/LEVER_LEFT_DarkGreen.png" id="44_kvdjq"]
+[ext_resource type="Texture2D" uid="uid://dqt24ifx5us4i" path="res://art/LEVER_LEFT_LightBlue.png" id="45_62nyd"]
+[ext_resource type="Texture2D" uid="uid://bmvwwqrsdrl26" path="res://art/LEVER_LEFT_LightGreen.png" id="46_58qtd"]
+[ext_resource type="Texture2D" uid="uid://bgb714vdqi7f5" path="res://art/LEVER_LEFT_Magenta.png" id="47_rq335"]
+[ext_resource type="Texture2D" uid="uid://dhvh420ltt7xq" path="res://art/LEVER_LEFT_Orange.png" id="48_4s1se"]
+[ext_resource type="Texture2D" uid="uid://dfc0evqi1kg74" path="res://art/LEVER_LEFT_Pink.png" id="49_uo3wp"]
+[ext_resource type="Texture2D" uid="uid://b5xu2k38mb3m4" path="res://art/LEVER_LEFT_Purple.png" id="50_c1daw"]
+[ext_resource type="Texture2D" uid="uid://vy7j5pfaygim" path="res://art/LEVER_LEFT_Red.png" id="51_fcm1u"]
+[ext_resource type="Texture2D" uid="uid://cmx7hqks4dvao" path="res://art/LEVER_RIGHT_Brown.png" id="52_g4psc"]
+[ext_resource type="Texture2D" uid="uid://cpo033wkqusv4" path="res://art/LEVER_RIGHT_DarkBlue.png" id="53_4hi0m"]
+[ext_resource type="Texture2D" uid="uid://cn7wk17klekin" path="res://art/LEVER_RIGHT_DarkGreen.png" id="54_8us5u"]
+[ext_resource type="Texture2D" uid="uid://dm8u1r2204g2m" path="res://art/LEVER_RIGHT_LightBlue.png" id="55_yprwg"]
+[ext_resource type="Texture2D" uid="uid://sqdc8yaif1dy" path="res://art/LEVER_RIGHT_LightGreen.png" id="56_xiu5g"]
+[ext_resource type="Texture2D" uid="uid://dwh0s8njg46rm" path="res://art/LEVER_RIGHT_Magenta.png" id="57_to6ev"]
+[ext_resource type="Texture2D" uid="uid://b1wndk7vbu133" path="res://art/LEVER_RIGHT_Orange.png" id="58_ui8xo"]
+[ext_resource type="Texture2D" uid="uid://4b2b80lj6384" path="res://art/LEVER_RIGHT_Pink.png" id="59_d16cv"]
+[ext_resource type="Texture2D" uid="uid://dtpq1yyemtrgp" path="res://art/LEVER_RIGHT_Purple.png" id="60_pjvsw"]
+[ext_resource type="Texture2D" uid="uid://xhdvkqav05tt" path="res://art/LEVER_RIGHT_Red.png" id="61_wsvb2"]
 
 [node name="ArtManager" type="Node2D"]
 script = ExtResource("1_qhmg0")
@@ -48,3 +68,5 @@ buttons_up = Array[Texture]([ExtResource("2_nljg2"), ExtResource("3_qovkh"), Ext
 buttons_down = Array[Texture]([ExtResource("12_f7tp4"), ExtResource("13_m3akl"), ExtResource("14_10kcl"), ExtResource("15_0arr8"), ExtResource("16_fdycc"), ExtResource("17_5hff4"), ExtResource("18_0qt27"), ExtResource("19_xiiq8"), ExtResource("20_0afet"), ExtResource("21_p5310")])
 cut_lines = Array[Texture]([ExtResource("22_mmq6s"), ExtResource("23_ahnut"), ExtResource("24_6q2g6"), ExtResource("25_bthqq"), ExtResource("26_a4rc4"), ExtResource("27_y2mu2"), ExtResource("28_b1l8x"), ExtResource("29_4sbpg"), ExtResource("30_mlr85"), ExtResource("31_tyfmu")])
 scissors = Array[Texture]([ExtResource("32_7awmf"), ExtResource("33_c2s6f"), ExtResource("34_py0oo"), ExtResource("35_w8r8m"), ExtResource("36_7n06p"), ExtResource("37_om3b6"), ExtResource("38_cxdwa"), ExtResource("39_inwm7"), ExtResource("40_vo2h3"), ExtResource("41_j26dk")])
+switch_active = Array[Texture]([ExtResource("42_hj270"), ExtResource("43_ryesk"), ExtResource("44_kvdjq"), ExtResource("45_62nyd"), ExtResource("46_58qtd"), ExtResource("47_rq335"), ExtResource("48_4s1se"), ExtResource("49_uo3wp"), ExtResource("50_c1daw"), ExtResource("51_fcm1u")])
+switch_deactive = Array[Texture]([ExtResource("52_g4psc"), ExtResource("53_4hi0m"), ExtResource("54_8us5u"), ExtResource("55_yprwg"), ExtResource("56_xiu5g"), ExtResource("57_to6ev"), ExtResource("58_ui8xo"), ExtResource("59_d16cv"), ExtResource("60_pjvsw"), ExtResource("61_wsvb2")])

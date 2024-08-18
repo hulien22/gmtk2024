@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://cl8yfala4bc7e"]
+
+[ext_resource type="PackedScene" uid="uid://devynwi66p18n" path="res://scenes/render/rendered_obj.tscn" id="1_okbwa"]
+[ext_resource type="Script" path="res://scripts/render/rendered_switch.gd" id="2_luqoi"]
+
+[node name="RenderedSwitch" instance=ExtResource("1_okbwa")]
+script = ExtResource("2_luqoi")

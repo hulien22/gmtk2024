@@ -139,6 +139,7 @@ func _ready() -> void:
 	level = Level.new()
 	level.LoadLevelFromText(levelstr)
 	level.DEBUG_PrintState(level.CurrentState())
+	level.rendered_level = $RenderedLevel
 	$RenderedLevel.init(level)
 
 func _input(event):

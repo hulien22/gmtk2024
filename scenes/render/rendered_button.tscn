@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://blijeb150f3pk"]
+
+[ext_resource type="PackedScene" uid="uid://devynwi66p18n" path="res://scenes/render/rendered_obj.tscn" id="1_gojfj"]
+[ext_resource type="Script" path="res://scripts/render/rendered_button.gd" id="2_ly2yc"]
+
+[node name="RenderedButton" instance=ExtResource("1_gojfj")]
+script = ExtResource("2_ly2yc")

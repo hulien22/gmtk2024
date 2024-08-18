@@ -1,12 +1,12 @@
 extends RenderedObj
-class_name RenderedBox
+class_name RenderedScissors
 
-@export var texture: Texture
+var activated:bool
 
 func init(obj: TileObj):
 	super.init(obj)
+	activated = obj.activated
 	%SpriteHolder.position = obj.posn
-	%Sprite.texture = texture
 	match obj.size:
 		TileObj.TileSize.BIG:
 			%SpriteHolder.scale = Vector2(0.02, 0.02)
@@ -14,13 +14,14 @@ func init(obj: TileObj):
 			%SpriteHolder.scale = Vector2(0.01, 0.01)
 		TileObj.TileSize.SMALL:
 			%SpriteHolder.scale = Vector2(0.005, 0.005)
+	%Sprite.texture = ArtManager.get_color_wall(activated, color)
 
 func ProcessAnimationEvent(event: AnimationEvent):
 	match event.anim_type:
-		AnimationEvent.AnimationType.MOVED:
-			posn = event.new_posn
-			%SpriteHolder.position = event.new_posn
-			# TODO Direction
+		AnimationEvent.AnimationType.ACTIVATED:
+			activated = true
+		AnimationEvent.AnimationType.DEACTIVATED:
+			activated = false
 		_:
 			super.ProcessAnimationEvent(event)
-	
+	%Sprite.texture = ArtManager.get_color_wall(activated, color)
