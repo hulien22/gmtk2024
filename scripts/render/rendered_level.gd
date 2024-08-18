@@ -21,9 +21,6 @@ func init(data: Level):
 	$BackgroundLayer.init(data, border_size)
 	$GridOffset.position = Vector2i(border_size*tile_size, border_size*tile_size)
 	$GridOffset.scale = Vector2i(tile_size, tile_size)
-	#$GridOffset/PB.init(data, TileObj.TileSize.BIG)
-	#$GridOffset/PM.init(data, TileObj.TileSize.MEDIUM)
-	#$GridOffset/PS.init(data, TileObj.TileSize.SMALL)
 	
 	for obj in objects:
 		obj.queue_free()
@@ -42,9 +39,10 @@ func init(data: Level):
 			objects.push_back(node)
 			$GridOffset/Buttons.add_child(node)
 		elif obj is SwitchObj:
-			#var node = button_scn.instantiate()
-			#node.init(obj)
-			#$GridOffset.add_child(node)
+			var node = button_scn.instantiate() as RenderedSwitch
+			node.init(obj)
+			objects.push_back(node)
+			$GridOffset/Switches.add_child(node)
 			pass
 	for obj in data.CurrentState().collision_objects:
 		if obj is BoxObj:

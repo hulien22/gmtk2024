@@ -465,6 +465,8 @@ visible = false
 
 [node name="Buttons" type="Node2D" parent="GridOffset"]
 
+[node name="Switches" type="Node2D" parent="GridOffset"]
+
 [node name="Boxes" type="Node2D" parent="GridOffset"]
 
 [node name="Player" type="Node2D" parent="GridOffset"]
