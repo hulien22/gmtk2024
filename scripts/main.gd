@@ -51,43 +51,6 @@ var level: Level
 # 	"w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  ",
 # ]
 
-# var levelstr: Array[String] = [
-# 	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  ",
-# 	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  BRS.  w  w  w  w  w  w  w  w  w  w  ",
-# 	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  BRS.  w  w  w  w  w  w  w  w  w  w  ",
-# 	".  .  .  .  XS .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  ",
-# 	"PB .  .  .  XB .  .  .  .  .  .  .  XB .  .  .  .  CRR.  .  .  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  ",
-# 	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  CRR.  .  .  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  ",
-# 	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  CRR.  .  XM .  .  .  .  .  .  .  .  .  .  .  .  .  w  w  ",
-# 	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  CRR.  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  w  w  ",
-# 	".  .  .  .  BRB.  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  CR CR CR CR w  w  w  w  w  w  w  w  ",
-# 	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  w  w  w  w  w  w  w  w  ",
-# 	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  w  w  w  w  w  w  w  w  ",
-# 	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  w  w  w  w  w  w  w  w  ",
-# 	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  FB .  .  .  w  w  w  w  w  w  w  w  ",
-# 	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  w  w  w  w  w  w  w  w  ",
-# 	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  w  w  w  w  w  w  w  w  ",
-# 	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  w  w  w  w  w  w  w  w  ",
-# ]
-# var levelstr: Array[String] = [
-# 	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  ",
-# 	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  BRS.  w  w  w  w  w  w  ",
-# 	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  BRS.  w  w  w  w  w  w  ",
-# 	".  .  .  .  XS .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  ",
-# 	"PB .  .  .  XB .  .  .  .  .  .  .  XB .  .  .  .  CRR.  .  .  .  .  .  .  .  .  .  .  .  w  w  ",
-# 	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  CRR.  .  .  .  .  .  .  .  .  .  .  .  w  w  ",
-# 	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  CRR.  .  XM .  .  .  .  .  .  .  .  .  .  .  ",
-# 	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  CRR.  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
-# 	".  .  .  .  BRB.  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  CR CR CR CR w  w  w  w  ",
-# 	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  w  w  w  w  ",
-# 	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  w  w  w  w  ",
-# 	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  w  w  w  w  ",
-# 	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  FB .  .  .  w  w  w  w  ",
-# 	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  w  w  w  w  ",
-# 	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  w  w  w  w  ",
-# 	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  w  w  w  w  ",
-# ]
-
 #######  LEVEL: THE DELETE KEY
 var levelstr: Array[String] = [
 	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  ",
