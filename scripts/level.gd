@@ -9,6 +9,7 @@ var width:int
 var height:int
 # don't show flag when the stage has been completed once
 var completed:bool = false
+var dead:bool = false
 
 # 2d array of bool to represent walls / empty spaces
 # 1 if there is any wall of any size in that 4x4 square, else 0
@@ -25,6 +26,9 @@ func CurrentState() -> LevelState:
 
 func TryMove(dir: Enums.Direction) -> bool:
 	var cur_state: LevelState = CurrentState()
+	
+	if dead:
+		return false
 	
 	var player_body_obj: PlayerBodyObj = WillPlayerRejoin(dir)
 	if player_body_obj != null:
@@ -70,6 +74,8 @@ func TryMove(dir: Enums.Direction) -> bool:
 	return true
 
 func TrySummon() -> bool:
+	if dead:
+		return false
 	var state: LevelState = CurrentState()
 	if state.player.size == TileObj.TileSize.SMALL:
 		# already too small
@@ -95,6 +101,8 @@ func TrySummon() -> bool:
 	return true
 
 func TryToggleSwitch() -> bool:
+	if dead:
+		return false
 	var state: LevelState = CurrentState()
 	var new_state: LevelState = state.custom_duplicate()
 	# see if we are on a switch of our size
@@ -116,7 +124,15 @@ func Undo() -> bool:
 	if state_stack.size() <= 1:
 		return false
 	state_stack.pop_back()
+	dead = false
 	# don't update any colors, previous state should already have sorted that out
+	return true
+
+func Reset() -> bool:
+	state_stack.clear()
+	state_stack.push_back(starting_state)
+	dead = false
+	# don't update completed, that stays
 	return true
 
 func UpdateState(new_state: LevelState):
@@ -180,12 +196,14 @@ func HandleLevelColorState(new_state: LevelState) -> bool:
 						if col_obj.type == TileObj.TileType.PLAYER_BODY:
 							# DEATH
 							print("YOU DIED")
+							dead = true
 						elif col_obj.type == TileObj.TileType.BOX:
 							# crush the box 
 							CrushBox(col_obj, new_state)
 							crushed_box = true
 				if new_state.player.CollidesWith(obj.posn, obj.size):
 					print("YOU DIED")
+					dead = true
 	
 	for wall in deactivated_walls:
 		new_state.bg_objects.push_back(wall)
@@ -244,7 +262,7 @@ func CanObjMoveTo(state: LevelState, target_posn:Vector2i, size: TileObj.TileSiz
 				return true
 			# TODO handler other types if needed here
 	
-	### Can't push a box onto a switch?
+	### TODO Can't push a box onto a switch?
 	#if (type == TileObj.TileType.BOX):
 		#for obj in state.bg_objects:
 			#if obj.type == TileObj.TileType.SWITCH && obj.CollidesWith(target_posn, size):

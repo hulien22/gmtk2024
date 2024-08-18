@@ -16,34 +16,88 @@ var level: Level
 	#".  .  .  .  .  .  .  .  w  w  w  w  .  .  .  .  .  .  .  .  BGM.  .  .  CBR.  BGM.  .  .  .  .  .  .  .  .  ",
 	#".  .  .  .  .  .  .  .  w  w  w  w  .  .  .  .  .  .  .  .  .  .  .  .  CBR.  .  .  .  .  .  .  .  .  .  .  ",
 #]
+# var levelstr: Array[String] = [
+# 	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  SRB.  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
+# 	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
+# 	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  XM .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
+# 	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
+# 	"PB .  .  .  XM .  BRM.  CRR.  BRM.  .  .  SRM.  .  .  .  .  w  w  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
+# 	".  .  .  .  .  .  .  .  CRR.  .  .  .  .  .  .  .  .  .  .  w  w  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
+# 	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
+# 	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
+# 	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
+# 	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  XS XS XS XS .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
+# 	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
+# 	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
+# ]
 
-# LOCKPICKING LEVEL
+###### LEVEL THAT I THINK IS COOL AND I REALLY HOPE ISN'T BROKEN..
+# var levelstr: Array[String] = [
+# 	"w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  ",
+# 	"w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  ",
+# 	"w  w  w  w  w  w  w  w  FS w  w  w  w  w  w  w  w  w  w  w  ",
+# 	"w  w  w  w  w  w  w  w  CR w  w  w  w  w  w  w  w  w  w  w  ",
+# 	"BRM.  .  CR BRB.  .  .  PB .  .  .  .  .  .  .  CR .  .  .  ",
+# 	".  .  .  CR .  .  .  .  .  .  .  .  .  .  .  .  CR .  .  .  ",
+# 	"BRM.  .  CR .  .  .  .  .  .  .  .  BRM.  .  .  CR .  .  .  ",
+# 	".  .  .  CR .  .  .  .  .  .  .  .  .  .  .  .  CR .  .  .  ",
+# 	".  .  .  .  w  w  w  w  w  w  w  w  CR CR w  w  .  .  .  .  ",
+# 	".  .  .  .  w  w  w  w  w  w  w  w  CR CR w  w  .  .  .  .  ",
+# 	"XM .  XM .  .  .  .  .  .  .  .  .  BRM.  .  .  .  .  .  .  ",
+# 	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
+# 	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
+# 	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
+# 	"w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  ",
+# 	"w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  ",
+# ]
+
+#######  LEVEL: THE DELETE KEY
 var levelstr: Array[String] = [
-	"w  w  w  w  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  ",
-	"w  w  w  w  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  ",
-	"w  w  w  w  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  ",
-	"w  w  w  w  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  ",
-	".  .  .  .  BGB.  .  .  .  .  .  .  w  w  w  w  w  w  .  .  .  .  XM .  .  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  ",
-	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  ",
-	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  w  w  ",
-	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  w  w  ",
-	"PB .  .  .  XB .  .  .  w  w  w  w  w  w  .  .  .  .  .  .  XM .  .  .  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  w  w  ",
-	".  .  .  .  .  .  .  .  w  w  w  w  w  w  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  w  w  ",
-	".  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  .  .  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  w  w  ",
-	".  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  .  .  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  w  w  ",
-	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  CGRCY .  .  .  .  CYRCG .  .  .  .  CGRCYR.  .  .  .  CYRCG .  .  .  .  CGRCY .  FM .  ",
-	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  CGRCY .  .  .  .  CYRCG .  .  .  .  CGRCYR.  .  .  .  CYRCG .  .  .  .  CGRCY .  .  .  ",
-	".  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  ",
-	".  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  ",
-	".  .  w  w  BYB.  .  .  .  .  .  .  w  w  .  .  .  .  .  .  .  .  XM .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  ",
-	".  .  w  w  .  .  .  .  .  .  .  .  w  w  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  ",
-	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  ",
-	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  ",
-	"w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  XM .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  ",
-	"w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  ",
-	"w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  ",
-	"w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  ",
+	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  ",
+	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  ",
+	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  ",
+	".  .  .  .  XS .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  ",
+	"PB .  .  .  XB .  .  .  .  .  .  .  XB .  .  .  .  .  .  .  .  CRR.  .  .  .  .  .  .  .  w  w  ",
+	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  CRR.  .  .  .  .  .  .  .  w  w  ",
+	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  CRR.  .  XM .  .  .  .  BRSBRS.  ",
+	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  CRR.  .  .  .  .  .  .  .  .  .  ",
+	".  .  .  .  BRB.  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  CR CR CR CR w  w  w  w  ",
+	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  w  w  w  w  ",
+	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  w  w  w  w  ",
+	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  w  w  w  w  ",
+	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  FB .  .  .  w  w  w  w  ",
+	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  w  w  w  w  ",
+	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  w  w  w  w  ",
+	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  w  w  w  w  ",
 ]
+
+#######  LOCKPICKING LEVEL
+# var levelstr: Array[String] = [
+# 	"w  w  w  w  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  ",
+# 	"w  w  w  w  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  ",
+# 	"w  w  w  w  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  ",
+# 	"w  w  w  w  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  ",
+# 	".  .  .  .  BGB.  .  .  .  .  .  .  w  w  w  w  w  w  .  .  .  .  XM .  .  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  ",
+# 	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  ",
+# 	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  w  w  ",
+# 	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  w  w  ",
+# 	"PB .  .  .  XB .  .  .  w  w  w  w  w  w  .  .  .  .  .  .  XM .  .  .  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  w  w  ",
+# 	".  .  .  .  .  .  .  .  w  w  w  w  w  w  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  w  w  ",
+# 	".  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  .  .  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  w  w  ",
+# 	".  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  .  .  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  w  w  ",
+# 	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  CGRCY .  .  .  .  CYRCG .  .  .  .  CGRCYR.  .  .  .  CYRCG .  .  .  .  CGRCY .  FM .  ",
+# 	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  CGRCY .  .  .  .  CYRCG .  .  .  .  CGRCYR.  .  .  .  CYRCG .  .  .  .  CGRCY .  .  .  ",
+# 	".  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  ",
+# 	".  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  ",
+# 	".  .  w  w  BYB.  .  .  .  .  .  .  w  w  .  .  .  .  .  .  .  .  XM .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  ",
+# 	".  .  w  w  .  .  .  .  .  .  .  .  w  w  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  ",
+# 	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  ",
+# 	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  ",
+# 	"w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  XM .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  ",
+# 	"w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  ",
+# 	"w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  ",
+# 	"w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  ",
+# ]
 
 #var levelstr: Array[String] = [
 	#".  .  .  .  .  .  .  .  ",
@@ -83,6 +137,8 @@ func _input(event):
 		update = level.TryToggleSwitch()
 	elif event.is_action_pressed("Undo"):
 		update = level.Undo()
+	elif event.is_action_pressed("ResetLevel"):
+		update = level.Reset()
 
 	if update:
 		level.DEBUG_PrintState(level.CurrentState())
