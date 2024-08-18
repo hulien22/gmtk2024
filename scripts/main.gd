@@ -31,25 +31,45 @@ var level: Level
 # 	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
 # ]
 
-###### LEVEL THAT I THINK IS COOL AND I REALLY HOPE ISN'T BROKEN..
+##### LEVEL: SCALING A MOUNTAIN
 var levelstr: Array[String] = [
-	"w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  ",
-	"w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  ",
-	"w  w  w  w  w  w  w  w  FS w  w  w  w  w  w  w  w  w  w  w  ",
-	"w  w  w  w  w  w  w  w  CR w  w  w  w  w  w  w  w  w  w  w  ",
-	"BRM.  CR CR BRB.  .  .  PB .  .  .  .  .  .  .  CR CR .  .  ",
-	".  .  CR CR .  .  .  .  .  .  .  .  .  .  .  .  CR CR .  .  ",
-	"BRM.  CR CR .  .  .  .  .  .  .  .  BRM.  .  .  CR CR .  .  ",
-	".  .  CR CR .  .  .  .  .  .  .  .  .  .  .  .  CR CR .  .  ",
-	".  .  w  w  w  w  w  w  w  w  w  w  CR CR w  w  w  w  .  .  ",
-	".  .  w  w  w  w  w  w  w  w  w  w  CR CR w  w  w  w  .  .  ",
-	"XM .  XM .  .  .  .  .  .  .  .  .  BRM.  .  .  .  .  .  .  ",
-	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
-	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
-	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
-	"w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  ",
-	"w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  ",
+	"w  w  w  w  w  w  w  w  w  w  w  w  .  FS w  w  ",
+	"w  w  w  w  w  w  w  w  w  w  w  w  CRRw  w  w  ",
+	"w  w  w  w  w  w  w  BRSXS .  XS .  .  w  w  w  ",
+	"w  w  w  w  w  w  w  w  w  .  w  w  .  w  w  w  ",
+	"w  w  w  w  w  w  w  w  w  .  w  w  .  w  w  w  ",
+	"w  w  w  w  w  w  w  w  w  CR w  w  CRRw  w  w  ",
+	"w  w  w  w  w  w  .  .  XM .  BRM.  .  .  BRM.  ",
+	"w  w  w  w  w  w  .  .  .  .  .  .  .  .  .  .  ",
+	"w  w  w  w  w  w  .  .  w  w  w  w  w  w  w  w  ",
+	"w  w  w  w  w  w  .  .  w  w  w  w  w  w  w  w  ",
+	"w  w  w  w  w  w  .  .  w  w  w  w  w  w  w  w  ",
+	"w  w  w  w  w  w  CRRCRRw  w  w  w  w  w  w  w  ",
+	"PB .  .  .  XB .  .  .  .  .  .  .  BRB.  .  .  ",
+	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
+	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
+	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
 ]
+
+####### LEVEL: TRAPPED
+#var levelstr: Array[String] = [
+	#"w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  ",
+	#"w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  ",
+	#"w  w  w  w  w  w  w  w  FS w  w  w  w  w  w  w  w  w  w  w  ",
+	#"w  w  w  w  w  w  w  w  CR w  w  w  w  w  w  w  w  w  w  w  ",
+	#"BRM.  CR CR BRB.  .  .  PB .  .  .  .  .  .  .  CR CR .  .  ",
+	#".  .  CR CR .  .  .  .  .  .  .  .  .  .  .  .  CR CR .  .  ",
+	#"BRM.  CR CR .  .  .  .  .  .  .  .  BRM.  .  .  CR CR .  .  ",
+	#".  .  CR CR .  .  .  .  .  .  .  .  .  .  .  .  CR CR .  .  ",
+	#".  .  w  w  w  w  w  w  w  w  w  w  CR CR w  w  w  w  .  .  ",
+	#".  .  w  w  w  w  w  w  w  w  w  w  CR CR w  w  w  w  .  .  ",
+	#"XM .  XM .  .  .  .  .  .  .  .  .  BRM.  .  .  .  .  .  .  ",
+	#".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
+	#".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
+	#".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
+	#"w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  ",
+	#"w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  ",
+#]
 
 ########  LEVEL: THE DELETE KEY
 #var levelstr: Array[String] = [
