@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://kjlspggnuha"]
+
+[ext_resource type="Script" path="res://scripts/render/rendered_box.gd" id="1_fif4o"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t7io8"]
+
+[node name="RenderedBox" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_t7io8")
+speed_scale = 0.0
+script = ExtResource("1_fif4o")

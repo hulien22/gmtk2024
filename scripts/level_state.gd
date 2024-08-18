@@ -10,7 +10,7 @@ var collision_objects: Array[TileObj] = []  # Vector2i -> TileObj
 # Buttons and Switches and Flag
 var bg_objects: Array[TileObj] = [] # Vector2i -> TileObj
 
-var level_color_states:Array[bool] = [0, 0, 0, 0, 0, 0];
+var level_color_states:Array[bool] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 # figure out which to use..
 func test():
