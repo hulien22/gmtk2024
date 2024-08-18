@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dhxqm08k81422"]
+[gd_scene load_steps=14 format=3 uid="uid://dhxqm08k81422"]
 
 [ext_resource type="Script" path="res://scripts/render/rendered_level.gd" id="1_ms517"]
 [ext_resource type="PackedScene" uid="uid://blijeb150f3pk" path="res://scenes/render/rendered_button.tscn" id="2_bex8r"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scripts/render/background_layer.gd" id="3_avu2h"]
 [ext_resource type="Texture2D" uid="uid://bpksmmbf3k8pl" path="res://art/Tile_Map.png" id="3_dter0"]
 [ext_resource type="PackedScene" uid="uid://brekff7vy8ggo" path="res://scenes/rendered_player.tscn" id="4_fiw6g"]
+[ext_resource type="PackedScene" uid="uid://clwpel5p0v44g" path="res://scenes/render/rendered_box.tscn" id="4_gywkk"]
 [ext_resource type="Texture2D" uid="uid://cppm4l23knvw4" path="res://art/BIG_blue_Placeholder.png" id="5_txbhw"]
 [ext_resource type="Texture2D" uid="uid://dbs4tv6kf4ghc" path="res://art/MEDIUM_Orange_Placeholder.png" id="6_glsrf"]
 [ext_resource type="Texture2D" uid="uid://k048mq4hwthl" path="res://art/SMALL_Yellow_Placeholder.png" id="7_bn66q"]
@@ -448,6 +449,7 @@ border_size = 1
 tile_size = 200
 player_scene = ExtResource("2_ll8mi")
 button_scn = ExtResource("2_bex8r")
+box_scn = ExtResource("4_gywkk")
 temp_scn = ExtResource("3_6lpuy")
 
 [node name="BackgroundLayer" type="TileMapLayer" parent="."]

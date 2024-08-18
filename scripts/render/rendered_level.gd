@@ -6,6 +6,7 @@ class_name RenderedLevel
 
 @export var player_scene: PackedScene
 @export var button_scn: PackedScene
+@export var box_scn: PackedScene
 @export var switch_scn: PackedScene
 
 @export var temp_scn: PackedScene
@@ -43,9 +44,24 @@ func init(data: Level):
 			#node.init(obj)
 			#$GridOffset.add_child(node)
 			pass
+	for obj in data.CurrentState().collision_objects:
+		if obj is BoxObj:
+			var node = box_scn.instantiate() as RenderedBox
+			node.init(obj)
+			objects.push_back(node)
+			$GridOffset/Boxes.add_child(node)
+		elif obj is SwitchObj:
+			#var node = button_scn.instantiate()
+			#node.init(obj)
+			#$GridOffset.add_child(node)
+			pass
 
 func ProcessAnimationEvents(events: Array[AnimationEvent]):
 	for event in events:
+		# Check for special events
+		if event.anim_type == AnimationEvent.AnimationType.SPAWNED:
+			pass
+		
 		# find corresponding object
 		var found_obj = false
 		for obj in objects:
