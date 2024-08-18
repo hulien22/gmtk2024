@@ -7,7 +7,9 @@ class_name RenderedLevel
 @export var button_scn: PackedScene
 @export var switch_scn: PackedScene
 
+@export var temp_scn: PackedScene
 
+var objects: Array[RenderedObj] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -17,13 +19,16 @@ func init(data: Level):
 	$BackgroundLayer.init(data, border_size)
 	$GridOffset.position = Vector2i(border_size*tile_size, border_size*tile_size)
 	$GridOffset.scale = Vector2i(tile_size, tile_size)
-	$GridOffset/PB.init(data, TileObj.TileSize.BIG)
-	$GridOffset/PM.init(data, TileObj.TileSize.MEDIUM)
-	$GridOffset/PS.init(data, TileObj.TileSize.SMALL)
+	#$GridOffset/PB.init(data, TileObj.TileSize.BIG)
+	#$GridOffset/PM.init(data, TileObj.TileSize.MEDIUM)
+	#$GridOffset/PS.init(data, TileObj.TileSize.SMALL)
+	
+	objects.clear()
 	for obj in data.CurrentState().bg_objects:
 		if obj is ButtonObj:
-			var node = button_scn.instantiate()
+			var node = button_scn.instantiate() as RenderedButton
 			node.init(obj)
+			objects.push_back(node)
 			$GridOffset/Buttons.add_child(node)
 		elif obj is SwitchObj:
 			#var node = button_scn.instantiate()
