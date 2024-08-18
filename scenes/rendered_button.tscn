@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bajdasdx1lxlc"]
+
+[ext_resource type="Script" path="res://scripts/render/rendered_button.gd" id="1_whq6t"]
+
+[node name="RenderedButton" type="Sprite2D"]
+centered = false
+script = ExtResource("1_whq6t")

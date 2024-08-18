@@ -145,7 +145,7 @@ func UpdateState(new_state: LevelState):
 	state_stack.push_back(new_state)
 
 func ComputeLevelColorState(new_state: LevelState):
-	new_state.level_color_states = [0, 0, 0, 0, 0, 0];
+	new_state.level_color_states = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 	for obj in new_state.bg_objects:
 		if obj.type == TileObj.TileType.SWITCH:
 			if obj.activated:
@@ -392,11 +392,11 @@ static func GetColorFromChar(c: String) -> Enums.Colors:
 		"O":
 			return Enums.Colors.ORANGE
 		"Y":
-			return Enums.Colors.YELLOW
+			return Enums.Colors.LIGHTGREEN
 		"G":
-			return Enums.Colors.GREEN
+			return Enums.Colors.DARKGREEN
 		"B":
-			return Enums.Colors.BLUE
+			return Enums.Colors.DARKBLUE
 		"P":
 			return Enums.Colors.PURPLE
 		_:

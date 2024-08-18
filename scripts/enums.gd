@@ -17,12 +17,16 @@ static func GetDirection(dir: Direction) -> Vector2i:
 			
 
 enum Colors {
-	RED,
+	BROWN,
+	DARKBLUE,
+	DARKGREEN,
+	LIGHTBLUE,
+	LIGHTGREEN,
+	MAGENTA,
 	ORANGE,
-	YELLOW,
-	GREEN,
-	BLUE,
+	PINK,
 	PURPLE,
+	RED,
 	NONE
 };
-const COLOR_MAX:int = 6;
+const COLOR_MAX:int = 10;
