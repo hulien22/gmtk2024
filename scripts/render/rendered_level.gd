@@ -24,7 +24,8 @@ func init(data: Level):
 	$GridOffset.scale = Vector2i(tile_size, tile_size)
 	
 	for obj in objects:
-		obj.queue_free()
+		if obj != null:
+			obj.queue_free()
 	objects.clear()
 	
 	if true:
@@ -69,6 +70,7 @@ func init(data: Level):
 
 
 func ProcessAnimationEvents(events: Array[AnimationEvent]):
+	CleanupDeletedEntries()
 	for event in events:
 		# Check for special events
 		if event.anim_type == AnimationEvent.AnimationType.SPAWNED:
