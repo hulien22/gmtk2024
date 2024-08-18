@@ -41,6 +41,8 @@ func ProcessAnimationEvent(event: AnimationEvent):
 			posn = event.new_posn
 			%SpriteHolder.position = event.new_posn
 			# TODO Direction
+		AnimationEvent.AnimationType.RETURNED:
+			queue_free()
 		_:
 			super.ProcessAnimationEvent(event)
 	
