@@ -25,6 +25,8 @@ func LoadLevel():
 	level = WorldState.levels[WorldState.active_level]
 	%Camera2D.zoom = Vector2.ONE * WorldState.level_infos[WorldState.active_level].camera_zoom
 	%Camera2D.offset = WorldState.level_infos[WorldState.active_level].camera_offset
+	%BgTiles.position = WorldState.level_infos[WorldState.active_level].bg_tile_posn
+	%BgTiles.size = WorldState.level_infos[WorldState.active_level].bg_tile_size
 	level.rendered_level = $RenderedLevel
 	$RenderedLevel.init(level)
 

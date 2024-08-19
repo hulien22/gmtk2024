@@ -18,3 +18,5 @@ func _init():
 	level_name = "Basics"
 	camera_zoom = 0.15
 	camera_offset = Vector2(0, -800)
+	bg_tile_posn = Vector2(200,200)
+	bg_tile_size = Vector2(7400,2500)

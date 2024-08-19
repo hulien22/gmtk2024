@@ -22,3 +22,5 @@ func _init():
 	level_name = "Delete Key"
 	camera_zoom = 0.169
 	camera_offset = Vector2(0, -100)
+	bg_tile_posn = Vector2(200,200)
+	bg_tile_size = Vector2(6600,3400)
