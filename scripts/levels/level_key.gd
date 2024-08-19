@@ -20,4 +20,5 @@ func _init():
 	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  w  w  w  w  ",
 	]
 	level_name = "Delete Key"
-	camera_zoom = 0.17
+	camera_zoom = 0.169
+	camera_offset = Vector2(0, -100)

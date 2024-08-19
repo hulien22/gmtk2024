@@ -24,6 +24,7 @@ func _ready() -> void:
 func LoadLevel():
 	level = WorldState.levels[WorldState.active_level]
 	%Camera2D.zoom = Vector2.ONE * WorldState.level_infos[WorldState.active_level].camera_zoom
+	%Camera2D.offset = WorldState.level_infos[WorldState.active_level].camera_offset
 	level.rendered_level = $RenderedLevel
 	$RenderedLevel.init(level)
 

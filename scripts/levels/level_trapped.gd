@@ -21,3 +21,4 @@ func _init():
 	]
 	level_name = "Trapped"
 	camera_zoom = 0.17
+	camera_offset = Vector2(-1300, -100)

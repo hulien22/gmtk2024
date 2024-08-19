@@ -29,3 +29,4 @@ func _init():
 	]
 	level_name = "Lockpick"
 	camera_zoom = 0.115
+	camera_offset = Vector2(0, -200)

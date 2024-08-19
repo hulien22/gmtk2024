@@ -3,7 +3,7 @@ extends Node
 var first_load:bool = true
 
 var active_level:int = 0;
-var num_stars: int = 3;
+var num_stars: int = 4;
 var color_states:Array[bool] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 # Make sure WorldState is loaded after all of these

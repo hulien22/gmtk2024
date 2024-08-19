@@ -21,3 +21,4 @@ func _init():
 	]
 	level_name = "Scale The Mountain"
 	camera_zoom = 0.17
+	camera_offset = Vector2(-1500, -50)

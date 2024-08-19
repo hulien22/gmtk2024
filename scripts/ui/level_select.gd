@@ -83,6 +83,7 @@ func PlayEnterLevelAnim():
 	AudioManager.play_spit()
 
 func GoToLevel():
+	AudioManager.set_level_select(false) 
 	get_tree().change_scene_to_packed(level_scene)
 
 func PlayLeaveLevelAnim():
