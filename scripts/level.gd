@@ -59,7 +59,7 @@ func TryMove(dir: Enums.Direction) -> bool:
 		
 		var bigplayer_anim: AnimationEvent = AnimationEvent.new()
 		bigplayer_anim.anim_type = AnimationEvent.AnimationType.REVIVE
-		bigplayer_anim.obj_type = TileObj.TileType.PLAYER
+		bigplayer_anim.obj_type = TileObj.TileType.PLAYER_BODY
 		bigplayer_anim.posn = new_state.player.posn
 		bigplayer_anim.direction = new_state.player.direction
 		animation_events.push_back(bigplayer_anim)
@@ -155,7 +155,7 @@ func TrySummon() -> bool:
 	animation_events.push_back(smallplayer_anim)
 	
 	var bigplayer_anim: AnimationEvent = AnimationEvent.new()
-	bigplayer_anim.anim_type = AnimationEvent.AnimationType.DEACTIVATED
+	bigplayer_anim.anim_type = AnimationEvent.AnimationType.DECAPITATE
 	bigplayer_anim.obj_type = TileObj.TileType.PLAYER
 	bigplayer_anim.posn = body_obj.posn
 	bigplayer_anim.new_posn = body_obj.posn

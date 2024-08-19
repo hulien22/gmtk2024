@@ -1,13 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://c3je8dsmej1qp"]
+[gd_scene load_steps=8 format=3 uid="uid://c3je8dsmej1qp"]
 
 [ext_resource type="PackedScene" uid="uid://devynwi66p18n" path="res://scenes/render/rendered_obj.tscn" id="1_2cq36"]
 [ext_resource type="Script" path="res://scripts/render/rendered_player.gd" id="2_0ft0s"]
 [ext_resource type="Texture2D" uid="uid://cw7wuvxop7el4" path="res://art/BIG_Front.png" id="3_mcxix"]
 [ext_resource type="Texture2D" uid="uid://dbs4tv6kf4ghc" path="res://art/MEDIUM_Orange_Placeholder.png" id="4_y36h4"]
 [ext_resource type="Texture2D" uid="uid://k048mq4hwthl" path="res://art/SMALL_Yellow_Placeholder.png" id="5_1fhsn"]
+[ext_resource type="Texture2D" uid="uid://c1si23mag5d45" path="res://art/BIG_Front_OPEN.png" id="6_y8tqq"]
+[ext_resource type="Texture2D" uid="uid://dxalrt230dk6n" path="res://art/MEDIUM_Orange_OPEN.png" id="6_yr2r4"]
 
 [node name="RenderedPlayer" instance=ExtResource("1_2cq36")]
 script = ExtResource("2_0ft0s")
 big_texture = ExtResource("3_mcxix")
 medium_texture = ExtResource("4_y36h4")
 small_texture = ExtResource("5_1fhsn")
+big_open_texture = ExtResource("6_y8tqq")
+medium_open_texture = ExtResource("6_yr2r4")
