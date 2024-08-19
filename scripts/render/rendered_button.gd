@@ -6,6 +6,7 @@ var activated:bool
 func init(obj: TileObj):
 	super.init(obj)
 	activated = obj.activated
+	print(posn, " ", activated)
 	%SpriteHolder.position = obj.posn
 	match obj.size:
 		TileObj.TileSize.BIG:
