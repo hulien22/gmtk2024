@@ -241,10 +241,12 @@ func ComputeLevelColorState(new_state: LevelState):
 					break
 			if !button_is_activated && new_state.player.size >= obj.size && new_state.player.CollidesWith(obj.posn, obj.size):
 				button_is_activated = true
+			
 			if button_is_activated:
 				new_state.level_color_states[obj.color] = !new_state.level_color_states[obj.color]
 				obj.activated = true
-			obj.activated = false
+			else:
+				obj.activated = false
 			
 			var anim_event: AnimationEvent = AnimationEvent.new()
 			if button_is_activated:
