@@ -1,0 +1,46 @@
+[gd_scene load_steps=16 format=3 uid="uid://gsfwoqdxclvi"]
+
+[ext_resource type="Script" path="res://scripts/audio_manager.gd" id="1_bt5sm"]
+[ext_resource type="AudioStream" uid="uid://dhem7bq1gmydx" path="res://audio/s_intro.ogg" id="1_px3jf"]
+[ext_resource type="AudioStream" uid="uid://b3yr4jdsuxyov" path="res://audio/s_small.ogg" id="2_1ni36"]
+[ext_resource type="AudioStream" uid="uid://vjyp7xxk6lic" path="res://audio/button.ogg" id="2_m8fah"]
+[ext_resource type="AudioStream" uid="uid://bfd1m34esttab" path="res://audio/s_medium.ogg" id="3_744on"]
+[ext_resource type="AudioStream" uid="uid://k0m6eluasvbj" path="res://audio/crush.ogg" id="3_iaej4"]
+[ext_resource type="AudioStream" uid="uid://csu0xxkkts76q" path="res://audio/s_big.ogg" id="4_nowmj"]
+[ext_resource type="AudioStream" uid="uid://bmkdpbw773vck" path="res://audio/denied.ogg" id="4_rcxbf"]
+[ext_resource type="AudioStream" uid="uid://b481ho7gr5ris" path="res://audio/s_low.ogg" id="5_eto73"]
+[ext_resource type="AudioStream" uid="uid://ci2w0u467rmt7" path="res://audio/lever.ogg" id="5_hnyid"]
+[ext_resource type="AudioStream" uid="uid://3t420276axi1" path="res://audio/scissors.ogg" id="6_7cqoq"]
+[ext_resource type="AudioStream" uid="uid://6eti4wahdhe2" path="res://audio/spit.ogg" id="7_lmqcw"]
+[ext_resource type="AudioStream" uid="uid://ckr8ke7m1h2vs" path="res://audio/swallow.ogg" id="8_d64pc"]
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_b3iru"]
+stream_count = 4
+stream_0/stream = ExtResource("2_1ni36")
+stream_0/volume = 0.0
+stream_1/stream = ExtResource("3_744on")
+stream_1/volume = 0.0
+stream_2/stream = ExtResource("4_nowmj")
+stream_2/volume = 0.0
+stream_3/stream = ExtResource("5_eto73")
+stream_3/volume = 0.0
+
+[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_gb53q"]
+clip_count = 2
+clip_0/name = &"S Intro"
+clip_0/stream = ExtResource("1_px3jf")
+clip_0/auto_advance = 1
+clip_0/next_clip = 1
+clip_1/name = &"Main"
+clip_1/stream = SubResource("AudioStreamSynchronized_b3iru")
+clip_1/auto_advance = 0
+
+[node name="AudioManager" type="Node"]
+script = ExtResource("1_bt5sm")
+sound_effects = Array[AudioStream]([ExtResource("2_m8fah"), ExtResource("3_iaej4"), ExtResource("4_rcxbf"), ExtResource("5_hnyid"), ExtResource("6_7cqoq"), ExtResource("7_lmqcw"), ExtResource("8_d64pc")])
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamInteractive_gb53q")
+autoplay = true
+
+[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
