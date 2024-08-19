@@ -9,6 +9,7 @@ class_name RenderedLevel
 @export var box_scn: PackedScene
 @export var switch_scn: PackedScene
 @export var scissor_scn: PackedScene
+@export var flag_scn: PackedScene
 
 @export var temp_scn: PackedScene
 
@@ -50,6 +51,11 @@ func init(data: Level):
 			node.init(obj)
 			objects.push_back(node)
 			$GridOffset/Scissors.add_child(node)
+		elif obj is FlagObj:
+			var node = flag_scn.instantiate() as RenderedFlag
+			node.init(obj)
+			objects.push_back(node)
+			$GridOffset/Flag.add_child(node)
 
 	for obj in data.CurrentState().collision_objects:
 		if obj is BoxObj:

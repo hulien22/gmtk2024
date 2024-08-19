@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dhxqm08k81422"]
+[gd_scene load_steps=14 format=3 uid="uid://dhxqm08k81422"]
 
 [ext_resource type="Script" path="res://scripts/render/rendered_level.gd" id="1_ms517"]
 [ext_resource type="PackedScene" uid="uid://blijeb150f3pk" path="res://scenes/render/rendered_button.tscn" id="2_bex8r"]
@@ -6,13 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://devynwi66p18n" path="res://scenes/render/rendered_obj.tscn" id="3_6lpuy"]
 [ext_resource type="Script" path="res://scripts/render/background_layer.gd" id="3_avu2h"]
 [ext_resource type="Texture2D" uid="uid://bpksmmbf3k8pl" path="res://art/Tile_Map.png" id="3_dter0"]
-[ext_resource type="PackedScene" uid="uid://brekff7vy8ggo" path="res://scenes/rendered_player.tscn" id="4_fiw6g"]
 [ext_resource type="PackedScene" uid="uid://clwpel5p0v44g" path="res://scenes/render/rendered_box.tscn" id="4_gywkk"]
 [ext_resource type="PackedScene" uid="uid://cl8yfala4bc7e" path="res://scenes/render/rendered_switch.tscn" id="5_tp8nc"]
-[ext_resource type="Texture2D" uid="uid://cppm4l23knvw4" path="res://art/BIG_blue_Placeholder.png" id="5_txbhw"]
 [ext_resource type="PackedScene" uid="uid://cchalf14w1x1i" path="res://scenes/render/rendered_scissors.tscn" id="6_210nf"]
-[ext_resource type="Texture2D" uid="uid://dbs4tv6kf4ghc" path="res://art/MEDIUM_Orange_Placeholder.png" id="6_glsrf"]
-[ext_resource type="Texture2D" uid="uid://k048mq4hwthl" path="res://art/SMALL_Yellow_Placeholder.png" id="7_bn66q"]
+[ext_resource type="PackedScene" uid="uid://bfvtgt5fgp6ia" path="res://scenes/render/rendered_flag.tscn" id="7_0x75m"]
 [ext_resource type="Texture2D" uid="uid://cyju4r6wtgm0t" path="res://art/FLOOR_TILE_BlueGreen.png" id="8_36t2g"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_soaic"]
@@ -455,6 +452,7 @@ button_scn = ExtResource("2_bex8r")
 box_scn = ExtResource("4_gywkk")
 switch_scn = ExtResource("5_tp8nc")
 scissor_scn = ExtResource("6_210nf")
+flag_scn = ExtResource("7_0x75m")
 temp_scn = ExtResource("3_6lpuy")
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -489,17 +487,4 @@ visible = false
 
 [node name="Scissors" type="Node2D" parent="GridOffset"]
 
-[node name="PB" parent="GridOffset" instance=ExtResource("4_fiw6g")]
-visible = false
-scale = Vector2(0.04, 0.04)
-texture = ExtResource("5_txbhw")
-
-[node name="PM" parent="GridOffset" instance=ExtResource("4_fiw6g")]
-visible = false
-scale = Vector2(0.04, 0.04)
-texture = ExtResource("6_glsrf")
-
-[node name="PS" parent="GridOffset" instance=ExtResource("4_fiw6g")]
-visible = false
-scale = Vector2(0.04, 0.04)
-texture = ExtResource("7_bn66q")
+[node name="Flag" type="Node2D" parent="GridOffset"]
