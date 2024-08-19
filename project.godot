@@ -19,6 +19,11 @@ config/icon="res://icon.svg"
 
 ArtManager="*res://scenes/ArtManager.tscn"
 AudioManager="*res://scenes/AudioManager.tscn"
+LevelBasic="*res://scripts/levels/level_basic.gd"
+LevelKey="*res://scripts/levels/level_key.gd"
+LevelLockpick="*res://scripts/levels/level_lockpick.gd"
+LevelMountain="*res://scripts/levels/level_mountain.gd"
+LevelTrapped="*res://scripts/levels/level_trapped.gd"
 WorldState="*res://scripts/world_state.gd"
 
 [display]

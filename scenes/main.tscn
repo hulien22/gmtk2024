@@ -26,6 +26,7 @@ script = ExtResource("1_rehln")
 [node name="RenderedLevel" parent="." instance=ExtResource("2_d05o2")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
 anchor_mode = 0
 zoom = Vector2(0.17, 0.17)
 
