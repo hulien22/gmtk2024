@@ -71,8 +71,19 @@ void fragment()
 vec4 origColor = texture(SCREEN_TEXTURE, SCREEN_UV);
 float intensity = getIntensity(origColor.rgb);
 //vec4 bgColor = mix(texture(u_bgTexture, fract(UV*u_bgTiling)), u_bgColor, u_bgColorFactor);
+
+//float time = TIME * 1000.0;
+//vec4 bgColor;
+//if (int(time) % 1000 > 500) {
+	//bgColor = mix(texture(u_bgTexture, fract(UV*u_bgTiling)), origColor, u_bgColorFactor);
+//} else {
+	//bgColor = mix(texture(u_patternTexture, fract(UV*u_patternTiling)), origColor, u_bgColorFactor);
+//}
 vec4 bgColor = mix(texture(u_bgTexture, fract(UV*u_bgTiling)), origColor, u_bgColorFactor);
-vec4 patternColor = getPatternColor(UV, intensity);
+
+
+//vec4 patternColor = getPatternColor(UV, intensity);
+vec4 patternColor = vec4(1.0, 1.0, 1.0, 1.0);
 vec4 color = mix(u_patternColor, bgColor, getIntensity(patternColor.rgb));
 COLOR = color;
 }
