@@ -56,6 +56,12 @@ func init(data: Level):
 			node.init(obj)
 			objects.push_back(node)
 			$GridOffset/Flag.add_child(node)
+		elif obj is CrushedBoxObj:
+			# But added as a crushed box type so doesn't match other boxes
+			var node = box_scn.instantiate() as RenderedBox
+			node.init(obj)
+			objects.push_back(node)
+			$GridOffset/Boxes.add_child(node)
 
 	for obj in data.CurrentState().collision_objects:
 		if obj is BoxObj:
