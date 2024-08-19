@@ -16,20 +16,20 @@ var level: Level
 	#".  .  .  .  .  .  .  .  w  w  w  w  .  .  .  .  .  .  .  .  BGM.  .  .  CBR.  BGM.  .  .  .  .  .  .  .  .  ",
 	#".  .  .  .  .  .  .  .  w  w  w  w  .  .  .  .  .  .  .  .  .  .  .  .  CBR.  .  .  .  .  .  .  .  .  .  .  ",
 #]
-var levelstr: Array[String] = [
-".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  SRB.  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
-".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
-".  .  .  .  .  .  .  .  .  .  BGM.  .  .  .  .  XM .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
-".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
-"PB .  .  .  XM .  BRM.  CRR.  BRM.  .  .  SRM.  .  .  .  .  w  w  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
-".  .  .  .  .  .  .  .  CRR.  .  .  .  .  .  .  .  .  .  .  w  w  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
-".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
-".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
-".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
-".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  XS XS XS XS .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
-".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
-".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
-]
+#var levelstr: Array[String] = [
+#".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  SRB.  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
+#".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
+#".  .  .  .  .  .  .  .  .  .  BGM.  .  .  .  .  XM .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
+#".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
+#"PB .  .  .  XM .  BRM.  CRR.  BRM.  .  .  SRM.  .  .  .  .  w  w  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
+#".  .  .  .  .  .  .  .  CRR.  .  .  .  .  .  .  .  .  .  .  w  w  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
+#".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
+#".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
+#".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
+#".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  XS XS XS XS .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
+#".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
+#".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ",
+#]
 
 ###### LEVEL: SCALING A MOUNTAIN
 #var levelstr: Array[String] = [
@@ -71,25 +71,25 @@ var levelstr: Array[String] = [
 	#"w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  ",
 #]
 
-########  LEVEL: THE DELETE KEY
-#var levelstr: Array[String] = [
-	#".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  ",
-	#".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  ",
-	#".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  ",
-	#".  .  .  .  XS .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  ",
-	#"PB .  .  .  XB .  .  .  .  .  .  .  XB .  .  .  .  .  .  .  .  CRR.  .  .  .  .  .  .  .  w  w  ",
-	#".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  CRR.  .  .  .  .  .  .  .  w  w  ",
-	#".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  CRR.  .  XM .  .  .  .  BRSBRS.  ",
-	#".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  CRR.  .  .  .  .  .  .  .  .  .  ",
-	#".  .  .  .  BRB.  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  CR CR CR CR w  w  w  w  ",
-	#".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  w  w  w  w  ",
-	#".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  w  w  w  w  ",
-	#".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  w  w  w  w  ",
-	#".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  FB .  .  .  w  w  w  w  ",
-	#".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  w  w  w  w  ",
-	#".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  w  w  w  w  ",
-	#".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  w  w  w  w  ",
-#]
+#######  LEVEL: THE DELETE KEY
+var levelstr: Array[String] = [
+	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  ",
+	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  ",
+	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  ",
+	".  .  .  .  XS .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  w  w  w  w  w  w  ",
+	"PB .  .  .  XB .  .  .  .  .  .  .  XB .  .  .  .  .  .  .  .  CRR.  .  .  .  .  .  .  .  w  w  ",
+	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  CRR.  .  .  .  .  .  .  .  w  w  ",
+	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  CRR.  .  XM .  .  .  .  BRSBRS.  ",
+	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  CRR.  .  .  .  .  .  .  .  .  .  ",
+	".  .  .  .  BRB.  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  CR CR CR CR w  w  w  w  ",
+	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  w  w  w  w  ",
+	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  w  w  w  w  ",
+	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  w  w  w  w  ",
+	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  FB .  .  .  w  w  w  w  ",
+	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  w  w  w  w  ",
+	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  w  w  w  w  ",
+	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  w  w  w  w  w  w  w  w  .  .  .  .  w  w  w  w  ",
+]
 
 #######  LOCKPICKING LEVEL
 # var levelstr: Array[String] = [
