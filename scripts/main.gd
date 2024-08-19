@@ -29,6 +29,8 @@ func LoadLevel():
 	%BgTiles.size = WorldState.level_infos[WorldState.active_level].bg_tile_size
 	level.rendered_level = $RenderedLevel
 	$RenderedLevel.init(level)
+	await get_tree().create_timer(AnimationConstants.LONG_ANIM * 2).timeout
+	level.StartLevel()
 
 
 func _input(event):
@@ -50,7 +52,9 @@ func _input(event):
 	elif event.is_action_pressed("ResetLevel"):
 		update = level.Reset()
 	elif event.is_action_pressed("ReturnToLevelSelect"):
-		if level.CurrentState().player.size == TileObj.TileSize.BIG:
+		if (level.LeaveLevel()):
+		#if level.CurrentState().player.size == TileObj.TileSize.BIG:
+			await get_tree().create_timer(AnimationConstants.LONG_ANIM * 2).timeout
 			get_tree().change_scene_to_file("res://scenes/ui/level_select.tscn")
 			return
 		else:

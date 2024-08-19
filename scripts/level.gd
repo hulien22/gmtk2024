@@ -13,6 +13,10 @@ var height:int
 var animation_events: Array[AnimationEvent] = []
 var secondary_animation_events: Array[AnimationEvent] = []
 
+var BIG_PLAYER_SPAWN_LOCATION:Vector2i
+var big_player_last_location:Vector2i
+var original_player_start_location:Vector2i
+
 # don't show flag when the stage has been completed once
 var completed:bool = false
 var dead:bool = false
@@ -195,6 +199,53 @@ func TryToggleSwitch() -> bool:
 	UpdateState(new_state)
 	return true
 
+func StartLevel():
+	print(BIG_PLAYER_SPAWN_LOCATION)
+	var cur_state: LevelState = CurrentState()
+	var new_state: LevelState = cur_state.custom_duplicate()
+	
+	var player_anim: AnimationEvent = AnimationEvent.new()
+	player_anim.anim_type = AnimationEvent.AnimationType.MOVED
+	player_anim.obj_type = TileObj.TileType.PLAYER
+	player_anim.posn = BIG_PLAYER_SPAWN_LOCATION
+	player_anim.new_posn = big_player_last_location
+	player_anim.direction = new_state.player.direction
+	animation_events.push_back(player_anim)
+	
+	new_state.player.posn = big_player_last_location
+	
+	UpdateState(new_state)
+	
+	# delete all previous state
+	state_stack.clear()
+	state_stack.push_back(new_state)
+
+func LeaveLevel() -> bool:
+	var cur_state: LevelState = CurrentState()
+	if dead:
+		return false
+	elif cur_state.player.size != TileObj.TileSize.BIG:
+		#TODO signals to show info text
+		return false
+	
+	big_player_last_location = CurrentState().player.posn
+	
+	var new_state: LevelState = cur_state.custom_duplicate()
+	
+	var player_anim: AnimationEvent = AnimationEvent.new()
+	player_anim.anim_type = AnimationEvent.AnimationType.MOVED
+	player_anim.obj_type = TileObj.TileType.PLAYER
+	player_anim.posn = new_state.player.posn
+	player_anim.new_posn = BIG_PLAYER_SPAWN_LOCATION
+	player_anim.direction = new_state.player.direction
+	animation_events.push_back(player_anim)
+	
+	new_state.player.posn = BIG_PLAYER_SPAWN_LOCATION
+	UpdateState(new_state)
+	
+	return true
+	
+
 func Undo() -> bool:
 	if state_stack.size() <= 1:
 		return false
@@ -208,8 +259,10 @@ func Reset() -> bool:
 	state_stack.clear()
 	state_stack.push_back(starting_state)
 	dead = false
+	big_player_last_location = original_player_start_location
 	# don't update completed, that stays
 	rendered_level.init(self)
+	StartLevel()
 	return true
 
 func UpdateState(new_state: LevelState):
@@ -263,7 +316,7 @@ func ComputeLevelColorState(new_state: LevelState):
 # Returns whether or not we deleted stuff - requires a recompute of colors
 func HandleLevelColorState(new_state: LevelState) -> bool:
 	#TODO combine with global state
-	var combined_color_states = new_state.level_color_states
+	var combined_color_states = WorldState.GetGlobalColorStates(new_state, self) #new_state.level_color_states
 	var crushed_box:bool = false
 	
 	# Color walls swap between collision_objects and bg_objects depending on if they are activated or not
@@ -536,6 +589,12 @@ func LoadLevelFromText(map: Array[String]):
 	height = map.size()
 	width = map[0].length() / 3
 	
+	if true:
+		var spawn_x = width / 2
+		while (spawn_x % 4 != 0):
+			spawn_x -= 1
+		BIG_PLAYER_SPAWN_LOCATION = Vector2i(spawn_x, -height)
+	
 	assert(height % 4 == 0)
 	assert(width % 4 == 0)
 	
@@ -557,7 +616,9 @@ func LoadLevelFromText(map: Array[String]):
 				"P":
 					assert(text == "PB ")
 					starting_state.player = PlayerObj.new()
-					starting_state.player.posn = Vector2i(j,i)
+					starting_state.player.posn = BIG_PLAYER_SPAWN_LOCATION
+					big_player_last_location = Vector2i(j,i)
+					original_player_start_location = Vector2i(j,i)
 					starting_state.player.AssertOnGrid()
 				"F":
 					var new_obj:TileObj = FlagObj.new()
