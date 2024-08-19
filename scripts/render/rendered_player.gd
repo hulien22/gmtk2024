@@ -7,15 +7,22 @@ class_name RenderedPlayer
 
 func init(obj: TileObj):
 	super.init(obj)
+	
+	# We can also get PLAYERBODY, want that to also be treated as player?
+	type = TileObj.TileType.PLAYER
+	
 	%SpriteHolder.position = obj.posn
-	%SpriteHolder.scale = Vector2(0.04, 0.04)
-	match obj.size:
+	#%SpriteHolder.scale = Vector2(0.04, 0.04)
+	match size:
 		TileObj.TileSize.BIG:
 			%Sprite.texture = big_texture
+			%SpriteHolder.scale = Vector2(0.02, 0.02)
 		TileObj.TileSize.MEDIUM:
 			%Sprite.texture = medium_texture
+			%SpriteHolder.scale = Vector2(0.01, 0.01)
 		TileObj.TileSize.SMALL:
 			%Sprite.texture = small_texture
+			%SpriteHolder.scale = Vector2(0.005, 0.005)
 
 func SpawnFromEvent(event: AnimationEvent):
 	assert(event.anim_type == AnimationEvent.AnimationType.SPAWNED)
@@ -25,14 +32,17 @@ func SpawnFromEvent(event: AnimationEvent):
 	direction = event.direction
 	
 	%SpriteHolder.position = posn
-	%SpriteHolder.scale = Vector2(0.04, 0.04)
+	#%SpriteHolder.scale = Vector2(0.04, 0.04)
 	match size:
 		TileObj.TileSize.BIG:
 			%Sprite.texture = big_texture
+			%SpriteHolder.scale = Vector2(0.02, 0.02)
 		TileObj.TileSize.MEDIUM:
 			%Sprite.texture = medium_texture
+			%SpriteHolder.scale = Vector2(0.01, 0.01)
 		TileObj.TileSize.SMALL:
 			%Sprite.texture = small_texture
+			%SpriteHolder.scale = Vector2(0.005, 0.005)
 
 
 func ProcessAnimationEvent(event: AnimationEvent):
