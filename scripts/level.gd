@@ -10,7 +10,8 @@ var level_name: String = "Unnamed Level"
 var width:int
 var height:int
 
-var animation_events: Array[AnimationEvent]
+var animation_events: Array[AnimationEvent] = []
+var secondary_animation_events: Array[AnimationEvent] = []
 
 # don't show flag when the stage has been completed once
 var completed:bool = false
@@ -111,7 +112,7 @@ func TryMove(dir: Enums.Direction) -> bool:
 		
 		moved_obj.posn = moved_obj.posn + movement_vec
 	for obj in crushed_objs:
-		CrushBox(obj, new_state)
+		CrushBox(obj, new_state, false)
 	
 	# TODO check if we are on any buttons and activate if not activated before
 	
@@ -220,6 +221,7 @@ func UpdateState(new_state: LevelState):
 		# one thought, have a secondary animation_events, crushed boxes in HandleLevelColorState go there
 		# then we play anim here, and swap in secondary animation_events
 		PlayAnim()
+		await rendered_level.get_tree().create_timer(AnimationConstants.LONG_ANIM).timeout
 		ComputeLevelColorState(new_state)
 	
 	#PlayAnim(new_state.player.size, new_state.player.posn)
@@ -297,7 +299,7 @@ func HandleLevelColorState(new_state: LevelState) -> bool:
 							dead = true
 						elif col_obj.type == TileObj.TileType.BOX:
 							# crush the box 
-							CrushBox(col_obj, new_state)
+							CrushBox(col_obj, new_state, true)
 							crushed_box = true
 				if new_state.player.CollidesWith(obj.posn, obj.size):
 					print("YOU DIED")
@@ -469,14 +471,17 @@ func GetSummonPosn() -> Vector2i:
 	# return nope
 	return Vector2i(-1,-1)
 
-func CrushBox(obj: TileObj, new_state: LevelState):
+func CrushBox(obj: TileObj, new_state: LevelState, delay: bool):
 	assert(obj.type == TileObj.TileType.BOX)
 	
 	var anim_event: AnimationEvent = AnimationEvent.new()
 	anim_event.anim_type = AnimationEvent.AnimationType.CRUSHED
 	anim_event.obj_type = obj.type
 	anim_event.posn = obj.posn
-	animation_events.push_back(anim_event)
+	if delay:
+		secondary_animation_events.push_back(anim_event)
+	else:
+		animation_events.push_back(anim_event)
 	
 	# Add crushed object tile (to show debris)
 	var new_obj:TileObj = CrushedBoxObj.new()
@@ -489,7 +494,11 @@ func CrushBox(obj: TileObj, new_state: LevelState):
 func PlayAnim():
 	#player_moved.emit(size, new_pos)
 	rendered_level.ProcessAnimationEvents(animation_events)
+	
 	animation_events.clear()
+	for ae in secondary_animation_events:
+		animation_events.push_back(ae.duplicate())
+	secondary_animation_events.clear()
 
 static func GetSizeFromChar(c: String) -> TileObj.TileSize:
 	match c:
@@ -657,5 +666,5 @@ func DEBUG_PrintState(state: LevelState):
 		for j in width:
 			var posn: Vector2i = Vector2i(j, i)
 			out += DEBUG_WhatIsAtPoint(state, posn)
-		print(out)
-	print()
+		#print(out)
+	#print()

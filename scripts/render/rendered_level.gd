@@ -90,8 +90,10 @@ func ProcessAnimationEvents(events: Array[AnimationEvent]):
 			node.SpawnFromEvent(event)
 			objects.push_back(node)
 			$GridOffset/Player.add_child(node)
+			node.ProcessAnimationEvent(event)
+			continue
 		
-		# TODO handle deletion events
+		# TODO handle deletion events?
 		
 		# find corresponding object
 		var found_obj = false
