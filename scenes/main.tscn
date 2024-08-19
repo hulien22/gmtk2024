@@ -8,7 +8,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1monb"]
 shader = ExtResource("3_cdy1k")
 shader_parameter/u_bgColor = Vector4(1, 1, 1, 1)
-shader_parameter/u_bgColorFactor = 0.4
+shader_parameter/u_bgColorFactor = 0.804
 shader_parameter/u_patternColor = Vector4(0, 0, 0, 1)
 shader_parameter/u_threshold1 = 0.75
 shader_parameter/u_threshold2 = 0.5
@@ -16,7 +16,7 @@ shader_parameter/u_threshold3 = 0.25
 shader_parameter/u_threshold4 = 0.05
 shader_parameter/u_bgTiling = Vector2(1, 1)
 shader_parameter/u_patternTiling = Vector2(1, 1)
-shader_parameter/u_patternTexture = ExtResource("5_dqn8f")
+shader_parameter/u_bgTexture = ExtResource("5_dqn8f")
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_rehln")
