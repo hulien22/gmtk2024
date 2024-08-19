@@ -98,13 +98,13 @@ func ProcessAnimationEvent(event: AnimationEvent):
 			tween.parallel().tween_property(%Sprite, "scale", Vector2(1.5,1.5), AnimationConstants.HALF_MOVE).set_ease(Tween.EASE_OUT)
 			tween.tween_property(%Sprite, "scale", Vector2(0.01,0.01), AnimationConstants.HALF_MOVE).set_ease(Tween.EASE_IN)
 			tween.tween_callback(queue_free)
-			
+			AudioManager.play_swallow()
 		AnimationEvent.AnimationType.SPAWNED:
 			StartNewTween()
 			tween.tween_property(%SpriteHolder, "position", Vector2(event.new_posn.x, event.new_posn.y), AnimationConstants.MOVE)
 			tween.parallel().tween_property(%Sprite, "scale", Vector2(1.5,1.5), AnimationConstants.HALF_MOVE).set_ease(Tween.EASE_OUT)
 			tween.tween_property(%Sprite, "scale", Vector2(1,1), AnimationConstants.HALF_MOVE).set_ease(Tween.EASE_IN)
-		
+			AudioManager.play_spit()
 		AnimationEvent.AnimationType.REVIVE:
 			type = TileObj.TileType.PLAYER
 			%Sprite.rotation_degrees = GetTargetRotationDegrees()

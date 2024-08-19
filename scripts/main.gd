@@ -160,6 +160,11 @@ func _input(event):
 		update = level.Undo()
 	elif event.is_action_pressed("ResetLevel"):
 		update = level.Reset()
-
+	else:
+		return # dont play denied for ranom inputs
+	# AudioManager.set_level_select(true) need to set in level select
 	if update:
+		AudioManager.set_size(level.CurrentState().player.size)
 		level.DEBUG_PrintState(level.CurrentState())
+	else:
+		AudioManager.play_denied()

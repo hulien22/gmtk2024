@@ -37,6 +37,7 @@ clip_1/auto_advance = 0
 
 [node name="AudioManager" type="Node"]
 script = ExtResource("1_bt5sm")
+lower = -30.0
 sound_effects = Array[AudioStream]([ExtResource("2_m8fah"), ExtResource("3_iaej4"), ExtResource("4_rcxbf"), ExtResource("5_hnyid"), ExtResource("6_7cqoq"), ExtResource("7_lmqcw"), ExtResource("8_d64pc")])
 
 [node name="Music" type="AudioStreamPlayer" parent="."]

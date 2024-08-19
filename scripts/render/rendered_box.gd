@@ -42,6 +42,7 @@ func ProcessAnimationEvent(event: AnimationEvent):
 			#tween.parallel().tween_property(%Sprite, "scale", Vector2(1,1), AnimationConstants.LONG_ANIM) # SLEEP
 			#tween.tween_callback(set_texture)
 			set_texture()
+			AudioManager.play_crush()
 		_:
 			super.ProcessAnimationEvent(event)
 	
