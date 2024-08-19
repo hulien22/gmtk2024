@@ -129,7 +129,7 @@ func TrySummon() -> bool:
 		return false
 	
 	var new_posn = GetSummonPosn()
-	print(new_posn)
+	#print(new_posn)
 	if new_posn == Vector2i(-1,-1):
 		# TODO emit signal to display "NO ROOM" message
 		return false
@@ -343,10 +343,10 @@ func CanPlayerMove(dir: Enums.Direction) -> bool:
 
 func CanObjMoveTo(state: LevelState, target_posn:Vector2i, size: TileObj.TileSize, dir: Enums.Direction, type: TileObj.TileType) -> bool:
 	if (!IsPosnInBounds(target_posn)):
-		print("not IsPosnInBounds")
+		#print("not IsPosnInBounds")
 		return false
 	if (WallExistsAtPosn(target_posn, size)):
-		print("WallExistsAtPosn")
+		#print("WallExistsAtPosn")
 		return false
 	
 	# now check for other objects
@@ -355,7 +355,7 @@ func CanObjMoveTo(state: LevelState, target_posn:Vector2i, size: TileObj.TileSiz
 			if (type == TileObj.TileType.PLAYER):
 				if !obj.is_pushable || obj.size > size:
 					 # can't move things that aren't pushable, bigger things than us
-					print("!!", obj)
+					#print("!!", obj)
 					return false
 				if obj.size < size:
 					# we can move into this spot and will crush it
@@ -380,7 +380,7 @@ func CanObjMoveTo(state: LevelState, target_posn:Vector2i, size: TileObj.TileSiz
 			#if obj.type == TileObj.TileType.SWITCH && obj.CollidesWith(target_posn, size):
 				#return false
 
-	print("ret true")
+	#print("ret true")
 	return true
 
 # Assumes that CanPlayerMove == true

@@ -2,6 +2,7 @@ extends Node2D
 
 var level: Level
 
+
 #var levelstr: Array[String] = [
 	#".  .  .  .  .  .  .  .  w  w  w  w  .  .  .  .  .  .  .  .  .  .  .  .  CBR.  .  .  .  .  .  .  .  .  .  .  ",
 	#".  .  .  .  .  .  .  .  w  w  w  w  .  CG .  .  .  .  .  .  .  .  .  .  CBR.  .  .  .  .  .  .  .  .  .  .  ",
@@ -160,6 +161,13 @@ func _input(event):
 		update = level.Undo()
 	elif event.is_action_pressed("ResetLevel"):
 		update = level.Reset()
+	elif event.is_action_pressed("ReturnToLevelSelect"):
+		if level.CurrentState().player.size == TileObj.TileSize.BIG:
+			get_tree().change_scene_to_file("res://scenes/ui/level_select.tscn")
+			return
+		else:
+			# show message about too small?
+			return
 	else:
 		return # dont play denied for ranom inputs
 	# AudioManager.set_level_select(true) need to set in level select
