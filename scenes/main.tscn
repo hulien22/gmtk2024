@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://b1sgun56vynqx"]
+[gd_scene load_steps=8 format=3 uid="uid://b1sgun56vynqx"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_rehln"]
 [ext_resource type="PackedScene" uid="uid://dhxqm08k81422" path="res://scenes/rendered_level.tscn" id="2_d05o2"]
+[ext_resource type="Texture2D" uid="uid://cyju4r6wtgm0t" path="res://art/FLOOR_TILE_BlueGreen.png" id="2_d5wki"]
 [ext_resource type="Shader" path="res://shaders/test.gdshader" id="3_cdy1k"]
 [ext_resource type="Texture2D" uid="uid://0f4xoq7ge4k5" path="res://shaders/pencil.jpg" id="5_dqn8f"]
 [ext_resource type="Texture2D" uid="uid://bisjudm5gbd04" path="res://shaders/pencil - Copy.jpg" id="5_efjmo"]
@@ -23,9 +24,22 @@ shader_parameter/u_patternTexture = ExtResource("5_efjmo")
 [node name="Main" type="Node2D"]
 script = ExtResource("1_rehln")
 
+[node name="BgTiles" type="TextureRect" parent="."]
+unique_name_in_owner = true
+z_index = -100
+z_as_relative = false
+offset_left = -200.0
+offset_top = -192.0
+offset_right = -200.0
+offset_bottom = -192.0
+texture = ExtResource("2_d5wki")
+expand_mode = 2
+stretch_mode = 1
+
 [node name="RenderedLevel" parent="." instance=ExtResource("2_d05o2")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
 anchor_mode = 0
 zoom = Vector2(0.17, 0.17)
 
@@ -38,3 +52,4 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true

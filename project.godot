@@ -11,13 +11,24 @@ config_version=5
 [application]
 
 config/name="gmtk2024"
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="res://scenes/ui/main_menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 ArtManager="*res://scenes/ArtManager.tscn"
+AudioManager="*res://scenes/AudioManager.tscn"
+LevelBasic="*res://scripts/levels/level_basic.gd"
+LevelKey="*res://scripts/levels/level_key.gd"
+LevelLockpick="*res://scripts/levels/level_lockpick.gd"
+LevelMountain="*res://scripts/levels/level_mountain.gd"
+LevelTrapped="*res://scripts/levels/level_trapped.gd"
+WorldState="*res://scripts/world_state.gd"
+
+[display]
+
+window/stretch/mode="canvas_items"
 
 [input]
 
@@ -34,6 +45,11 @@ Undo={
 ResetLevel={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":82,"key_label":0,"unicode":114,"location":0,"echo":false,"script":null)
+]
+}
+ReturnToLevelSelect={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
 

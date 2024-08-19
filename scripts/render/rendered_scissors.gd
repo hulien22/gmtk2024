@@ -24,4 +24,5 @@ func ProcessAnimationEvent(event: AnimationEvent):
 			activated = false
 		_:
 			super.ProcessAnimationEvent(event)
+	AudioManager.play_scissors()
 	%Sprite.texture = ArtManager.get_color_wall(activated, color)

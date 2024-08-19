@@ -10,7 +10,12 @@ var level_name: String = "Unnamed Level"
 var width:int
 var height:int
 
-var animation_events: Array[AnimationEvent]
+var animation_events: Array[AnimationEvent] = []
+var secondary_animation_events: Array[AnimationEvent] = []
+
+var BIG_PLAYER_SPAWN_LOCATION:Vector2i
+var big_player_last_location:Vector2i
+var original_player_start_location:Vector2i
 
 # don't show flag when the stage has been completed once
 var completed:bool = false
@@ -58,7 +63,7 @@ func TryMove(dir: Enums.Direction) -> bool:
 		
 		var bigplayer_anim: AnimationEvent = AnimationEvent.new()
 		bigplayer_anim.anim_type = AnimationEvent.AnimationType.REVIVE
-		bigplayer_anim.obj_type = TileObj.TileType.PLAYER
+		bigplayer_anim.obj_type = TileObj.TileType.PLAYER_BODY
 		bigplayer_anim.posn = new_state.player.posn
 		bigplayer_anim.direction = new_state.player.direction
 		animation_events.push_back(bigplayer_anim)
@@ -111,7 +116,7 @@ func TryMove(dir: Enums.Direction) -> bool:
 		
 		moved_obj.posn = moved_obj.posn + movement_vec
 	for obj in crushed_objs:
-		CrushBox(obj, new_state)
+		CrushBox(obj, new_state, false)
 	
 	# TODO check if we are on any buttons and activate if not activated before
 	
@@ -128,7 +133,7 @@ func TrySummon() -> bool:
 		return false
 	
 	var new_posn = GetSummonPosn()
-	print(new_posn)
+	#print(new_posn)
 	if new_posn == Vector2i(-1,-1):
 		# TODO emit signal to display "NO ROOM" message
 		return false
@@ -154,7 +159,7 @@ func TrySummon() -> bool:
 	animation_events.push_back(smallplayer_anim)
 	
 	var bigplayer_anim: AnimationEvent = AnimationEvent.new()
-	bigplayer_anim.anim_type = AnimationEvent.AnimationType.DEACTIVATED
+	bigplayer_anim.anim_type = AnimationEvent.AnimationType.DECAPITATE
 	bigplayer_anim.obj_type = TileObj.TileType.PLAYER
 	bigplayer_anim.posn = body_obj.posn
 	bigplayer_anim.new_posn = body_obj.posn
@@ -194,6 +199,53 @@ func TryToggleSwitch() -> bool:
 	UpdateState(new_state)
 	return true
 
+func StartLevel():
+	print(BIG_PLAYER_SPAWN_LOCATION)
+	var cur_state: LevelState = CurrentState()
+	var new_state: LevelState = cur_state.custom_duplicate()
+	
+	var player_anim: AnimationEvent = AnimationEvent.new()
+	player_anim.anim_type = AnimationEvent.AnimationType.MOVED
+	player_anim.obj_type = TileObj.TileType.PLAYER
+	player_anim.posn = BIG_PLAYER_SPAWN_LOCATION
+	player_anim.new_posn = big_player_last_location
+	player_anim.direction = new_state.player.direction
+	animation_events.push_back(player_anim)
+	
+	new_state.player.posn = big_player_last_location
+	
+	UpdateState(new_state)
+	
+	# delete all previous state
+	state_stack.clear()
+	state_stack.push_back(new_state)
+
+func LeaveLevel() -> bool:
+	var cur_state: LevelState = CurrentState()
+	if dead:
+		return false
+	elif cur_state.player.size != TileObj.TileSize.BIG:
+		#TODO signals to show info text
+		return false
+	
+	big_player_last_location = CurrentState().player.posn
+	
+	var new_state: LevelState = cur_state.custom_duplicate()
+	
+	var player_anim: AnimationEvent = AnimationEvent.new()
+	player_anim.anim_type = AnimationEvent.AnimationType.MOVED
+	player_anim.obj_type = TileObj.TileType.PLAYER
+	player_anim.posn = new_state.player.posn
+	player_anim.new_posn = BIG_PLAYER_SPAWN_LOCATION
+	player_anim.direction = new_state.player.direction
+	animation_events.push_back(player_anim)
+	
+	new_state.player.posn = BIG_PLAYER_SPAWN_LOCATION
+	UpdateState(new_state)
+	
+	return true
+	
+
 func Undo() -> bool:
 	if state_stack.size() <= 1:
 		return false
@@ -207,8 +259,10 @@ func Reset() -> bool:
 	state_stack.clear()
 	state_stack.push_back(starting_state)
 	dead = false
+	big_player_last_location = original_player_start_location
 	# don't update completed, that stays
 	rendered_level.init(self)
+	StartLevel()
 	return true
 
 func UpdateState(new_state: LevelState):
@@ -220,6 +274,7 @@ func UpdateState(new_state: LevelState):
 		# one thought, have a secondary animation_events, crushed boxes in HandleLevelColorState go there
 		# then we play anim here, and swap in secondary animation_events
 		PlayAnim()
+		await rendered_level.get_tree().create_timer(AnimationConstants.LONG_ANIM).timeout
 		ComputeLevelColorState(new_state)
 	
 	#PlayAnim(new_state.player.size, new_state.player.posn)
@@ -261,7 +316,7 @@ func ComputeLevelColorState(new_state: LevelState):
 # Returns whether or not we deleted stuff - requires a recompute of colors
 func HandleLevelColorState(new_state: LevelState) -> bool:
 	#TODO combine with global state
-	var combined_color_states = new_state.level_color_states
+	var combined_color_states = WorldState.GetGlobalColorStates(new_state, self) #new_state.level_color_states
 	var crushed_box:bool = false
 	
 	# Color walls swap between collision_objects and bg_objects depending on if they are activated or not
@@ -297,7 +352,7 @@ func HandleLevelColorState(new_state: LevelState) -> bool:
 							dead = true
 						elif col_obj.type == TileObj.TileType.BOX:
 							# crush the box 
-							CrushBox(col_obj, new_state)
+							CrushBox(col_obj, new_state, true)
 							crushed_box = true
 				if new_state.player.CollidesWith(obj.posn, obj.size):
 					print("YOU DIED")
@@ -341,10 +396,10 @@ func CanPlayerMove(dir: Enums.Direction) -> bool:
 
 func CanObjMoveTo(state: LevelState, target_posn:Vector2i, size: TileObj.TileSize, dir: Enums.Direction, type: TileObj.TileType) -> bool:
 	if (!IsPosnInBounds(target_posn)):
-		print("not IsPosnInBounds")
+		#print("not IsPosnInBounds")
 		return false
 	if (WallExistsAtPosn(target_posn, size)):
-		print("WallExistsAtPosn")
+		#print("WallExistsAtPosn")
 		return false
 	
 	# now check for other objects
@@ -353,7 +408,7 @@ func CanObjMoveTo(state: LevelState, target_posn:Vector2i, size: TileObj.TileSiz
 			if (type == TileObj.TileType.PLAYER):
 				if !obj.is_pushable || obj.size > size:
 					 # can't move things that aren't pushable, bigger things than us
-					print("!!", obj)
+					#print("!!", obj)
 					return false
 				if obj.size < size:
 					# we can move into this spot and will crush it
@@ -378,7 +433,7 @@ func CanObjMoveTo(state: LevelState, target_posn:Vector2i, size: TileObj.TileSiz
 			#if obj.type == TileObj.TileType.SWITCH && obj.CollidesWith(target_posn, size):
 				#return false
 
-	print("ret true")
+	#print("ret true")
 	return true
 
 # Assumes that CanPlayerMove == true
@@ -469,14 +524,17 @@ func GetSummonPosn() -> Vector2i:
 	# return nope
 	return Vector2i(-1,-1)
 
-func CrushBox(obj: TileObj, new_state: LevelState):
+func CrushBox(obj: TileObj, new_state: LevelState, delay: bool):
 	assert(obj.type == TileObj.TileType.BOX)
 	
 	var anim_event: AnimationEvent = AnimationEvent.new()
 	anim_event.anim_type = AnimationEvent.AnimationType.CRUSHED
 	anim_event.obj_type = obj.type
 	anim_event.posn = obj.posn
-	animation_events.push_back(anim_event)
+	if delay:
+		secondary_animation_events.push_back(anim_event)
+	else:
+		animation_events.push_back(anim_event)
 	
 	# Add crushed object tile (to show debris)
 	var new_obj:TileObj = CrushedBoxObj.new()
@@ -489,7 +547,11 @@ func CrushBox(obj: TileObj, new_state: LevelState):
 func PlayAnim():
 	#player_moved.emit(size, new_pos)
 	rendered_level.ProcessAnimationEvents(animation_events)
+	
 	animation_events.clear()
+	for ae in secondary_animation_events:
+		animation_events.push_back(ae.duplicate())
+	secondary_animation_events.clear()
 
 static func GetSizeFromChar(c: String) -> TileObj.TileSize:
 	match c:
@@ -527,6 +589,12 @@ func LoadLevelFromText(map: Array[String]):
 	height = map.size()
 	width = map[0].length() / 3
 	
+	if true:
+		var spawn_x = width / 2
+		while (spawn_x % 4 != 0):
+			spawn_x -= 1
+		BIG_PLAYER_SPAWN_LOCATION = Vector2i(spawn_x, -height)
+	
 	assert(height % 4 == 0)
 	assert(width % 4 == 0)
 	
@@ -548,7 +616,9 @@ func LoadLevelFromText(map: Array[String]):
 				"P":
 					assert(text == "PB ")
 					starting_state.player = PlayerObj.new()
-					starting_state.player.posn = Vector2i(j,i)
+					starting_state.player.posn = BIG_PLAYER_SPAWN_LOCATION
+					big_player_last_location = Vector2i(j,i)
+					original_player_start_location = Vector2i(j,i)
 					starting_state.player.AssertOnGrid()
 				"F":
 					var new_obj:TileObj = FlagObj.new()
@@ -657,5 +727,5 @@ func DEBUG_PrintState(state: LevelState):
 		for j in width:
 			var posn: Vector2i = Vector2i(j, i)
 			out += DEBUG_WhatIsAtPoint(state, posn)
-		print(out)
-	print()
+		#print(out)
+	#print()

@@ -1,0 +1,144 @@
+[gd_scene load_steps=14 format=3 uid="uid://c0t5msameqqn1"]
+
+[ext_resource type="FontFile" uid="uid://c8xg5q7buc3ip" path="res://fonts/grinched-2-0.regular.otf" id="1_07u0k"]
+[ext_resource type="Script" path="res://scripts/ui/level_select.gd" id="1_rrw0o"]
+[ext_resource type="Texture2D" uid="uid://bqeqbrdrexhjs" path="res://art/STAGE_SELECT.png" id="2_hlt5p"]
+[ext_resource type="PackedScene" uid="uid://b1sgun56vynqx" path="res://scenes/main.tscn" id="2_yv4p1"]
+[ext_resource type="Texture2D" uid="uid://du1hc0ws578nw" path="res://art/STAGE_SELECT_Open.png" id="3_adxqp"]
+[ext_resource type="Texture2D" uid="uid://c0ap8wtlhul5w" path="res://art/Tile_Map_Sign.png" id="4_ti2bg"]
+[ext_resource type="Texture2D" uid="uid://cw7wuvxop7el4" path="res://art/BIG_Front.png" id="5_ywd6w"]
+[ext_resource type="Shader" path="res://shaders/test.gdshader" id="8_aq2wd"]
+[ext_resource type="Texture2D" uid="uid://0f4xoq7ge4k5" path="res://shaders/pencil.jpg" id="9_kbx2t"]
+[ext_resource type="Texture2D" uid="uid://bisjudm5gbd04" path="res://shaders/pencil - Copy.jpg" id="10_d6hu4"]
+
+[sub_resource type="Theme" id="Theme_3o2y6"]
+default_font = ExtResource("1_07u0k")
+default_font_size = 32
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h6mod"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_hlt5p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_adxqp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_652io"]
+shader = ExtResource("8_aq2wd")
+shader_parameter/u_bgColor = Vector4(1, 1, 1, 1)
+shader_parameter/u_bgColorFactor = 0.804
+shader_parameter/u_patternColor = Vector4(0, 0, 0, 1)
+shader_parameter/u_threshold1 = 0.75
+shader_parameter/u_threshold2 = 0.5
+shader_parameter/u_threshold3 = 0.25
+shader_parameter/u_threshold4 = 0.05
+shader_parameter/u_bgTiling = Vector2(1, 1)
+shader_parameter/u_patternTiling = Vector2(1, 1)
+shader_parameter/u_bgTexture = ExtResource("9_kbx2t")
+shader_parameter/u_patternTexture = ExtResource("10_d6hu4")
+
+[node name="LevelSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rrw0o")
+level_scene = ExtResource("2_yv4p1")
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 9.0
+offset_top = 1.0
+offset_right = 375.0
+offset_bottom = 106.0
+theme = SubResource("Theme_3o2y6")
+text = "Level Select"
+
+[node name="Levels" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Level1" type="Sprite2D" parent="Levels"]
+position = Vector2(168, 233)
+scale = Vector2(0.228333, 0.62)
+texture = ExtResource("4_ti2bg")
+
+[node name="Level2" type="Sprite2D" parent="Levels"]
+position = Vector2(375, 229)
+scale = Vector2(0.228333, 0.62)
+texture = ExtResource("4_ti2bg")
+
+[node name="Level3" type="Sprite2D" parent="Levels"]
+position = Vector2(579, 228)
+scale = Vector2(0.228333, 0.62)
+texture = ExtResource("4_ti2bg")
+
+[node name="Level4" type="Sprite2D" parent="Levels"]
+position = Vector2(790, 228)
+scale = Vector2(0.228333, 0.62)
+texture = ExtResource("4_ti2bg")
+
+[node name="Level5" type="Sprite2D" parent="Levels"]
+position = Vector2(1004, 233)
+scale = Vector2(0.228333, 0.62)
+texture = ExtResource("4_ti2bg")
+
+[node name="Level6" type="Sprite2D" parent="Levels"]
+position = Vector2(167, 464)
+scale = Vector2(0.228333, 0.62)
+texture = ExtResource("4_ti2bg")
+
+[node name="Level7" type="Sprite2D" parent="Levels"]
+position = Vector2(371, 466)
+scale = Vector2(0.228333, 0.62)
+texture = ExtResource("4_ti2bg")
+
+[node name="Level8" type="Sprite2D" parent="Levels"]
+position = Vector2(571, 470)
+scale = Vector2(0.228333, 0.62)
+texture = ExtResource("4_ti2bg")
+
+[node name="Level9" type="Sprite2D" parent="Levels"]
+position = Vector2(790, 471)
+scale = Vector2(0.228333, 0.62)
+texture = ExtResource("4_ti2bg")
+
+[node name="Level10" type="Sprite2D" parent="Levels"]
+position = Vector2(1011, 471)
+scale = Vector2(0.228333, 0.62)
+texture = ExtResource("4_ti2bg")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(169, 122)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_h6mod")
+
+[node name="LittleGuy" type="Sprite2D" parent="Sprite"]
+unique_name_in_owner = true
+visible = false
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_ywd6w")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D/CanvasLayer"]
+material = SubResource("ShaderMaterial_652io")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true

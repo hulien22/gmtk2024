@@ -24,4 +24,5 @@ func ProcessAnimationEvent(event: AnimationEvent):
 			activated = false
 		_:
 			super.ProcessAnimationEvent(event)
+	AudioManager.play_lever()
 	%Sprite.texture = ArtManager.get_switch(activated, color)
