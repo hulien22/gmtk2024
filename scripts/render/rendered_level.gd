@@ -12,7 +12,7 @@ class_name RenderedLevel
 
 @export var temp_scn: PackedScene
 
-var objects: Array[RenderedObj] = []
+var objects: Array = [] # Array[RenderedObj] but this runs into errors with deletion, so commented out..
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -95,7 +95,7 @@ func ProcessAnimationEvents(events: Array[AnimationEvent]):
 	pass
 
 func CleanupDeletedEntries():
-	var to_delete:Array[RenderedObj] = []
+	var to_delete:Array = []
 	for obj in objects:
 		if obj == null:
 			to_delete.push_back(obj)

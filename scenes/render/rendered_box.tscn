@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://devynwi66p18n" path="res://scenes/render/rendered_obj.tscn" id="1_b4qc2"]
 [ext_resource type="Script" path="res://scripts/render/rendered_box.gd" id="2_v13kj"]
-[ext_resource type="Texture2D" uid="uid://de6xh2x7bqsef" path="res://art/BOX.png" id="3_j4h2l"]
+[ext_resource type="Texture2D" uid="uid://lx1x7kk5itd0" path="res://art/BOBBIN.png" id="3_spttt"]
 
 [node name="RenderedBox" instance=ExtResource("1_b4qc2")]
 script = ExtResource("2_v13kj")
-texture = ExtResource("3_j4h2l")
+texture = ExtResource("3_spttt")
