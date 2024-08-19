@@ -21,18 +21,21 @@ func init(obj: TileObj):
 	
 	%SpriteHolder.position = obj.posn
 	#%SpriteHolder.scale = Vector2(0.04, 0.04)
+	%Sprite.rotation_degrees = GetTargetRotationDegrees()
 	match size:
 		TileObj.TileSize.BIG:
 			if type ==  TileObj.TileType.PLAYER:
 				%Sprite.texture = big_texture
 			else:
 				%Sprite.texture = big_open_texture
+				%Sprite.rotation_degrees = 0
 			%SpriteHolder.scale = Vector2(0.02, 0.02)
 		TileObj.TileSize.MEDIUM:
 			if type ==  TileObj.TileType.PLAYER:
 				%Sprite.texture = medium_texture
 			else:
 				%Sprite.texture = medium_open_texture
+				%Sprite.rotation_degrees = 0
 			%SpriteHolder.scale = Vector2(0.01, 0.01)
 		TileObj.TileSize.SMALL:
 			%Sprite.texture = small_texture
@@ -64,15 +67,18 @@ func SpawnFromEvent(event: AnimationEvent):
 			%SpriteHolder.position = from_posn + Vector2(0.5,0.5)
 	%Sprite.position = Vector2(PLAYER_SIZE/2,PLAYER_SIZE/2)
 	%Sprite.scale = Vector2(0.01,0.01)
+	%Sprite.rotation_degrees = GetTargetRotationDegrees()
 
 
 func ProcessAnimationEvent(event: AnimationEvent):
 	match event.anim_type:
 		AnimationEvent.AnimationType.MOVED:
 			posn = event.new_posn
+			direction = event.direction
 			
 			StartNewTween()
 			tween.tween_property(%SpriteHolder, "position", Vector2(event.new_posn.x, event.new_posn.y), AnimationConstants.MOVE)
+			tween.parallel().tween_property(%Sprite, "rotation_degrees", GetTargetRotationDegrees(), AnimationConstants.MOVE).set_trans(Tween.TRANS_SPRING)
 			tween.parallel().tween_property(%Sprite, "scale", Vector2(1.1,1.1), AnimationConstants.HALF_MOVE).set_ease(Tween.EASE_OUT)
 			tween.tween_property(%Sprite, "scale", Vector2(1,1), AnimationConstants.HALF_MOVE).set_ease(Tween.EASE_IN)
 			# TODO Direction
@@ -101,6 +107,7 @@ func ProcessAnimationEvent(event: AnimationEvent):
 		
 		AnimationEvent.AnimationType.REVIVE:
 			type = TileObj.TileType.PLAYER
+			%Sprite.rotation_degrees = GetTargetRotationDegrees()
 			match size:
 				TileObj.TileSize.BIG:
 					%Sprite.texture = big_texture
@@ -118,7 +125,18 @@ func ProcessAnimationEvent(event: AnimationEvent):
 					%Sprite.texture = big_open_texture
 				TileObj.TileSize.MEDIUM:
 					%Sprite.texture = medium_open_texture
+			%Sprite.rotation_degrees = 0
 		
 		_:
 			super.ProcessAnimationEvent(event)
-	
+
+func GetTargetRotationDegrees() -> float:
+	match direction:
+		Enums.Direction.UP:
+			return 180.0
+		Enums.Direction.LEFT:
+			return 90.0
+		Enums.Direction.RIGHT:
+			return 270.0
+		_:
+			return 0.0
