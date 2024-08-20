@@ -235,6 +235,74 @@ theme = SubResource("Theme_414ev")
 text = "Get to the Star"
 horizontal_alignment = 1
 
+[node name="Level2" type="Control" parent="UI"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="InstructionsLevel1" type="Label" parent="UI/Level2"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 105.0
+offset_top = -28.0
+offset_right = 644.0
+offset_bottom = 263.0
+grow_vertical = 0
+theme = SubResource("Theme_6jgpt")
+text = "Z to Undo
+R to Restart"
+
+[node name="InstructionsLevel2" type="Label" parent="UI/Level2"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 101.0
+offset_top = 402.0
+offset_right = 640.0
+offset_bottom = 595.0
+grow_vertical = 0
+theme = SubResource("Theme_6jgpt")
+text = "
+Esc to go back to level select"
+horizontal_alignment = 1
+
+[node name="InstructionsLevel3" type="Label" parent="UI/Level2"]
+visible = false
+modulate = Color(1, 1, 1, 0.713726)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -62.0
+offset_top = 249.0
+offset_right = 316.0
+offset_bottom = 344.0
+grow_vertical = 0
+theme = SubResource("Theme_414ev")
+text = "X to interact"
+horizontal_alignment = 1
+
+[node name="InstructionsLevel4" type="Label" parent="UI/Level2"]
+visible = false
+modulate = Color(1, 1, 1, 0.713726)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 709.0
+offset_top = 283.0
+offset_right = 1087.0
+offset_bottom = 378.0
+grow_vertical = 0
+theme = SubResource("Theme_414ev")
+text = "Get to the Star"
+horizontal_alignment = 1
+
 [node name="Control" type="Control" parent="UI"]
 anchors_preset = 0
 offset_top = 226.0
