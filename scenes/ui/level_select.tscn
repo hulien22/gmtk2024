@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c0t5msameqqn1"]
+[gd_scene load_steps=18 format=3 uid="uid://c0t5msameqqn1"]
 
 [ext_resource type="FontFile" uid="uid://c8xg5q7buc3ip" path="res://fonts/grinched-2-0.regular.otf" id="1_07u0k"]
 [ext_resource type="Script" path="res://scripts/ui/level_select.gd" id="1_rrw0o"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://du1hc0ws578nw" path="res://art/STAGE_SELECT_Open.png" id="3_adxqp"]
 [ext_resource type="Texture2D" uid="uid://cdotyqa4c85jp" path="res://art/LEVEL_SELECT_FLOOR.png" id="3_mpfa8"]
 [ext_resource type="Texture2D" uid="uid://c0ap8wtlhul5w" path="res://art/Tile_Map_Sign.png" id="4_ti2bg"]
+[ext_resource type="Texture2D" uid="uid://duiftb8s8npab" path="res://art/STAR.png" id="5_cogqh"]
 [ext_resource type="Texture2D" uid="uid://cw7wuvxop7el4" path="res://art/BIG_Front.png" id="5_ywd6w"]
 [ext_resource type="Shader" path="res://shaders/test.gdshader" id="8_aq2wd"]
 [ext_resource type="Texture2D" uid="uid://0f4xoq7ge4k5" path="res://shaders/pencil.jpg" id="9_kbx2t"]
@@ -17,6 +18,10 @@ default_font = ExtResource("1_07u0k")
 default_font_size = 64
 
 [sub_resource type="Theme" id="Theme_ieahj"]
+default_font = ExtResource("1_07u0k")
+default_font_size = 40
+
+[sub_resource type="Theme" id="Theme_5h0y3"]
 default_font = ExtResource("1_07u0k")
 default_font_size = 40
 
@@ -84,6 +89,23 @@ offset_right = 1142.0
 offset_bottom = 677.0
 theme = SubResource("Theme_ieahj")
 text = "Press Space To Select"
+horizontal_alignment = 1
+
+[node name="Star" type="Sprite2D" parent="."]
+position = Vector2(1099, 56)
+scale = Vector2(0.595, 0.595)
+texture = ExtResource("5_cogqh")
+
+[node name="Stars" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 1045.0
+offset_top = 22.0
+offset_right = 1152.0
+offset_bottom = 127.0
+theme = SubResource("Theme_5h0y3")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "0"
 horizontal_alignment = 1
 
 [node name="Levels" type="Control" parent="."]

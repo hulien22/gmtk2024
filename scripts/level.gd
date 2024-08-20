@@ -305,6 +305,7 @@ func CheckForCompletion() -> float:
 				if o.size == cur_state.player.size:
 					# COMPLETED!!
 					completed = true
+					WorldState.num_stars += 1
 					#trigger special animation
 					
 					var player_anim: AnimationEvent = AnimationEvent.new()
