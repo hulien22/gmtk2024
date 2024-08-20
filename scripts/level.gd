@@ -207,7 +207,7 @@ func TryToggleSwitch() -> bool:
 	return true
 
 func StartLevel():
-	print(BIG_PLAYER_SPAWN_LOCATION, " ", big_player_last_location)
+	#print(BIG_PLAYER_SPAWN_LOCATION, " ", big_player_last_location)
 	var cur_state: LevelState = CurrentState()
 	var new_state: LevelState = cur_state.custom_duplicate()
 	

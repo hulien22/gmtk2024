@@ -47,41 +47,41 @@ func _process(delta: float) -> void:
 			music_streams.set_sync_stream_volume(x, minf(0, music_streams.get_sync_stream_volume(x) + rate))
 
 func play_swallow():
-	print("playing swallow")
+	#print("playing swallow")
 	sound_effect_player.stream = sound_effects[6]
 	sound_effect_player.play()
 
 func play_spit():
-	print("playing spit")
+	#print("playing spit")
 	sound_effect_player.stream = sound_effects[5]
 	sound_effect_player.play()
 
 func play_scissors():
-	print("playing scissors")
+	#print("playing scissors")
 	sound_effect_player.stream = sound_effects[4]
 	sound_effect_player.play()
 	
 func play_lever():
-	print("playing lever")
+	#print("playing lever")
 	sound_effect_player.stream = sound_effects[3]
 	sound_effect_player.play()
 	
 func play_denied():
-	print("playing denied")
+	#print("playing denied")
 	sound_effect_player.stream = sound_effects[2]
 	sound_effect_player.play()
 	
 func play_crush():
-	print("playing crush")
+	#print("playing crush")
 	sound_effect_player.stream = sound_effects[1]
 	sound_effect_player.play()
 	
 func play_button():
-	print("playing button")
+	#print("playing button")
 	sound_effect_player.stream = sound_effects[0]
 	sound_effect_player.play()
 
 func play_win():
-	print("playing win")
+	#print("playing win")
 	win_sound_effect_player.stream = sound_effects[7]
 	win_sound_effect_player.play()
