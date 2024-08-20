@@ -23,7 +23,6 @@ func set_texture():
 	else:
 		%Sprite.texture = crushed_texture
 		%Sprite.modulate.a = 0.5
-		
 
 func ProcessAnimationEvent(event: AnimationEvent):
 	match event.anim_type:
