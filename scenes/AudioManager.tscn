@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bo71di7jyg7i3"]
+[gd_scene load_steps=17 format=3 uid="uid://gsfwoqdxclvi"]
 
 [ext_resource type="Script" path="res://scripts/audio_manager.gd" id="1_bt5sm"]
 [ext_resource type="AudioStream" uid="uid://dhem7bq1gmydx" path="res://audio/s_intro.ogg" id="1_px3jf"]
@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://3t420276axi1" path="res://audio/scissors.ogg" id="6_7cqoq"]
 [ext_resource type="AudioStream" uid="uid://6eti4wahdhe2" path="res://audio/spit.ogg" id="7_lmqcw"]
 [ext_resource type="AudioStream" uid="uid://ckr8ke7m1h2vs" path="res://audio/swallow.ogg" id="8_d64pc"]
+[ext_resource type="AudioStream" uid="uid://bicb82jjywa1h" path="res://audio/win.ogg" id="9_g1d15"]
 
 [sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_b3iru"]
 stream_count = 4
@@ -37,8 +38,8 @@ clip_1/auto_advance = 0
 
 [node name="AudioManager" type="Node"]
 script = ExtResource("1_bt5sm")
-lower = -30.0
-sound_effects = Array[AudioStream]([ExtResource("2_m8fah"), ExtResource("3_iaej4"), ExtResource("4_rcxbf"), ExtResource("5_hnyid"), ExtResource("6_7cqoq"), ExtResource("7_lmqcw"), ExtResource("8_d64pc")])
+lower = -10.0
+sound_effects = Array[AudioStream]([ExtResource("2_m8fah"), ExtResource("3_iaej4"), ExtResource("4_rcxbf"), ExtResource("5_hnyid"), ExtResource("6_7cqoq"), ExtResource("7_lmqcw"), ExtResource("8_d64pc"), ExtResource("9_g1d15")])
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamInteractive_gb53q")
