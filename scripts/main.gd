@@ -92,6 +92,8 @@ func _process(delta: float) -> void:
 		time_since_last_input_pressed += delta
 		if time_since_last_input_pressed < INPUT_DELAY:
 			return
+		if new_input == "ui_accept" || new_input == "ToggleSwitch":
+			return
 		time_since_last_input_pressed = 0
 	else:
 		last_input_pressed = new_input
