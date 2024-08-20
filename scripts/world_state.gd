@@ -3,7 +3,7 @@ extends Node
 var first_load:bool = true
 
 var active_level:int = 0;
-var num_stars: int = 9;
+var num_stars: int = 6;
 
 # Make sure WorldState is loaded after all of these
 var level_infos: Array[LevelInfo] = [

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c0t5msameqqn1"]
+[gd_scene load_steps=16 format=3 uid="uid://c0t5msameqqn1"]
 
 [ext_resource type="FontFile" uid="uid://c8xg5q7buc3ip" path="res://fonts/grinched-2-0.regular.otf" id="1_07u0k"]
 [ext_resource type="Script" path="res://scripts/ui/level_select.gd" id="1_rrw0o"]
@@ -15,6 +15,10 @@
 [sub_resource type="Theme" id="Theme_3o2y6"]
 default_font = ExtResource("1_07u0k")
 default_font_size = 64
+
+[sub_resource type="Theme" id="Theme_ieahj"]
+default_font = ExtResource("1_07u0k")
+default_font_size = 40
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_h6mod"]
 animations = [{
@@ -71,6 +75,17 @@ theme = SubResource("Theme_3o2y6")
 text = "Level Select"
 horizontal_alignment = 1
 
+[node name="Space" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 9.0
+offset_top = 572.0
+offset_right = 1142.0
+offset_bottom = 677.0
+theme = SubResource("Theme_ieahj")
+text = "Press Space To Select"
+horizontal_alignment = 1
+
 [node name="Levels" type="Control" parent="."]
 unique_name_in_owner = true
 anchors_preset = 0
@@ -94,7 +109,7 @@ text = "1"
 horizontal_alignment = 1
 
 [node name="Level2" type="Sprite2D" parent="Levels"]
-position = Vector2(375, 229)
+position = Vector2(372, 238)
 scale = Vector2(0.228333, 0.62)
 texture = ExtResource("4_ti2bg")
 
@@ -110,7 +125,7 @@ text = "2"
 horizontal_alignment = 1
 
 [node name="Level3" type="Sprite2D" parent="Levels"]
-position = Vector2(579, 228)
+position = Vector2(577, 241)
 scale = Vector2(0.228333, 0.62)
 texture = ExtResource("4_ti2bg")
 

@@ -20,7 +20,9 @@ func _ready() -> void:
 	
 	if WorldState.first_load:
 		WorldState.first_load = false
+		#%Space.show()
 	else:
+		#%Space.hide()
 		animating = true
 		PlayLeaveLevelAnim()
 
@@ -67,7 +69,7 @@ func _input(event):
 
 func MoveStuff():
 	var level = %Levels.get_children()[cur_level] as Sprite2D
-	%Sprite.global_position = level.global_position + Vector2(5, -100)
+	%Sprite.global_position = level.global_position + Vector2(3, -110)
 	%LevelName.text = WorldState.levels[cur_level].level_name
 
 func PlayEnterLevelAnim():
