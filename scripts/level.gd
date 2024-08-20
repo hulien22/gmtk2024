@@ -318,6 +318,13 @@ func CheckForCompletion():
 					player_anim.new_posn = BIG_PLAYER_SPAWN_LOCATION
 					animation_events.push_back(player_anim)
 					
+					
+					var flag_anim: AnimationEvent = AnimationEvent.new()
+					flag_anim.anim_type = AnimationEvent.AnimationType.ACTIVATED
+					flag_anim.obj_type = o.type
+					flag_anim.posn = o.posn
+					animation_events.push_back(flag_anim)
+					
 					#update state to only include stuff
 					var new_state: LevelState = cur_state.custom_duplicate()
 					var players_to_del:Array[TileObj] = []
