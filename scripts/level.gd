@@ -302,17 +302,17 @@ func CheckForCompletion():
 					#trigger special animation
 					
 					var player_anim: AnimationEvent = AnimationEvent.new()
-					var wait_time = AnimationConstants.LONG_ANIM
+					var wait_time = AnimationConstants.LONG_LONG_ANIM
 					match o.size:
 						TileObj.TileSize.BIG:
 							player_anim.anim_type = AnimationEvent.AnimationType.LEVEL_COMPLETE_BIG
-							wait_time += 3*AnimationConstants.LONG_ANIM
+							wait_time += 3*AnimationConstants.LONG_LONG_ANIM
 						TileObj.TileSize.MEDIUM:
 							player_anim.anim_type = AnimationEvent.AnimationType.LEVEL_COMPLETE_MEDIUM
-							wait_time += 2*AnimationConstants.LONG_ANIM
+							wait_time += 2*AnimationConstants.LONG_LONG_ANIM
 						TileObj.TileSize.SMALL:
 							player_anim.anim_type = AnimationEvent.AnimationType.LEVEL_COMPLETE_SMALL
-							wait_time += AnimationConstants.LONG_ANIM
+							wait_time += AnimationConstants.LONG_LONG_ANIM
 					player_anim.obj_type = TileObj.TileType.PLAYER
 					player_anim.posn = cur_state.player.posn
 					player_anim.new_posn = BIG_PLAYER_SPAWN_LOCATION

@@ -19,9 +19,9 @@ func ProcessAnimationEvent(event: AnimationEvent):
 	match event.anim_type:
 		AnimationEvent.AnimationType.ACTIVATED:
 			StartNewTween()
-			tween.tween_property(%Sprite, "rotation_degrees", 360, AnimationConstants.LONG_LONG_ANIM)
-			tween.parallel().tween_property(%Sprite, "scale", Vector2(5,5), AnimationConstants.LONG_LONG_ANIM)
-			tween.tween_property(%Sprite, "rotation_degrees", 720, AnimationConstants.LONG_LONG_ANIM)
-			tween.parallel().tween_property(%Sprite, "scale", Vector2(40,40), AnimationConstants.LONG_LONG_ANIM)
+			#tween.tween_property(%Sprite, "rotation_degrees", 360, AnimationConstants.LONG_LONG_ANIM)
+			#tween.parallel().tween_property(%Sprite, "scale", Vector2(5,5), AnimationConstants.LONG_LONG_ANIM)
+			tween.tween_property(%Sprite, "rotation_degrees", 720, 2* AnimationConstants.LONG_LONG_ANIM).set_trans(Tween.TRANS_QUAD)
+			tween.parallel().tween_property(%Sprite, "scale", Vector2(20,20), 2*AnimationConstants.LONG_LONG_ANIM).set_trans(Tween.TRANS_QUAD)
 		_:
 			super.ProcessAnimationEvent(event)
