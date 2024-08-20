@@ -283,7 +283,7 @@ func UpdateState(new_state: LevelState):
 		# one thought, have a secondary animation_events, crushed boxes in HandleLevelColorState go there
 		# then we play anim here, and swap in secondary animation_events
 		PlayAnim()
-		await rendered_level.get_tree().create_timer(AnimationConstants.LONG_ANIM).timeout
+		await rendered_level.get_tree().create_timer(AnimationConstants.HALF_MOVE).timeout
 		ComputeLevelColorState(new_state)
 	
 	#PlayAnim(new_state.player.size, new_state.player.posn)
