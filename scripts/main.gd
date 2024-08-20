@@ -2,6 +2,7 @@ extends Node2D
 
 var level: Level
 
+
 #var levelstr: Array[String] = [
 	#".  .  .  .  .  .  .  .  w  w  w  w  .  .  .  .  .  .  .  .  .  .  .  .  CBR.  .  .  .  .  .  .  .  .  .  .  ",
 	#".  .  .  .  .  .  .  .  w  w  w  w  .  CG .  .  .  .  .  .  .  .  .  .  CBR.  .  .  .  .  .  .  .  .  .  .  ",
@@ -28,6 +29,7 @@ func LoadLevel():
 	%BgTiles.position = WorldState.level_infos[WorldState.active_level].bg_tile_posn
 	%BgTiles.size = WorldState.level_infos[WorldState.active_level].bg_tile_size
 	level.rendered_level = $RenderedLevel
+	level.leave_level.connect(LeaveLevel)
 	$RenderedLevel.init(level)
 	await get_tree().create_timer(AnimationConstants.LONG_ANIM * 2).timeout
 	level.StartLevel()
@@ -68,3 +70,6 @@ func _input(event):
 		level.DEBUG_PrintState(level.CurrentState())
 	else:
 		AudioManager.play_denied()
+
+func LeaveLevel():
+	get_tree().change_scene_to_file("res://scenes/ui/level_select.tscn")
