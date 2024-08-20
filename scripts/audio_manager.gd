@@ -10,11 +10,13 @@ extends Node
 
 var music_streams
 var sound_effect_player: AudioStreamPlayer
+var win_sound_effect_player: AudioStreamPlayer
 
 
 func _ready() -> void:
 	music_streams = $Music.stream.get_clip_stream(1)
 	sound_effect_player = $SoundEffects
+	win_sound_effect_player = $WinSoundEffect
 
 # for music control
 func set_size(size: TileObj.TileSize):
@@ -81,5 +83,5 @@ func play_button():
 
 func play_win():
 	print("playing win")
-	sound_effect_player.stream = sound_effects[7]
-	sound_effect_player.play()
+	win_sound_effect_player.stream = sound_effects[7]
+	win_sound_effect_player.play()
