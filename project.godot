@@ -27,6 +27,7 @@ LevelTrapped="*res://scripts/levels/level_trapped.gd"
 LevelTraffic="*res://scripts/levels/level_traffic.gd"
 LevelSimpleWeird="*res://scripts/levels/level_simple_weird.gd"
 LevelGate="*res://scripts/levels/level_gate.gd"
+LevelBacktobasic="*res://scripts/levels/level_backtobasic.gd"
 WorldState="*res://scripts/world_state.gd"
 
 [display]
