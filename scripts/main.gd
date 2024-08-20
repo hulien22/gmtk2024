@@ -31,15 +31,24 @@ func LoadLevel():
 	level.rendered_level = $RenderedLevel
 	level.leave_level.connect(LeaveLevel)
 	$RenderedLevel.init(level)
-	await get_tree().create_timer(AnimationConstants.LONG_ANIM * 2).timeout
+	await get_tree().create_timer(AnimationConstants.LONG_ANIM).timeout
 	level.StartLevel()
+	
+	var timer = get_tree().create_timer(AnimationConstants.LONG_ANIM)
+	timer.timeout.connect(EnableMovement)
 
+func EnableMovement():
+	is_animating = false
 
-
+var is_animating:bool = true
 var last_input_pressed: String = ""
 var time_since_last_input_pressed: float = 0
 @export var INPUT_DELAY: float = 0.15
+
 func _process(delta: float) -> void:
+	if is_animating:
+		return
+	
 	var new_input: String = ""
 	if Input.is_action_pressed("ui_up"):
 		new_input = "ui_up"
@@ -75,6 +84,7 @@ func _process(delta: float) -> void:
 		time_since_last_input_pressed = 0
 
 	var update: bool = false
+	is_animating = true
 	match new_input:
 		("ui_up"):
 			update = level.TryMove(Enums.Direction.UP)
@@ -100,12 +110,15 @@ func _process(delta: float) -> void:
 				return
 			else:
 				# show message about too small?
-				return
+				pass
+				#is_animating = false
+				#return
 	if update:
 		AudioManager.set_size(level.CurrentState().player.size)
 		level.DEBUG_PrintState(level.CurrentState())
 	else:
 		AudioManager.play_denied()
+	is_animating = false
 
 #
 #func _input(event):
