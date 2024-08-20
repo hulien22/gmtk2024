@@ -64,11 +64,12 @@ scale = Vector2(1.17404, 1.17404)
 texture = ExtResource("1_dg1eb")
 
 [node name="Title" type="Sprite2D" parent="."]
-position = Vector2(576.667, 324.5)
-scale = Vector2(0.599074, 0.599074)
+position = Vector2(576, 324)
+scale = Vector2(0.6, 0.6)
 texture = ExtResource("4_s86de")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 342.0
 offset_top = 459.0
@@ -80,7 +81,6 @@ rotation = -0.100205
 position = Vector2(588, 566)
 
 [node name="Press Space To Play" type="Label" parent="Node2D"]
-modulate = Color(1, 0.937255, 0.537255, 1)
 anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
@@ -90,6 +90,9 @@ offset_right = 200.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_ci7if")
+theme_override_colors/font_color = Color(0.992157, 0.847059, 0.4, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
 text = "Press Space To Play"
 horizontal_alignment = 1
 vertical_alignment = 1

@@ -132,7 +132,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Level1" type="Sprite2D" parent="Levels"]
-position = Vector2(168, 233)
+position = Vector2(168, 241)
 scale = Vector2(0.228333, 0.62)
 texture = ExtResource("4_ti2bg")
 
@@ -148,7 +148,7 @@ text = "1"
 horizontal_alignment = 1
 
 [node name="Level2" type="Sprite2D" parent="Levels"]
-position = Vector2(372, 238)
+position = Vector2(372, 241)
 scale = Vector2(0.228333, 0.62)
 texture = ExtResource("4_ti2bg")
 
@@ -164,7 +164,7 @@ text = "2"
 horizontal_alignment = 1
 
 [node name="Level3" type="Sprite2D" parent="Levels"]
-position = Vector2(577, 241)
+position = Vector2(576, 241)
 scale = Vector2(0.228333, 0.62)
 texture = ExtResource("4_ti2bg")
 
@@ -180,7 +180,7 @@ text = "3"
 horizontal_alignment = 1
 
 [node name="Level4" type="Sprite2D" parent="Levels"]
-position = Vector2(790, 228)
+position = Vector2(780, 241)
 scale = Vector2(0.228333, 0.62)
 texture = ExtResource("4_ti2bg")
 
@@ -196,7 +196,7 @@ text = "4"
 horizontal_alignment = 1
 
 [node name="Level5" type="Sprite2D" parent="Levels"]
-position = Vector2(1004, 233)
+position = Vector2(984, 241)
 scale = Vector2(0.228333, 0.62)
 texture = ExtResource("4_ti2bg")
 
@@ -228,7 +228,7 @@ text = "6"
 horizontal_alignment = 1
 
 [node name="Level7" type="Sprite2D" parent="Levels"]
-position = Vector2(371, 466)
+position = Vector2(371, 464)
 scale = Vector2(0.228333, 0.62)
 texture = ExtResource("4_ti2bg")
 
@@ -244,7 +244,7 @@ text = "7"
 horizontal_alignment = 1
 
 [node name="Level8" type="Sprite2D" parent="Levels"]
-position = Vector2(571, 470)
+position = Vector2(576, 464)
 scale = Vector2(0.228333, 0.62)
 texture = ExtResource("4_ti2bg")
 
@@ -260,7 +260,7 @@ text = "8"
 horizontal_alignment = 1
 
 [node name="Level9" type="Sprite2D" parent="Levels"]
-position = Vector2(790, 471)
+position = Vector2(780, 464)
 scale = Vector2(0.228333, 0.62)
 texture = ExtResource("4_ti2bg")
 
@@ -276,7 +276,7 @@ text = "9"
 horizontal_alignment = 1
 
 [node name="Level10" type="Sprite2D" parent="Levels"]
-position = Vector2(1011, 471)
+position = Vector2(984, 464)
 scale = Vector2(0.228333, 0.62)
 texture = ExtResource("4_ti2bg")
 
