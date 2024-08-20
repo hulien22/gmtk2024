@@ -139,9 +139,42 @@ func ProcessAnimationEvent(event: AnimationEvent):
 					%Sprite.texture = medium_open_texture
 			%Sprite.rotation_degrees = 0
 		
+		AnimationEvent.AnimationType.LEVEL_COMPLETE_MEDIUM:
+			LevelComplete(event)
+		AnimationEvent.AnimationType.LEVEL_COMPLETE_BIG:
+			LevelComplete(event)
+		AnimationEvent.AnimationType.LEVEL_COMPLETE_SMALL:
+			LevelComplete(event)
 		# TODO Handle LEVEL_COMPLETES
 		_:
 			super.ProcessAnimationEvent(event)
+
+func LevelComplete(event: AnimationEvent):
+	print("LEVELCOMPLETE: ", size, " ", posn, " ", event.new_posn)
+	
+	StartNewTween()
+	# initial wait
+	var target_posn:Vector2
+	match size:
+		TileObj.TileSize.BIG:
+			tween.tween_property(%Sprite, "scale", Vector2(1,1), 1.4*AnimationConstants.LONG_LONG_ANIM)
+			tween.tween_property(%Sprite, "texture", big_texture, 0.001)
+			tween.tween_property(%Sprite, "scale", Vector2(1,1), 0.6*AnimationConstants.LONG_LONG_ANIM)
+			tween.tween_property(%SpriteHolder, "position", Vector2(event.new_posn.x, event.new_posn.y), AnimationConstants.LONG_ANIM/2).set_trans(Tween.TRANS_QUAD)
+			tween.parallel().tween_property(%Sprite, "scale", Vector2(2,2), AnimationConstants.LONG_ANIM/2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+			return
+		TileObj.TileSize.MEDIUM:
+			target_posn = Vector2(event.new_posn.x + 1, event.new_posn.y + 1)
+			tween.tween_property(%Sprite, "scale", Vector2(1,1), 0.7*AnimationConstants.LONG_LONG_ANIM)
+			tween.tween_property(%Sprite, "texture", medium_texture, 0.001)
+			tween.tween_property(%Sprite, "scale", Vector2(1,1), 0.3*AnimationConstants.LONG_LONG_ANIM)
+		TileObj.TileSize.SMALL:
+			target_posn = Vector2(event.new_posn.x + 0.5, event.new_posn.y + 0.5)
+			#tween.tween_property(%Sprite, "scale", Vector2(1,1), 0.5 * AnimationConstants.LONG_LONG_ANIM)
+	tween.tween_property(%SpriteHolder, "position", target_posn, AnimationConstants.LONG_ANIM).set_ease(Tween.EASE_IN_OUT)
+	tween.parallel().tween_property(%Sprite, "scale", Vector2(1.1,1.1), AnimationConstants.LONG_ANIM / 2).set_ease(Tween.EASE_OUT)
+	tween.tween_property(%Sprite, "scale", Vector2(0.01,0.01), AnimationConstants.LONG_ANIM / 2).set_ease(Tween.EASE_IN)
+	
 
 func GetTargetRotationDegrees() -> float:
 	match direction:

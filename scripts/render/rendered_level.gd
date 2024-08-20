@@ -96,7 +96,33 @@ func ProcessAnimationEvents(events: Array[AnimationEvent]):
 			node.ProcessAnimationEvent(event)
 			continue
 		
-		# TODO handle deletion events?
+		if event.anim_type == AnimationEvent.AnimationType.LEVEL_COMPLETE_SMALL \
+		 || event.anim_type == AnimationEvent.AnimationType.LEVEL_COMPLETE_MEDIUM\
+		 || event.anim_type == AnimationEvent.AnimationType.LEVEL_COMPLETE_BIG:
+			# all player objs need to process this
+			var giant_posn:Vector2i = Vector2i(event.new_posn.x, event.new_posn.y)
+			var big_posn:Vector2i
+			var medium_posn:Vector2i
+			for obj in objects:
+				if obj == null:
+					continue
+				if obj.type == TileObj.TileType.PLAYER || obj.type == TileObj.TileType.PLAYER_BODY:
+					if obj.size == TileObj.TileSize.BIG:
+						big_posn = obj.posn
+					elif obj.size == TileObj.TileSize.MEDIUM:
+						medium_posn = obj.posn
+			for obj in objects:
+				if obj == null:
+					continue
+				if obj.type == TileObj.TileType.PLAYER || obj.type == TileObj.TileType.PLAYER_BODY:
+					if obj.size == TileObj.TileSize.BIG:
+						event.new_posn = giant_posn
+					elif obj.size == TileObj.TileSize.MEDIUM:
+						event.new_posn = big_posn
+					elif obj.size == TileObj.TileSize.SMALL:
+						event.new_posn = medium_posn
+					obj.ProcessAnimationEvent(event)
+			continue
 		
 		# find corresponding object
 		var found_obj = false
