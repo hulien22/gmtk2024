@@ -2,22 +2,22 @@ extends LevelInfo
 
 func _init():
 	level_str = [
-	".  .  .  .  PB .  .  .  w  w  w  w  .  .  .  .  XB .  .  .  BRB.  .  .  ",
+	".  .  .  .  PB .  .  .  w  w  w  w  .  .  .  .  XB .  .  .  BKB.  .  .  ",
 	".  .  .  .  .  .  .  .  w  w  w  w  .  .  .  .  .  .  .  .  .  .  .  .  ",
 	".  .  .  .  .  .  .  .  w  w  w  w  .  .  .  .  .  .  .  .  .  .  .  .  ",
 	".  .  .  .  .  .  .  .  w  w  w  w  .  .  .  .  .  .  .  .  .  .  .  .  ",
-	"CGRCGRCGRCGRw  w  .  .  w  w  w  w  XB .  .  .  w  w  w  w  w  w  w  w  ",
+	"CMRCMRCMRCMRw  w  .  .  w  w  w  w  XB .  .  .  w  w  w  w  w  w  w  w  ",
 	".  .  .  .  .  .  .  .  w  w  w  w  .  .  .  .  w  w  w  w  w  w  w  w  ",
 	".  .  .  .  .  .  .  .  w  w  w  w  .  .  .  .  w  w  w  w  w  w  w  w  ",
 	".  .  .  .  .  .  .  .  w  w  w  w  CYRCYRCYRCYRw  w  w  w  w  w  w  w  ",
-	".  .  .  .  .  .  .  .  w  .  .  .  .  .  .  .  CPR.  CGR.  .  .  .  .  ",
-	".  .  .  .  .  .  .  .  w  .  .  .  .  .  .  .  CPR.  CGR.  .  .  .  .  ",
-	".  .  .  .  .  .  .  BPSw  .  .  .  .  .  .  .  CPR.  CGR.  XM .  .  .  ",
-	".  .  .  .  .  .  .  BGSw  .  .  XS  .  .  .  . CPR.  CGR.  .  .  .  .  ",
-	".  .  .  .  .  .  .  .  CPR.  .  .  .  .  .  .  CPR.  CGR.  FB .  .  .  ",
-	".  .  .  .  .  .  .  .  CPR.  .  .  .  .  .  .  CPR.  CGR.  .  .  .  .  ",
-	".  .  .  .  .  .  .  .  CPR.  .  .  .  .  .  .  CPR.  CGR.  .  .  .  .  ",
-	".  .  .  .  .  .  .  .  CPR.  .  .  .  .  .  .  CPR.  CGR.  .  .  .  .  ",
+	".  .  .  .  .  .  .  .  w  .  .  .  .  .  .  .  CPR.  CMR.  .  .  .  .  ",
+	".  .  .  .  .  .  .  .  w  .  .  .  .  .  .  .  CPR.  CMR.  .  .  .  .  ",
+	".  .  .  .  .  .  .  BPSw  .  .  .  .  .  .  .  CPR.  CMR.  XM .  .  .  ",
+	".  .  .  .  .  .  .  BMSw  .  .  XS  .  .  .  . CPR.  CMR.  .  .  .  .  ",
+	".  .  .  .  .  .  .  .  CPR.  .  .  .  .  .  .  CPR.  CMR.  FB .  .  .  ",
+	".  .  .  .  .  .  .  .  CPR.  .  .  .  .  .  .  CPR.  CMR.  .  .  .  .  ",
+	".  .  .  .  .  .  .  .  CPR.  .  .  .  .  .  .  CPR.  CMR.  .  .  .  .  ",
+	".  .  .  .  .  .  .  .  CPR.  .  .  .  .  .  .  CPR.  CMR.  .  .  .  .  ",
 	]
 	level_name = "Two Boxes"
 	camera_zoom = 0.18
