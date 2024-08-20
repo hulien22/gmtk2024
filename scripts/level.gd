@@ -288,7 +288,6 @@ func CheckForCompletion():
 	var cur_state: LevelState = CurrentState()
 	if dead:
 		return
-	# TODO handle completed
 	if completed:
 		return
 	
@@ -341,10 +340,10 @@ func CheckForCompletion():
 					big_player_last_location = new_state.player.posn
 					new_state.player.posn = BIG_PLAYER_SPAWN_LOCATION
 					
-					state_stack.clear()
-					state_stack.push_back(new_state)
+					#state_stack.clear()
+					#state_stack.push_back(new_state)
 					
-					PlayAnim()
+					UpdateState(new_state)
 					await rendered_level.get_tree().create_timer(wait_time).timeout
 					leave_level.emit()
 					return
