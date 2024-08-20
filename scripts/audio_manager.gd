@@ -78,3 +78,8 @@ func play_button():
 	print("playing button")
 	sound_effect_player.stream = sound_effects[0]
 	sound_effect_player.play()
+
+func play_win():
+	print("playing win")
+	sound_effect_player.stream = sound_effects[7]
+	sound_effect_player.play()
