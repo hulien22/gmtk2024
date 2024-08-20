@@ -8,6 +8,8 @@ var num_stars: int = 4;
 # Make sure WorldState is loaded after all of these
 var level_infos: Array[LevelInfo] = [
 	LevelBasic,
+	LevelTraffic,
+	LevelSimpleWeird,
 	LevelMountain,
 	LevelLockpick,
 	LevelKey,
