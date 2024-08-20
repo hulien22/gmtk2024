@@ -139,6 +139,7 @@ func ProcessAnimationEvent(event: AnimationEvent):
 					%Sprite.texture = medium_open_texture
 			%Sprite.rotation_degrees = 0
 		
+		# TODO Handle LEVEL_COMPLETES
 		_:
 			super.ProcessAnimationEvent(event)
 
