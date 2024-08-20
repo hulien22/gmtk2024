@@ -2,13 +2,13 @@ extends LevelInfo
 
 func _init():
 	level_str = [
-	"PB .  .  .  .  .  .  .  BKB.  .  .  .  .  .  .  XB .  CK CK .  .  .  .  BKB.  .  .  ",
-	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  CK CK .  .  .  .  .  .  .  .  ",
-	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  CK CK .  .  .  .  .  .  .  .  ",
-	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  CK CK .  .  .  .  .  .  .  .  ",
-	"w  w  w  w  CMRCMRCMRCMRw  w  w  w  .  .  .  .  w  w  w  w  CKRCKRCKRCKRw  w  w  w  ",
-	"w  w  w  w  .  .  .  .  w  w  w  w  .  .  .  .  w  w  w  w  CKRCKRCKRCKRw  w  w  w  ",
-	"w  w  w  w  .  .  .  .  w  w  SMM.  .  .  .  .  w  w  w  w  .  .  .  .  w  w  w  w  ",
+	"PB .  .  .  .  .  .  .  BLB.  .  .  .  .  .  .  XB .  CL CL .  .  .  .  BLB.  .  .  ",
+	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  CL CL .  .  .  .  .  .  .  .  ",
+	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  CL CL .  .  .  .  .  .  .  .  ",
+	".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  CL CL .  .  .  .  .  .  .  .  ",
+	"w  w  w  w  CKRCKRCKRCKRw  w  w  w  .  .  .  .  w  w  w  w  CLRCLRCLRCLRw  w  w  w  ",
+	"w  w  w  w  .  .  .  .  w  w  w  w  .  .  .  .  w  w  w  w  CLRCLRCLRCLRw  w  w  w  ",
+	"w  w  w  w  .  .  .  .  w  w  SKM.  .  .  .  .  w  w  w  w  .  .  .  .  w  w  w  w  ",
 	"w  w  w  w  .  .  .  .  w  w  .  .  .  .  .  .  w  w  w  w  .  .  .  .  w  w  w  w  ",
 	"w  w  w  w  .  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  FB .  .  .  w  w  w  w  ",
 	"w  w  w  w  .  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  .  .  .  .  w  w  w  w  ",
