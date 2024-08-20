@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c0t5msameqqn1"]
+[gd_scene load_steps=19 format=3 uid="uid://c0t5msameqqn1"]
 
 [ext_resource type="FontFile" uid="uid://c8xg5q7buc3ip" path="res://fonts/grinched-2-0.regular.otf" id="1_07u0k"]
 [ext_resource type="Script" path="res://scripts/ui/level_select.gd" id="1_rrw0o"]
@@ -20,6 +20,10 @@ default_font_size = 64
 [sub_resource type="Theme" id="Theme_ieahj"]
 default_font = ExtResource("1_07u0k")
 default_font_size = 40
+
+[sub_resource type="Theme" id="Theme_34s4q"]
+default_font = ExtResource("1_07u0k")
+default_font_size = 60
 
 [sub_resource type="Theme" id="Theme_5h0y3"]
 default_font = ExtResource("1_07u0k")
@@ -89,6 +93,19 @@ offset_right = 1142.0
 offset_bottom = 677.0
 theme = SubResource("Theme_ieahj")
 text = "Press Space To Select"
+horizontal_alignment = 1
+
+[node name="THANKS" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 9.0
+offset_top = 302.0
+offset_right = 1142.0
+offset_bottom = 407.0
+theme = SubResource("Theme_34s4q")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "THANKS FOR PLAYING"
 horizontal_alignment = 1
 
 [node name="Star" type="Sprite2D" parent="."]

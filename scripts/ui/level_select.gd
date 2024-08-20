@@ -27,6 +27,9 @@ func _ready() -> void:
 		#%Space.hide()
 		animating = true
 		PlayLeaveLevelAnim()
+	
+	if WorldState.num_stars >= 10:
+		%THANKS.show()
 
 
 func _input(event):
