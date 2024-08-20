@@ -12,6 +12,9 @@ enum AnimationType {
 	# For the larger body
 	DECAPITATE,
 	REVIVE,
+	LEVEL_COMPLETE_SMALL,
+	LEVEL_COMPLETE_MEDIUM,
+	LEVEL_COMPLETE_BIG,
 }
 
 @export var obj_type: TileObj.TileType

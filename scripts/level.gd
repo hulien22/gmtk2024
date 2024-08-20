@@ -200,7 +200,7 @@ func TryToggleSwitch() -> bool:
 	return true
 
 func StartLevel():
-	print(BIG_PLAYER_SPAWN_LOCATION)
+	print(BIG_PLAYER_SPAWN_LOCATION, " ", big_player_last_location)
 	var cur_state: LevelState = CurrentState()
 	var new_state: LevelState = cur_state.custom_duplicate()
 	
@@ -280,6 +280,73 @@ func UpdateState(new_state: LevelState):
 	#PlayAnim(new_state.player.size, new_state.player.posn)
 	PlayAnim()
 	state_stack.push_back(new_state)
+	#CheckForCompletion()
+
+func CheckForCompletion() -> float:
+	var cur_state: LevelState = CurrentState()
+	if dead:
+		return 0
+	if completed:
+		return 0
+	
+	for o in cur_state.bg_objects:
+		if o.type == TileObj.TileType.FLAG:
+			if o.CollidesWith(cur_state.player.posn, cur_state.player.size):
+				# check for size match
+				if o.size == cur_state.player.size:
+					# COMPLETED!!
+					completed = true
+					#trigger special animation
+					
+					var player_anim: AnimationEvent = AnimationEvent.new()
+					var wait_time = AnimationConstants.LONG_LONG_ANIM
+					match o.size:
+						TileObj.TileSize.BIG:
+							player_anim.anim_type = AnimationEvent.AnimationType.LEVEL_COMPLETE_BIG
+							wait_time += 3*AnimationConstants.LONG_LONG_ANIM
+						TileObj.TileSize.MEDIUM:
+							player_anim.anim_type = AnimationEvent.AnimationType.LEVEL_COMPLETE_MEDIUM
+							wait_time += 2*AnimationConstants.LONG_LONG_ANIM
+						TileObj.TileSize.SMALL:
+							player_anim.anim_type = AnimationEvent.AnimationType.LEVEL_COMPLETE_SMALL
+							wait_time += AnimationConstants.LONG_LONG_ANIM
+					player_anim.obj_type = TileObj.TileType.PLAYER
+					player_anim.posn = cur_state.player.posn
+					player_anim.new_posn = BIG_PLAYER_SPAWN_LOCATION
+					animation_events.push_back(player_anim)
+					
+					
+					var flag_anim: AnimationEvent = AnimationEvent.new()
+					flag_anim.anim_type = AnimationEvent.AnimationType.ACTIVATED
+					flag_anim.obj_type = o.type
+					flag_anim.posn = o.posn
+					animation_events.push_back(flag_anim)
+					
+					#update state to only include stuff
+					var new_state: LevelState = cur_state.custom_duplicate()
+					var players_to_del:Array[TileObj] = []
+					for obj in new_state.collision_objects:
+						if obj.type == TileObj.TileType.PLAYER_BODY:
+							if obj.size == TileObj.TileSize.BIG:
+								new_state.player.posn = obj.posn
+								new_state.player.size = obj.size
+								new_state.player.direction = obj.direction
+							players_to_del.push_back(obj)
+					for p in players_to_del:
+						new_state.collision_objects.erase(p)
+					
+					big_player_last_location = new_state.player.posn
+					new_state.player.posn = BIG_PLAYER_SPAWN_LOCATION
+					
+					#state_stack.clear()
+					#state_stack.push_back(new_state)
+					
+					UpdateState(new_state)
+					return wait_time
+				else:
+					#TODO signal, wrong size
+					break
+	return 0
 
 func ComputeLevelColorState(new_state: LevelState):
 	new_state.level_color_states = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];

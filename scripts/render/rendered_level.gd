@@ -52,6 +52,9 @@ func init(data: Level):
 			objects.push_back(node)
 			$GridOffset/Scissors.add_child(node)
 		elif obj is FlagObj:
+			if data.completed:
+				print("level completed, no flag")
+				continue
 			var node = flag_scn.instantiate() as RenderedFlag
 			node.init(obj)
 			objects.push_back(node)
