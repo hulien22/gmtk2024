@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://c0t5msameqqn1"]
+[gd_scene load_steps=15 format=3 uid="uid://c0t5msameqqn1"]
 
 [ext_resource type="FontFile" uid="uid://c8xg5q7buc3ip" path="res://fonts/grinched-2-0.regular.otf" id="1_07u0k"]
 [ext_resource type="Script" path="res://scripts/ui/level_select.gd" id="1_rrw0o"]
 [ext_resource type="Texture2D" uid="uid://bqeqbrdrexhjs" path="res://art/STAGE_SELECT.png" id="2_hlt5p"]
 [ext_resource type="PackedScene" uid="uid://b1sgun56vynqx" path="res://scenes/main.tscn" id="2_yv4p1"]
 [ext_resource type="Texture2D" uid="uid://du1hc0ws578nw" path="res://art/STAGE_SELECT_Open.png" id="3_adxqp"]
+[ext_resource type="Texture2D" uid="uid://cdotyqa4c85jp" path="res://art/LEVEL_SELECT_FLOOR.png" id="3_mpfa8"]
 [ext_resource type="Texture2D" uid="uid://c0ap8wtlhul5w" path="res://art/Tile_Map_Sign.png" id="4_ti2bg"]
 [ext_resource type="Texture2D" uid="uid://cw7wuvxop7el4" path="res://art/BIG_Front.png" id="5_ywd6w"]
 [ext_resource type="Shader" path="res://shaders/test.gdshader" id="8_aq2wd"]
@@ -52,6 +53,12 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_rrw0o")
 level_scene = ExtResource("2_yv4p1")
+
+[node name="LevelSelectFloor" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(575.5, 324)
+scale = Vector2(0.605729, 0.607407)
+texture = ExtResource("3_mpfa8")
 
 [node name="Label2" type="Label" parent="."]
 layout_mode = 0

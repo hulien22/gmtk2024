@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b1sgun56vynqx"]
+[gd_scene load_steps=18 format=3 uid="uid://b1sgun56vynqx"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_rehln"]
 [ext_resource type="PackedScene" uid="uid://dhxqm08k81422" path="res://scenes/rendered_level.tscn" id="2_d05o2"]
@@ -22,7 +22,111 @@ shader_parameter/u_patternTiling = Vector2(1, 1)
 shader_parameter/u_bgTexture = ExtResource("5_dqn8f")
 shader_parameter/u_patternTexture = ExtResource("5_efjmo")
 
-[sub_resource type="Theme" id="Theme_i1p45"]
+[sub_resource type="Theme" id="Theme_6jgpt"]
+default_font = ExtResource("7_lf7ge")
+default_font_size = 60
+
+[sub_resource type="Theme" id="Theme_414ev"]
+default_font = ExtResource("7_lf7ge")
+default_font_size = 35
+
+[sub_resource type="Theme" id="Theme_28cly"]
+default_font = ExtResource("7_lf7ge")
+default_font_size = 60
+
+[sub_resource type="FontVariation" id="FontVariation_7bag1"]
+base_font = ExtResource("7_lf7ge")
+spacing_glyph = 5
+
+[sub_resource type="Animation" id="Animation_b3h7q"]
+resource_name = "ErrorMessage"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.466667, 0.933333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.466667, 0.933333),
+"transitions": PackedFloat32Array(1, 1, 1.86607),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, 10)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.933333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_f8k3o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qpchh"]
+_data = {
+"ErrorMessage": SubResource("Animation_b3h7q"),
+"RESET": SubResource("Animation_f8k3o")
+}
+
+[sub_resource type="Theme" id="Theme_l76cv"]
+default_font = ExtResource("7_lf7ge")
+default_font_size = 60
+
+[sub_resource type="Theme" id="Theme_7lo2f"]
 default_font = ExtResource("7_lf7ge")
 default_font_size = 60
 
@@ -66,14 +170,158 @@ anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 648.0
 
-[node name="Label2" type="Label" parent="UI"]
+[node name="Level1" type="Control" parent="UI"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="InstructionsLevel1" type="Label" parent="UI/Level1"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -95.0
-offset_right = 348.0
+offset_left = 393.0
+offset_top = -13.0
+offset_right = 771.0
+offset_bottom = 82.0
 grow_vertical = 0
-theme = SubResource("Theme_i1p45")
-text = "MUNCH   OSHKA"
+theme = SubResource("Theme_6jgpt")
+text = "Arrow Keys to Move"
+horizontal_alignment = 1
+
+[node name="InstructionsLevel2" type="Label" parent="UI/Level1"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 394.0
+offset_top = 497.0
+offset_right = 772.0
+offset_bottom = 592.0
+grow_vertical = 0
+theme = SubResource("Theme_6jgpt")
+text = "Space To Pop Out"
+horizontal_alignment = 1
+
+[node name="InstructionsLevel3" type="Label" parent="UI/Level1"]
+modulate = Color(1, 1, 1, 0.713726)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -62.0
+offset_top = 249.0
+offset_right = 316.0
+offset_bottom = 344.0
+grow_vertical = 0
+theme = SubResource("Theme_414ev")
+text = "X to interact"
+horizontal_alignment = 1
+
+[node name="InstructionsLevel4" type="Label" parent="UI/Level1"]
+modulate = Color(1, 1, 1, 0.713726)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 709.0
+offset_top = 283.0
+offset_right = 1087.0
+offset_bottom = 378.0
+grow_vertical = 0
+theme = SubResource("Theme_414ev")
+text = "Get to the Star"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="UI"]
+anchors_preset = 0
+offset_top = 226.0
+offset_right = 40.0
+offset_bottom = 266.0
+
+[node name="Notice" type="Control" parent="UI/Control"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NoticeText" type="Label" parent="UI/Control/Notice"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -13.0
+offset_right = 1151.0
+offset_bottom = 82.0
+grow_vertical = 0
+theme = SubResource("Theme_28cly")
+theme_override_colors/font_color = Color(0.682353, 0, 0.121569, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.993199, 0.878965, 0.806345, 1)
+theme_override_constants/outline_size = 9
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = SubResource("FontVariation_7bag1")
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Control/Notice"]
+libraries = {
+"": SubResource("AnimationLibrary_qpchh")
+}
+
+[node name="Control2" type="Control" parent="UI"]
+anchors_preset = 0
+offset_top = 226.0
+offset_right = 40.0
+offset_bottom = 266.0
+
+[node name="YouDied" type="Control" parent="UI/Control2"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control2/YouDied"]
+layout_mode = 0
+offset_left = -29.0
+offset_right = 1174.0
+offset_bottom = 151.0
+color = Color(0, 0, 0, 0.301961)
+
+[node name="NoticeText" type="Label" parent="UI/Control2/YouDied"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -13.0
+offset_right = 1151.0
+offset_bottom = 82.0
+grow_vertical = 0
+theme = SubResource("Theme_l76cv")
+theme_override_colors/font_color = Color(0.682353, 0, 0.121569, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 9
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = SubResource("FontVariation_7bag1")
+text = "YOU DIED"
+horizontal_alignment = 1
+
+[node name="InstructionsLevel1" type="Label" parent="UI/Control2/YouDied"]
+modulate = Color(1, 1, 1, 0.819608)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 127.0
+offset_top = -18.0
+offset_right = 1057.0
+offset_bottom = 82.0
+grow_vertical = 0
+theme = SubResource("Theme_7lo2f")
+text = "Z to undo                                                    R to restart"
 horizontal_alignment = 1
