@@ -2,22 +2,22 @@ extends LevelInfo
 
 func _init():
 	level_str = [
-	"w  w  w  w  .  .  .  .  PB .  .  .  w  w  w  w  .  .  .  .  XB .  .  .  BKB.  .  .  ",
+	"w  w  w  w  .  .  .  .  PB .  .  .  w  w  w  w  .  .  .  .  XB .  .  .  BOB.  .  .  ",
 	"w  w  w  w  .  .  .  .  .  .  .  .  w  w  w  w  .  .  .  .  .  .  .  .  .  .  .  .  ",
 	"w  w  w  w  .  .  .  .  .  .  .  .  w  w  w  w  .  .  .  .  .  .  .  .  .  .  .  .  ",
 	"w  w  w  w  .  .  .  .  .  .  .  .  w  w  w  w  .  .  .  .  .  .  .  .  .  .  .  .  ",
-	"w  w  w  w  CMRCMRCMRCMRw  w  .  .  w  w  w  w  XB .  .  .  w  w  w  w  w  w  w  w  ",
+	"w  w  w  w  CR CR CR CR w  w  .  .  w  w  w  w  XB .  .  .  w  w  w  w  w  w  w  w  ",
 	"w  w  w  w  .  .  .  .  w  w  .  .  w  w  w  w  .  .  .  .  w  w  w  w  w  w  w  w  ",
 	"w  w  w  w  .  .  .  .  w  w  .  .  w  w  w  w  .  .  .  .  w  w  w  w  w  w  w  w  ",
-	"w  w  w  w  CMRCMRCMRCMRw  w  .  .  w  w  w  w  CY CY CY CY w  w  w  w  w  w  w  w  ",
-	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  .  .  .  .  CPR.  CMR.  .  .  .  .  ",
-	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  .  .  .  .  CPR.  CMR.  .  .  .  .  ",
-	".  .  .  .  .  .  .  .  .  .  .  BPSw  w  w  w  .  .  .  .  CPR.  CMR.  XM .  .  .  ",
-	".  .  .  .  .  .  .  .  .  .  .  BMSw  w  w  w  .  .  .  .  CPR.  CMR.  .  .  .  .  ",
-	"w  w  w  w  .  .  .  .  .  .  .  .  CPR.  .  .  .  .  .  .  CPR.  CMR.  FB .  .  .  ",
-	"w  w  w  w  .  .  .  .  .  .  .  .  CPR.  .  .  .  XS .  .  CPR.  CMR.  .  .  .  .  ",
-	"w  w  w  w  .  .  .  .  .  .  .  .  CPR.  .  .  .  .  .  .  CPR.  CMR.  .  .  .  .  ",
-	"w  w  w  w  .  .  .  .  .  .  .  .  CPR.  .  .  .  .  .  .  CPR.  CMR.  .  .  .  .  ",
+	"w  w  w  w  CR CR CR CR w  w  .  .  w  w  w  w  CY CY CY CY w  w  w  w  w  w  w  w  ",
+	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  .  .  .  .  CL .  CR .  .  .  .  .  ",
+	".  .  .  .  .  .  .  .  .  .  .  .  w  w  w  w  .  .  .  .  CL .  CR .  .  .  .  .  ",
+	".  .  .  .  .  .  .  .  .  .  .  BLSw  w  w  w  .  .  .  .  CL .  CR .  XM .  .  .  ",
+	".  .  .  .  .  .  .  .  .  .  .  BRSw  w  w  w  .  .  .  .  CL .  CR .  .  .  .  .  ",
+	"w  w  w  w  .  .  .  .  .  .  .  .  CL .  .  .  .  .  .  .  CL .  CR .  FB .  .  .  ",
+	"w  w  w  w  .  .  .  .  .  .  .  .  CL .  .  .  .  XS .  .  CL .  CR .  .  .  .  .  ",
+	"w  w  w  w  .  .  .  .  .  .  .  .  CL .  .  .  .  .  .  .  CL .  CR .  .  .  .  .  ",
+	"w  w  w  w  .  .  .  .  .  .  .  .  CL .  .  .  .  .  .  .  CL .  CR .  .  .  .  .  ",
 	]
 	level_name = "Two Boxes"
 	camera_zoom = 0.18
