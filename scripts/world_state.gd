@@ -11,8 +11,8 @@ var level_infos: Array[LevelInfo] = [
 	LevelTraffic,
 	LevelLockpick,
 	LevelGate,
-	LevelSimpleWeird,
 	LevelMountain,
+	LevelSimpleWeird,
 	LevelKey,
 	LevelTrapped,
 	LevelBacktobasic
