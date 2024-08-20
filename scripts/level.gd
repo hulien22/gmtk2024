@@ -654,6 +654,14 @@ static func GetColorFromChar(c: String) -> Enums.Colors:
 			return Enums.Colors.DARKBLUE
 		"P":
 			return Enums.Colors.PURPLE
+		"W":
+			return Enums.Colors.BROWN
+		"M":
+			return Enums.Colors.MAGENTA
+		"K":
+			return Enums.Colors.PINK
+		"L":
+			return Enums.Colors.LIGHTBLUE
 		_:
 			printerr("found unknown color " + c)
 			assert(false)
