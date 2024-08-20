@@ -76,12 +76,24 @@ func ProcessAnimationEvent(event: AnimationEvent):
 			posn = event.new_posn
 			direction = event.direction
 			
-			StartNewTween()
-			tween.tween_property(%SpriteHolder, "position", Vector2(event.new_posn.x, event.new_posn.y), AnimationConstants.MOVE)
-			tween.parallel().tween_property(%Sprite, "rotation_degrees", GetTargetRotationDegrees(), AnimationConstants.MOVE).set_trans(Tween.TRANS_SPRING)
-			tween.parallel().tween_property(%Sprite, "scale", Vector2(1.1,1.1), AnimationConstants.HALF_MOVE).set_ease(Tween.EASE_OUT)
-			tween.tween_property(%Sprite, "scale", Vector2(1,1), AnimationConstants.HALF_MOVE).set_ease(Tween.EASE_IN)
-			# TODO Direction
+			if event.new_posn.y < 0:
+				StartNewTween()
+				tween.tween_property(%SpriteHolder, "position", Vector2(event.new_posn.x, event.new_posn.y), AnimationConstants.LONG_ANIM).set_trans(Tween.TRANS_QUAD)
+				tween.parallel().tween_property(%Sprite, "rotation_degrees", GetTargetRotationDegrees(), AnimationConstants.LONG_ANIM).set_trans(Tween.TRANS_SPRING)
+				tween.parallel().tween_property(%Sprite, "scale", Vector2(2,2), AnimationConstants.LONG_ANIM).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+			elif event.posn.y < 0:
+				%Sprite.scale = Vector2(2,2)
+				StartNewTween()
+				tween.tween_property(%SpriteHolder, "position", Vector2(event.new_posn.x, event.new_posn.y), AnimationConstants.LONG_ANIM).set_trans(Tween.TRANS_QUAD)
+				tween.parallel().tween_property(%Sprite, "rotation_degrees", GetTargetRotationDegrees(), AnimationConstants.LONG_ANIM).set_trans(Tween.TRANS_SPRING)
+				tween.parallel().tween_property(%Sprite, "scale", Vector2(1,1), AnimationConstants.LONG_ANIM).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+			else:
+				StartNewTween()
+				tween.tween_property(%SpriteHolder, "position", Vector2(event.new_posn.x, event.new_posn.y), AnimationConstants.MOVE)
+				tween.parallel().tween_property(%Sprite, "rotation_degrees", GetTargetRotationDegrees(), AnimationConstants.MOVE).set_trans(Tween.TRANS_SPRING)
+				tween.parallel().tween_property(%Sprite, "scale", Vector2(1.1,1.1), AnimationConstants.HALF_MOVE).set_ease(Tween.EASE_OUT)
+				tween.tween_property(%Sprite, "scale", Vector2(1,1), AnimationConstants.HALF_MOVE).set_ease(Tween.EASE_IN)
+
 		AnimationEvent.AnimationType.RETURNED:
 			posn = Vector2i(-1,-1) # we're gonna be deleted so get out of here
 			StartNewTween()
