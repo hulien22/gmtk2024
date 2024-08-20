@@ -671,7 +671,7 @@ static func GetColorFromChar(c: String) -> Enums.Colors:
 			assert(false)
 			return Enums.Colors.NONE
 
-func LoadLevelFromText(map: Array[String]):
+func LoadLevelFromText(map: Array[String], is_meta_level:bool = false):
 	height = map.size()
 	width = map[0].length() / 3
 	
@@ -680,6 +680,8 @@ func LoadLevelFromText(map: Array[String]):
 		while (spawn_x % 4 != 0):
 			spawn_x -= 1
 		BIG_PLAYER_SPAWN_LOCATION = Vector2i(spawn_x, -height)
+		if (is_meta_level):
+			BIG_PLAYER_SPAWN_LOCATION.y -= 8
 	
 	assert(height % 4 == 0)
 	assert(width % 4 == 0)

@@ -24,7 +24,7 @@ var levels: Array[Level] = []
 func LoadLevels():
 	for li in level_infos:
 		var level = Level.new()
-		level.LoadLevelFromText(li.level_str)
+		level.LoadLevelFromText(li.level_str, li.level_name == "Meta")
 		level.level_name = li.level_name
 		levels.push_back(level)
 
