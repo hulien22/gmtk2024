@@ -54,6 +54,7 @@ script = ExtResource("1_rrw0o")
 level_scene = ExtResource("2_yv4p1")
 
 [node name="Label2" type="Label" parent="."]
+layout_mode = 0
 offset_left = 9.0
 offset_top = 1.0
 offset_right = 375.0
