@@ -181,8 +181,11 @@ func TryToggleSwitch() -> bool:
 	# see if we are on a switch of our size
 	var updated:bool = false
 	for obj in new_state.bg_objects:
-		if obj.type == TileObj.TileType.SWITCH && obj.size == new_state.player.size && \
-		   obj.CollidesWith(new_state.player.posn, new_state.player.size):
+		if obj.type == TileObj.TileType.SWITCH && obj.CollidesWith(new_state.player.posn, new_state.player.size):
+			if obj.size != new_state.player.size:
+				show_message.emit("Not the right size...")
+				return false
+			
 			obj.activated = !obj.activated
 			updated = true
 			
