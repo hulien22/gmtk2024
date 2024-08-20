@@ -26,6 +26,8 @@ func _ready() -> void:
 		%Level1.show()
 	elif WorldState.active_level == 1:
 		%Level2.show()
+	elif WorldState.active_level == 8:
+		%Level1.show()
 
 func LoadLevel():
 	level = WorldState.levels[WorldState.active_level]
