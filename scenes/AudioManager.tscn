@@ -43,9 +43,10 @@ sound_effects = Array[AudioStream]([ExtResource("2_m8fah"), ExtResource("3_iaej4
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamInteractive_gb53q")
+volume_db = -6.0
 autoplay = true
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 
 [node name="WinSoundEffect" type="AudioStreamPlayer" parent="."]
-volume_db = 3.0
+volume_db = 6.0
