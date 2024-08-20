@@ -21,14 +21,20 @@ var level: Level
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	LoadLevel()
+	
+	if WorldState.active_level == 0:
+		%Level1.show()
 
 func LoadLevel():
 	level = WorldState.levels[WorldState.active_level]
 	%Camera2D.zoom = Vector2.ONE * WorldState.level_infos[WorldState.active_level].camera_zoom
 	%Camera2D.offset = WorldState.level_infos[WorldState.active_level].camera_offset
+	%UI.scale = Vector2(1 / %Camera2D.zoom.x,1 / %Camera2D.zoom.y)
+	%UI.position = Vector2(%Camera2D.offset.x,%Camera2D.offset.y)
 	%BgTiles.position = WorldState.level_infos[WorldState.active_level].bg_tile_posn
 	%BgTiles.size = WorldState.level_infos[WorldState.active_level].bg_tile_size
 	level.rendered_level = $RenderedLevel
+	level.show_message.connect(ShowMessage)
 	$RenderedLevel.init(level)
 	await get_tree().create_timer(AnimationConstants.LONG_ANIM).timeout
 	level.StartLevel()
@@ -47,6 +53,11 @@ var time_since_last_input_pressed: float = 0
 func _process(delta: float) -> void:
 	if is_animating:
 		return
+	
+	if level.dead:
+		%YouDied.show()
+	else:
+		%YouDied.hide()
 	
 	var new_input: String = ""
 	if Input.is_action_pressed("ui_up"):
@@ -128,3 +139,8 @@ func _process(delta: float) -> void:
 
 func LeaveLevel():
 	get_tree().change_scene_to_file("res://scenes/ui/level_select.tscn")
+
+func ShowMessage(m:String):
+	%Notice/NoticeText.text = m
+	%Notice/AnimationPlayer.stop()
+	%Notice/AnimationPlayer.play("ErrorMessage")

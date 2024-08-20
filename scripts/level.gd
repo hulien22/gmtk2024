@@ -1,5 +1,7 @@
 class_name Level
 
+signal show_message(m:String)
+
 var rendered_level: RenderedLevel
 
 var starting_state: LevelState
@@ -130,12 +132,14 @@ func TrySummon() -> bool:
 	var state: LevelState = CurrentState()
 	if state.player.size == TileObj.TileSize.SMALL:
 		# already too small
+		#show_message.emit("Too Small...")
 		return false
 	
 	var new_posn = GetSummonPosn()
 	#print(new_posn)
 	if new_posn == Vector2i(-1,-1):
 		# TODO emit signal to display "NO ROOM" message
+		show_message.emit("No Room To Pop Out...")
 		return false
 	
 	# summon new guy!
@@ -226,6 +230,7 @@ func LeaveLevel() -> bool:
 		return false
 	elif cur_state.player.size != TileObj.TileSize.BIG:
 		#TODO signals to show info text
+		show_message.emit("Need to be LARGE to leave...")
 		return false
 	
 	big_player_last_location = CurrentState().player.posn
@@ -248,6 +253,7 @@ func LeaveLevel() -> bool:
 
 func Undo() -> bool:
 	if state_stack.size() <= 1:
+		show_message.emit("Nothing to undo...")
 		return false
 	state_stack.pop_back()
 	dead = false
@@ -345,6 +351,7 @@ func CheckForCompletion() -> float:
 					return wait_time
 				else:
 					#TODO signal, wrong size
+					show_message.emit("Not the right size...")
 					break
 	return 0
 
@@ -647,6 +654,14 @@ static func GetColorFromChar(c: String) -> Enums.Colors:
 			return Enums.Colors.DARKBLUE
 		"P":
 			return Enums.Colors.PURPLE
+		"W":
+			return Enums.Colors.BROWN
+		"M":
+			return Enums.Colors.MAGENTA
+		"K":
+			return Enums.Colors.PINK
+		"L":
+			return Enums.Colors.LIGHTBLUE
 		_:
 			printerr("found unknown color " + c)
 			assert(false)
