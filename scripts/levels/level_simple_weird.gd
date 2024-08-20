@@ -9,7 +9,7 @@ func _init():
 	"CMRCMRCMRCMRw  w  .  .  w  w  w  w  XB .  .  .  w  w  w  w  w  w  w  w  ",
 	".  .  .  .  .  .  .  .  w  w  w  w  .  .  .  .  w  w  w  w  w  w  w  w  ",
 	".  .  .  .  .  .  .  .  w  w  w  w  .  .  .  .  w  w  w  w  w  w  w  w  ",
-	".  .  .  .  .  .  .  .  w  w  w  w  CYRCYRCYRCYRw  w  w  w  w  w  w  w  ",
+	".  .  .  .  .  .  .  .  w  w  w  w  CY CY CY CY w  w  w  w  w  w  w  w  ",
 	".  .  .  .  .  .  .  .  w  .  .  .  .  .  .  .  CPR.  CMR.  .  .  .  .  ",
 	".  .  .  .  .  .  .  .  w  .  .  .  .  .  .  .  CPR.  CMR.  .  .  .  .  ",
 	".  .  .  .  .  .  .  BPSw  .  .  .  .  .  .  .  CPR.  CMR.  XM .  .  .  ",

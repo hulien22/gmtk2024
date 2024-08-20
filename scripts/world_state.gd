@@ -9,6 +9,7 @@ var num_stars: int = 4;
 var level_infos: Array[LevelInfo] = [
 	LevelBasic,
 	LevelTraffic,
+	LevelGate,
 	LevelSimpleWeird,
 	LevelMountain,
 	LevelLockpick,
