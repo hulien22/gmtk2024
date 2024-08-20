@@ -9,6 +9,6 @@ func _init():
 	]
 	level_name = "Meta"
 	camera_zoom = 0.25
-	camera_offset = Vector2(0, -800)
+	camera_offset = Vector2(-500, -700)
 	bg_tile_posn = Vector2(200,200)
-	bg_tile_size = Vector2(7400,2500)
+	bg_tile_size = Vector2(3400,1000)
