@@ -46,3 +46,6 @@ stream = SubResource("AudioStreamInteractive_gb53q")
 autoplay = true
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
+
+[node name="WinSoundEffect" type="AudioStreamPlayer" parent="."]
+volume_db = 2.0
