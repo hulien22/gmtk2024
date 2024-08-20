@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b1sgun56vynqx"]
+[gd_scene load_steps=10 format=3 uid="uid://b1sgun56vynqx"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_rehln"]
 [ext_resource type="PackedScene" uid="uid://dhxqm08k81422" path="res://scenes/rendered_level.tscn" id="2_d05o2"]
@@ -6,6 +6,7 @@
 [ext_resource type="Shader" path="res://shaders/test.gdshader" id="3_cdy1k"]
 [ext_resource type="Texture2D" uid="uid://0f4xoq7ge4k5" path="res://shaders/pencil.jpg" id="5_dqn8f"]
 [ext_resource type="Texture2D" uid="uid://bisjudm5gbd04" path="res://shaders/pencil - Copy.jpg" id="5_efjmo"]
+[ext_resource type="FontFile" uid="uid://c8xg5q7buc3ip" path="res://fonts/grinched-2-0.regular.otf" id="7_lf7ge"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1monb"]
 shader = ExtResource("3_cdy1k")
@@ -20,6 +21,10 @@ shader_parameter/u_bgTiling = Vector2(1, 1)
 shader_parameter/u_patternTiling = Vector2(1, 1)
 shader_parameter/u_bgTexture = ExtResource("5_dqn8f")
 shader_parameter/u_patternTexture = ExtResource("5_efjmo")
+
+[sub_resource type="Theme" id="Theme_i1p45"]
+default_font = ExtResource("7_lf7ge")
+default_font_size = 60
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_rehln")
@@ -53,3 +58,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
+
+[node name="UI" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="Label2" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -95.0
+offset_right = 348.0
+grow_vertical = 0
+theme = SubResource("Theme_i1p45")
+text = "MUNCH   OSHKA"
+horizontal_alignment = 1
