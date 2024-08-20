@@ -68,6 +68,7 @@ func _input(event):
 func MoveStuff():
 	var level = %Levels.get_children()[cur_level] as Sprite2D
 	%Sprite.global_position = level.global_position + Vector2(5, -100)
+	%LevelName.text = WorldState.levels[cur_level].level_name
 
 func PlayEnterLevelAnim():
 	%Sprite.frame = 1

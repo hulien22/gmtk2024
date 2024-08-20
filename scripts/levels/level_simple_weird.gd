@@ -21,6 +21,6 @@ func _init():
 	]
 	level_name = "Two Boxes"
 	camera_zoom = 0.18
-	camera_offset = Vector2(-600, 0)
+	camera_offset = Vector2(-200, 0)
 	bg_tile_posn = Vector2(200, 200)
 	bg_tile_size = Vector2(5800, 3400)

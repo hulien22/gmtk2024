@@ -14,7 +14,7 @@
 
 [sub_resource type="Theme" id="Theme_3o2y6"]
 default_font = ExtResource("1_07u0k")
-default_font_size = 32
+default_font_size = 64
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_h6mod"]
 animations = [{
@@ -60,14 +60,16 @@ position = Vector2(575.5, 324)
 scale = Vector2(0.605729, 0.607407)
 texture = ExtResource("3_mpfa8")
 
-[node name="Label2" type="Label" parent="."]
+[node name="LevelName" type="Label" parent="."]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 9.0
 offset_top = 1.0
-offset_right = 375.0
+offset_right = 1142.0
 offset_bottom = 106.0
 theme = SubResource("Theme_3o2y6")
 text = "Level Select"
+horizontal_alignment = 1
 
 [node name="Levels" type="Control" parent="."]
 unique_name_in_owner = true
@@ -80,50 +82,160 @@ position = Vector2(168, 233)
 scale = Vector2(0.228333, 0.62)
 texture = ExtResource("4_ti2bg")
 
+[node name="LevelNum" type="Label" parent="Levels/Level1"]
+modulate = Color(1, 1, 1, 0.827451)
+offset_left = -175.0
+offset_top = -94.0
+offset_right = -101.0
+offset_bottom = 7.0
+scale = Vector2(4.38, 1.61)
+theme = SubResource("Theme_3o2y6")
+text = "1"
+horizontal_alignment = 1
+
 [node name="Level2" type="Sprite2D" parent="Levels"]
 position = Vector2(375, 229)
 scale = Vector2(0.228333, 0.62)
 texture = ExtResource("4_ti2bg")
+
+[node name="LevelNum2" type="Label" parent="Levels/Level2"]
+modulate = Color(1, 1, 1, 0.827451)
+offset_left = -166.424
+offset_top = -87.5484
+offset_right = -92.4236
+offset_bottom = 13.4516
+scale = Vector2(4.38, 1.61)
+theme = SubResource("Theme_3o2y6")
+text = "2"
+horizontal_alignment = 1
 
 [node name="Level3" type="Sprite2D" parent="Levels"]
 position = Vector2(579, 228)
 scale = Vector2(0.228333, 0.62)
 texture = ExtResource("4_ti2bg")
 
+[node name="LevelNum3" type="Label" parent="Levels/Level3"]
+modulate = Color(1, 1, 1, 0.827451)
+offset_left = -166.424
+offset_top = -83.871
+offset_right = -92.4235
+offset_bottom = 17.129
+scale = Vector2(4.38, 1.61)
+theme = SubResource("Theme_3o2y6")
+text = "3"
+horizontal_alignment = 1
+
 [node name="Level4" type="Sprite2D" parent="Levels"]
 position = Vector2(790, 228)
 scale = Vector2(0.228333, 0.62)
 texture = ExtResource("4_ti2bg")
+
+[node name="LevelNum4" type="Label" parent="Levels/Level4"]
+modulate = Color(1, 1, 1, 0.827451)
+offset_left = -148.905
+offset_top = -85.9355
+offset_right = -74.9053
+offset_bottom = 15.0645
+scale = Vector2(4.38, 1.61)
+theme = SubResource("Theme_3o2y6")
+text = "4"
+horizontal_alignment = 1
 
 [node name="Level5" type="Sprite2D" parent="Levels"]
 position = Vector2(1004, 233)
 scale = Vector2(0.228333, 0.62)
 texture = ExtResource("4_ti2bg")
 
+[node name="LevelNum5" type="Label" parent="Levels/Level5"]
+modulate = Color(1, 1, 1, 0.827451)
+offset_left = -157.664
+offset_top = -94.0
+offset_right = -83.6644
+offset_bottom = 7.0
+scale = Vector2(4.38, 1.61)
+theme = SubResource("Theme_3o2y6")
+text = "5"
+horizontal_alignment = 1
+
 [node name="Level6" type="Sprite2D" parent="Levels"]
 position = Vector2(167, 464)
 scale = Vector2(0.228333, 0.62)
 texture = ExtResource("4_ti2bg")
+
+[node name="LevelNum6" type="Label" parent="Levels/Level6"]
+modulate = Color(1, 1, 1, 0.827451)
+offset_left = -179.562
+offset_top = -91.9355
+offset_right = -105.562
+offset_bottom = 9.0645
+scale = Vector2(4.38, 1.61)
+theme = SubResource("Theme_3o2y6")
+text = "6"
+horizontal_alignment = 1
 
 [node name="Level7" type="Sprite2D" parent="Levels"]
 position = Vector2(371, 466)
 scale = Vector2(0.228333, 0.62)
 texture = ExtResource("4_ti2bg")
 
+[node name="LevelNum7" type="Label" parent="Levels/Level7"]
+modulate = Color(1, 1, 1, 0.827451)
+offset_left = -157.664
+offset_top = -91.9355
+offset_right = -83.6644
+offset_bottom = 9.06451
+scale = Vector2(4.38, 1.61)
+theme = SubResource("Theme_3o2y6")
+text = "7"
+horizontal_alignment = 1
+
 [node name="Level8" type="Sprite2D" parent="Levels"]
 position = Vector2(571, 470)
 scale = Vector2(0.228333, 0.62)
 texture = ExtResource("4_ti2bg")
+
+[node name="LevelNum7" type="Label" parent="Levels/Level8"]
+modulate = Color(1, 1, 1, 0.827451)
+offset_left = -170.803
+offset_top = -87.0968
+offset_right = -96.8033
+offset_bottom = 13.9032
+scale = Vector2(4.38, 1.61)
+theme = SubResource("Theme_3o2y6")
+text = "8"
+horizontal_alignment = 1
 
 [node name="Level9" type="Sprite2D" parent="Levels"]
 position = Vector2(790, 471)
 scale = Vector2(0.228333, 0.62)
 texture = ExtResource("4_ti2bg")
 
+[node name="LevelNum7" type="Label" parent="Levels/Level9"]
+modulate = Color(1, 1, 1, 0.827451)
+offset_left = -153.285
+offset_top = -85.4839
+offset_right = -79.285
+offset_bottom = 15.5161
+scale = Vector2(4.38, 1.61)
+theme = SubResource("Theme_3o2y6")
+text = "9"
+horizontal_alignment = 1
+
 [node name="Level10" type="Sprite2D" parent="Levels"]
 position = Vector2(1011, 471)
 scale = Vector2(0.228333, 0.62)
 texture = ExtResource("4_ti2bg")
+
+[node name="LevelNum7" type="Label" parent="Levels/Level10"]
+modulate = Color(1, 1, 1, 0.827451)
+offset_left = -162.044
+offset_top = -91.9355
+offset_right = -88.0441
+offset_bottom = 9.06451
+scale = Vector2(4.38, 1.61)
+theme = SubResource("Theme_3o2y6")
+text = "10"
+horizontal_alignment = 1
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
