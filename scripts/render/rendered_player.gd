@@ -150,7 +150,7 @@ func ProcessAnimationEvent(event: AnimationEvent):
 			super.ProcessAnimationEvent(event)
 
 func LevelComplete(event: AnimationEvent):
-	print("LEVELCOMPLETE: ", size, " ", posn, " ", event.new_posn)
+	#print("LEVELCOMPLETE: ", size, " ", posn, " ", event.new_posn)
 	
 	StartNewTween()
 	# initial wait
