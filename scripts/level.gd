@@ -1,7 +1,5 @@
 class_name Level
 
-signal leave_level
-
 var rendered_level: RenderedLevel
 
 var starting_state: LevelState
@@ -282,14 +280,14 @@ func UpdateState(new_state: LevelState):
 	#PlayAnim(new_state.player.size, new_state.player.posn)
 	PlayAnim()
 	state_stack.push_back(new_state)
-	CheckForCompletion()
+	#CheckForCompletion()
 
-func CheckForCompletion():
+func CheckForCompletion() -> float:
 	var cur_state: LevelState = CurrentState()
 	if dead:
-		return
+		return 0
 	if completed:
-		return
+		return 0
 	
 	for o in cur_state.bg_objects:
 		if o.type == TileObj.TileType.FLAG:
@@ -344,12 +342,11 @@ func CheckForCompletion():
 					#state_stack.push_back(new_state)
 					
 					UpdateState(new_state)
-					await rendered_level.get_tree().create_timer(wait_time).timeout
-					leave_level.emit()
-					return
+					return wait_time
 				else:
 					#TODO signal, wrong size
 					break
+	return 0
 
 func ComputeLevelColorState(new_state: LevelState):
 	new_state.level_color_states = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
