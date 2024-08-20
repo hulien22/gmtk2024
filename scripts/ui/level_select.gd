@@ -16,6 +16,8 @@ func _ready() -> void:
 		else:
 			(%Levels.get_child(i) as Sprite2D).modulate.a = 0.5
 	
+	%Stars.text = str(WorldState.num_stars)
+	
 	MoveStuff()
 	
 	if WorldState.first_load:
