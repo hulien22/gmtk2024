@@ -2,10 +2,10 @@ extends LevelInfo
 
 func _init():
 	level_str = [
-	"PB .  .  .  CPRCPRCPRCPRw  w  w  w  w  w  BGSFS ",
-	".  .  .  .  CPRCPRCPRCPRw  w  w  w  w  w  XS BPS",
-	".  .  .  .  CPRCPRCPRCPR.  .  CORCORw  w  .  XS ",
-	".  .  .  .  CPRCPRCPRCPR.  .  CORCOR.  CGRXS BOS",
+	"PB .  .  .  CPRCPRCPRCPRw  w  w  w  w  w  BOSFS ",
+	".  .  .  .  CPRCPRCPRCPRw  w  w  w  w  w  XS .  ",
+	".  .  .  .  CPRCPRCPRCPR.  .  CORCORw  w  .  .  ",
+	".  .  .  .  CPRCPRCPRCPR.  .  CORCOR.  CGR.  BPS",
 	]
 	level_name = "Meta"
 	camera_zoom = 0.25
